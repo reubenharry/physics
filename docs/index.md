@@ -60,11 +60,12 @@ graph TB
     CA --> QFT
     C --> FA
     C --> DG
-    P --> Q
-    P --> TM
+    
+    Stats --> TM
     CHM --> GAT
     MT
     P --> Stats
+    P --> Q
 ```
 
 

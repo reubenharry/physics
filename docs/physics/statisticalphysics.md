@@ -2,7 +2,7 @@
 
 !!! Note 
 
-    These notes are strongly opinionated, following [Jaynes](todo), and present statistical physics as the application of the [maximum entropy principle](statistics.md) to physical systems. Furthermore, thermodynamics is presented in terms of the geometry of the information manifold, following [Caticha](TODO).
+    These notes are strongly opinionated, following [Jaynes](https://www.amazon.com/Probability-Theory-Science-T-Jaynes/dp/0521592712), and present statistical physics as the application of the [maximum entropy principle](statistics.md) to physical systems. Furthermore, thermodynamics is presented in terms of the geometry of the information manifold, following [Caticha](https://www.arielcaticha.com/my-book-entropic-physics).
     
     This seems like the natural modern approach, since it demystifies entropy, temperature and so on, viewing them as information-theoretic concepts, and not intrinsically physical ones. On this view, statistical physics is not new physics, it is the application of probability theory to old physics.
 
@@ -522,3 +522,19 @@ Ostensibly, this would require knowing the (time varying) distribution of the sy
 $$ \Delta B(t) = \beta E\_H[\dot{A}(0)B(t)] * K(t) $$
 
 This is sort of amazing: the expected perturbation is the output of a linear system with input $K$ and a kernel representing the correlation of the change of input variable and the output variable, under the original system. So you can predict the response to a small perturbation of the system just by seeing the behavior of the system without the perturbation.
+
+## Spontaneous symmetry breaking
+
+todo
+
+non-commuting limits
+
+To say that the Ising model has a spontaneously broken symmetry is to say that in the limit
+
+$$
+\lim_{b\to 0}\lim_{N \to \infty} m(b,N, T=0) \neq 0
+$$
+
+That is, in the limit of an infinitely large system ($N \to \infty$) and $0$ temperature, an arbitrarily small magnetic field $b$ will make the system choose either the all-spins-up or the all-spins-down state.
+
+More generally, spontaneous symmetry breaking involves a system with a symmetry of the Hamiltonian that exhibits this kind of arbitrary sensitivity to perturbation.

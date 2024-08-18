@@ -85,7 +85,7 @@ Then for $j^\mu := K^\mu - J^\mu$, we evidently have $\partial_\mu j^\mu = 0$, *
 
 ??? Advanced
 
-	This comment assumes familiarity with [differential forms](../../maths/differential_geometry)
+	This comment assumes familiarity with [differential forms](../maths/differential_geometry)
 
 	One consequence is that $Q(N) = \int_N \star J$, which is an integral over an $M-1$ dimension surface (where $M$ is the dimension of the full space, or spacetime) depends only on the homotopy class of $N$, since for $N$ and a deformation to $N'$, $Q(N)-Q(N') = \int_N \star J = \int d \star J = \int 0 = 0$.
 
@@ -93,17 +93,17 @@ Then for $j^\mu := K^\mu - J^\mu$, we evidently have $\partial_\mu j^\mu = 0$, *
 
 ### Examples
 
-For a particle theory, with $\phi(t : \R) : \R^3$,  with $\mathcal{L}(\phi, \dot \phi, t) = \frac{1}{2}m\dot \phi(a,t)^2$, let our transformation be $\phi(a,t) = \phi(0,t)+a$. Then $J^\mu = 0$, since $\dot \phi(a,t) = \dot \phi(0,t)$ which does not depend on $a$, and $K^\mu = m\dot q$, so $j^\mu = m\dot q$, and $m\partial_\mu  \dot q = 0 \Rightarrow \frac{d}{dt}\dot q = 0$, so *momentum is conserved*.
+For a particle theory, with $\phi(a : \R^3, t : \R) : \R^3$,  with $\mathcal{L}(\phi, \dot \phi, t) = \frac{1}{2}m\dot \phi(a,t)^2$, let our transformation be $\phi(a,t) = \phi(0,t)+a$. Then $J^\mu = 0$, since $\dot \phi(a,t) = \dot \phi(0,t)$ which does not depend on $a$, and $K^\mu = m\dot q$, so $j^\mu = m\dot q$, and $m\partial_\mu  \dot q = 0 \Rightarrow \frac{d}{dt}\dot q = 0$, so *momentum is conserved*.
 
 Similarly, for the transformation $\phi(a,t) = \phi(0,t+a)$ and $t(a) = a + t(0)$, we find that $\pd{\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x))}{a}|_{a=0} = \pd{\mathcal{L}}{t}$, and noting that $\partial_\mu = \pd{}{t}$, we see that $J^\mu = \mathcal{L} = \frac{1}{2}m\dot q^2$. $K^\mu = m\dot q^2$, so $j^\mu = \frac{1}{2}m\dot q^2 = \mathcal{H}$, i.e. the Hamiltonian, or energy of the system.
 
 TODO rotation
 
-Consider a spacetime translation $x(a) = x + a$. Then $j^\mu_\nu = \pd{\mathcal{L}}{\partial(\partial_\nu \phi)}\pd{\phi}{x_\mu} - \delta^\mu_\nu\mathcal{L}$
+Now consider an infinitesimal rotation. The [Lie algebra](../maths/representations.md) of the 3D rotation group consists of transformations which in coordinates look like $\phi(a,t)_i = \phi(0,t)_i + \epsilon_{ijk}\phi(0,t)_ja_k$. 
 
-In this context, $T := j$ is known as the energy-momentum tensor. The corresponding conserved quantities are $E = \int d^3 x T^0_0$ and $P_i = \int d^3 x T^0_i$ .
+For fields, the same reasoning holds. Consider a spacetime translation $x(a) = x + a$ and any Lagrangian $\mathcal{L}$. Then $j^\mu_\nu = \pd{\mathcal{L}}{\partial(\partial_\nu \phi)}\pd{\phi}{x_\mu} - \delta^\mu_\nu\mathcal{L}$. In this context, $T := j$ is known as the energy-momentum tensor. The corresponding conserved quantities are $E = \int d^3 x T^0_0$ and $P_i = \int d^3 x T^0_i$ .
 
-Now consider a rotation. As discussed in the notes on Lie groups 
+
 
 TODO CHECK
 

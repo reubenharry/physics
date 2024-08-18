@@ -492,7 +492,7 @@ Gaussian function $f(x)=e^{-\pi x^2}$ is fixed point of $\mathcal{F}$:
 
   
 
-Showing that is a nice application of ODEs, using the notation from [these notes](odes.md) where $F$ is *not* $\mathcal{F}f$:
+Showing that is a nice application of ODEs, using the notation from [these notes](diffeq.md) where $F$ is *not* $\mathcal{F}f$:
 
   
   

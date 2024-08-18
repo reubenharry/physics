@@ -76,7 +76,7 @@ $n \leq m$, where $m$ is the dimension of the manifold. Forms of the maximum dim
 
 ## Differential Geometry on Fiber Bundles
 
-[Fiber bundles](topology.md) are manifolds, and therefore a space in which differential geometry can be explored. In fact, they are fundamental to modern physics (in particular [gauge theories](/physics/gaugetheory), which include the Standard Model and general [relativity](/physics/relativity)).
+[Fiber bundles](topology.md) are manifolds, and therefore a space in which differential geometry can be explored. In fact, they are fundamental to modern physics (in particular [gauge theories](../physics/gaugetheory.md), which include the Standard Model and general [relativity](../physics/relativity.md)).
 
 ## Connections
 

@@ -1,15 +1,10 @@
-site_name: Reuben's Notes
+site_name: Maths and Physics
 
-site_url: https://zesty-daffodil-572c7d.netlify.app/
-
-site_name: Reuben's Notes
-
-repo_url: https://github.com/reubenharry/mclmc-docs
-
+# site_url: https://zesty-daffodil-572c7d.netlify.app/
 
 theme:
   name: material
-  site_name: Reuben's Notes
+  site_name: Maths and Physics
   # custom_dir: overrides
   features:
     # - announce.dismiss
@@ -134,6 +129,7 @@ nav:
         - Cohomology: maths/cohomology.md
         - Manifolds: maths/differential_geometry.md
         - Probability: maths/probability.md
+        - Conformal transforms: maths/conformal.md
     - Statistics:
       - Statistics: physics/statistics.md
     - Physics:
@@ -145,6 +141,7 @@ nav:
         - Statistical Physics: physics/statisticalphysics.md
         - Gauge Theory: physics/gaugetheory.md
         - Quantum Field Theory: physics/qft.md
+        - Condensed Matter: physics/condensedmatter.md
     - Computer Science:
         - Computer Science: cs/cs.md
         - Notation: cs/notation.md

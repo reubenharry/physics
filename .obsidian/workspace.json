@@ -1,0 +1,223 @@
+{
+  "main": {
+    "id": "6035d2f5c342abe2",
+    "type": "split",
+    "children": [
+      {
+        "id": "6cacc933364f8098",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0599e9f09e302055",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/index.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2e0758f0e7fd081d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/maths/complexanalysis.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "3ec77a9b8e02b2d7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/cs/cs.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "51b138fae4258b44",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/physics/statistics.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cb1dd97660aa7f54",
+    "type": "split",
+    "children": [
+      {
+        "id": "d16fbe65f268f4e8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa44a3de49bcb3bf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "161db817dcd5f886",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1c638b0e0bbf4496",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4396a6f5ce7400b6",
+    "type": "split",
+    "children": [
+      {
+        "id": "b5ead5aa10a34ec2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "60db2277fb47eb2a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "88d79c10562e79c3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b8a3564d724a20af",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "34bf53a0899d9679",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/index.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "0599e9f09e302055",
+  "lastOpenFiles": [
+    "overrides/partials/comments.html",
+    "overrides/partials",
+    "overrides",
+    "docs/overrides/partials/comments.html",
+    "docs/overrides/partials",
+    "docs/overrides",
+    "docs/maths/complexanalysis.md",
+    "docs/index.md",
+    "docs/maths/conformal.md",
+    "docs/maths/fourier.md",
+    "docs/maths/differential_geometry.md",
+    "docs/physics/symmetry.md",
+    "docs/physics/statisticalphysics.md",
+    "docs/physics/classical.md",
+    "docs/physics/qft.md",
+    "docs/maths/representations.md",
+    "gitignore",
+    "docs/maths/groups.md",
+    "docs/maths/calculus.md",
+    "docs/maths/diffeq.md",
+    "docs/physics/statistics.md",
+    "docs/cs/cs.md",
+    "docs/maths/homology.md",
+    "docs/physics/quantum.md",
+    "docs/maths/measuretheory.md",
+    "docs/maths/probability.md",
+    "docs/physics/condensedmatter.md",
+    "physics/statisticalphysics.md",
+    "physics",
+    "docs/physics/gaugetheory.md",
+    "docs/cs/notation.md",
+    "docs/engineering/imaging.md",
+    "maths/linearalgebra.md",
+    "docs/engineering",
+    "maths"
+  ]
+}

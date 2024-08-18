@@ -1,5 +1,7 @@
 
-Recall that a [group](groups.md) is a one-object [category](categories.md). If the set of maps from the object to itself is 
+Recall that a [group](groups.md) is a one-object [category](categories.md). If the space of maps from the object to itself is a manifold, we have what is known as a continuous group, or more commonly, a **Lie group**. The study of functors from groups (representation theory) is particularly interesting for Lie groups, since they have tangent spaces at their identity (a confluence of calculus (tangents) and group theory (identity) respectively).
+
+This mathematics is both beautiful and central to physical applications.
 $\newcommand{\R}{\mathbb{R}}$
 $\newcommand{\C}{\mathbb{C}}$
 $\newcommand{\N}{\mathbb{N}}$

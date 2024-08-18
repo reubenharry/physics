@@ -31,16 +31,21 @@ These are the Cauchy-Riemann equations, which the real and imaginary parts of yo
 
 ## Complex functions
 
-For a function $f$, a pole is a zero of $\frac{1}{f}$.
+For a function $f$, a pole is a zero of $\frac{1}{f}$. It is a point at which the function $f$ is not defined, or rather: $f$ is only defined on the complex point with the locations of the poles removed.
 
 A holomorphic function is a complex function which is complex differentiable in a neighborhood of every point in its domain. Every holomorphic function is analytic: this is an essential difference to real analysis: roughly, if a complex function is once differentiable, it is infinitely differentiable.
 
 A function whose only singularities are poles is meromorphic.
 
+A pole of $f$ has order $m$ if there exists a polynomial $p$ of order $m$ such that $fp$ is holomorphic on the complex plane.
+
+A branch cut is a line on which a function is not defined, rather than just an isolated point. For example, $\ln$ has a branch cut along the entire negative real axis.
 
 ## Contour integrals
 
-These are line integrals of holomorphic functions around a loop in the complex plane. Cauchy's integral theorem (which follows from Stokes' theorem) states that these are invariant under homotopy of paths. Simplest example:
+These are line integrals of holomorphic functions around a loop in the complex plane. Cauchy's integral theorem (which follows from Stokes' theorem) states that these are invariant under homotopy of paths. 
+
+A simple example of a contour integral:
 
 $$ \oint_C z^kdz$$
 
@@ -60,18 +65,36 @@ $$
 \oint_{\gamma} \frac{f(z)}{z^2}dz = \oint_{\gamma} \frac{f(0)+f'(0)z+\ldots}{z^2}dz = 2\pi if'(0)  
 $$
 
-## Residue
+## Residue theorem
 
-Note that $\oint_{\gamma} z^kdz$ is $0$ whenever $k\neq 1$. This is in line with Cauchy's integral theorem, which allows us to contract any loop to a point as long as there is no singularity inside the loop, resulting in the integral equal to $0$.
+The homotopy invariance of integrals of holomorphic functions along paths in the complex plane implies that a path along a loop is $0$ as long as there is no obstruction to contracting the loop, i.e. no poles.
 
-The *residue* of a singularity is the result of an integral around just that singularity (up to a factor of $2\pi i$). It is important because the residue theorem allows for the calculation of a contour integral by (roughly) summing up the residues times their winding numbers (number of times the path loops around the singularity).
+It turns out that, more generally, for a loop $\gamma$:
+
+$$
+\int _\gamma f(z)dz = 2\pi i \sum_{j} Res(f,\xi_j)
+$$
+
+where $\xi_j$ are the poles inside $\gamma$ and the residue $Res(f, \xi_j) := \frac{1}{(m-1)!}\frac{d^{m-1}}{dz^{m-1}}((z-\xi)^mf(z))|_{z=\xi}$
 
 ## Using complex analysis to solve real integrals
 
-It seems like a common trick is to take an integral on the real line, extend it to a loop going through the complex plane, and then using the powerful tools of complex analysis (e.g. residue theorem) to solve it. Which is pretty neat.
+A useful approach is to take an integral on the real line, extend it to a loop going through the complex plane, and then using the residue theorem to solve it.  One then makes an argument that as the real part is extended in length, it dominates the complex integral, so that the solved contour integral and the original real integral agree in the limit of a range of integration $\lim_{a \to \infty}[-a,a]$. 
 
-<!-- As an example, consider
+## Laurent series
 
-$$I = \int_{-\infty}^{\infty}\frac{1}{x^2+a^2}dx$$
+This is the expansion of a complex function $f$ at a point $c$ as:
 
-Suppose we first consider the case with finite bounds on integration, say $(-T,T)$ and create a contour by joining the two ends with a semicircle.  -->
+$$
+f(z) = \sum^{n=\infty}_{n=-\infty} a_n (z-c)^n
+$$
+
+with 
+
+$$
+a_n = \frac{1}{2\pi i}\int_\gamma \frac{f(z)}{(x-c)^{n-1}}dz
+$$
+
+for a loop $\gamma$.
+
+The principal part of a function $f$ is all the terms of the series with $n < 0$. 

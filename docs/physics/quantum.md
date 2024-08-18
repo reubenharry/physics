@@ -264,7 +264,7 @@ Note the very close relation to the analogous classical situation (e.g. Classica
 
 Quantization is the act of taking a classical system and designing a quantum system that behaves like the classical system in the limit of $h\to 0$ (roughly). To quantize the motion of a classical particle, we need to upgrade to infinite dimensional Hilbert spaces.
 
-In particular, take the space of functions which are normalizable (when you integrate them multiplied by their complex conjugate from $-\infty$ to $\infty$, you get a finite number). Actually, we'll even allow some non-normalizable things - see [Fourier analysis notes](/maths/fourier.md) to get an intuition of why *distributions* are also allowed.
+In particular, take the space of functions which are normalizable (when you integrate them multiplied by their complex conjugate from $-\infty$ to $\infty$, you get a finite number). Actually, we'll even allow some non-normalizable things - see [Fourier analysis notes](../maths/fourier.md) to get an intuition of why *distributions* are also allowed.
 
 
 Fixing a basis, a function can be defined by its coefficients. So the element $|\Phi\rangle$ of the Hilbert space is expressed in a basis (the position basis) as $\phi(x)$, where $\phi$ refers to the coefficient function.
@@ -285,7 +285,7 @@ $$X\phi(x) = x\phi(x) = x\_0\phi(x) \Rightarrow (x-x\_0)\phi(x) = 0 \Rightarrow 
 
 Viewed as a matrix, we have $\bra{x}X\ket{x'} = \delta(x-x')$.
 
-Another obvious operator $Y$ can be defined such that $Y|\phi\rangle$ in the position basis is $\pd{}{x}\phi(x)$. This is skew-self-adjoint and as a consequence, the momentum operator $P$, defined as $P=-i\hbar Y$ is self-adjoint (see [Fourier notes](/maths/fourier)). See to this, first note that for any ket $\ket{\Phi}$, we have $\phi(\infty)=\phi(-\infty)=0$ (since otherwise $\phi$ would not be normalizable). This explains why the first term on the third line below drops out:
+Another obvious operator $Y$ can be defined such that $Y|\phi\rangle$ in the position basis is $\pd{}{x}\phi(x)$. This is skew-self-adjoint and as a consequence, the momentum operator $P$, defined as $P=-i\hbar Y$ is self-adjoint (see [Fourier notes](../maths/fourier.md)). See to this, first note that for any ket $\ket{\Phi}$, we have $\phi(\infty)=\phi(-\infty)=0$ (since otherwise $\phi$ would not be normalizable). This explains why the first term on the third line below drops out:
 
 $$ \bra{\Phi}D\ket{\Psi}$$
 
