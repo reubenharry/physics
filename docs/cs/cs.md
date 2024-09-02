@@ -1,3 +1,9 @@
+$\newcommand{\R}{\mathbb{R}}$
+$\newcommand{\RR}{\mathbb{R}}$
+$\newcommand{\C}{\mathbb{C}}$
+$\newcommand{\Z}{\mathbb{Z}}$
+
+$\newcommand{\N}{\mathbb{N}}$
 
 ## Types
 

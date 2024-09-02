@@ -1,4 +1,9 @@
 
+$\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
+$\newcommand{\R}{\mathbb{R}}$
+$\newcommand{\RR}{\mathbb{R}}$
+$\newcommand{\C}{\mathbb{C}}$
+$\newcommand{\N}{\mathbb{N}}$
 
 !!! Note 
 
@@ -10,13 +15,17 @@
 
 ## Statistical physics
 
-A physical system has some configuration space $C$, and is fully characterized by a function $f: Time \to C$, which is typically specified by a Lagrangian. See the notes on [classical physics](classical.md).
-
-**Statistical** physics examines systems up to incomplete information, using the standard apparatus of Bayesian probability theory. That is, we describe our (incomplete) knowledge of a system by a probability distribution over systems, $p : Dist(Time \to C)$ .
+**Statistical** physics examines systems up to incomplete information, using the standard apparatus of Bayesian probability theory. That is, we describe our (incomplete) knowledge of a system by a probability distribution over systems, $p : Dist(Time \to C)$, where $C$ is the configuration space of the system, classical or quantum.
 
 While systems live on one manifold (the microspace), the space of interest to statistical physics (call it the "macrospace") is the manifold of distributions over the original space. Each macrostate is really a whole distribution over microstates. Quantities of interest, like energy, can be viewed as expectations over the distribution.
 
 Often the macrospace is much lower dimensional than the microspace (when we only consider maximum-entropy distributions - see below). This is why statistical physics is so effective.
+
+
+!!! Note
+
+    It is important to note that statistical physics often involves very large systems (e.g. a system of $10^{23}$ particles), but doesn't need to. It makes total sense to consider a distribution over a single particle system. It is just that many common results do not hold in this situation, but all the ensembles are defined exactly the same.
+
 
 ## Equilibrium statistical physics (thermodynamics)
 
@@ -26,58 +35,266 @@ $$
 \frac{\partial}{\partial t}\rho(t) = 0
 $$
 
-The principle of maximum entropy orders that we pick the maximum-entropy distribution over states consistent with our assumptions, namely: (1) the distribution is stationary, (2) either the exact energy of the system or the expected energy (if the system is open) has a fixed value, (3) other variables like the volume or the (expected) number of particles are fixed.
+The principle of maximum entropy orders that we pick the maximum-entropy distribution over states consistent with our assumptions, namely: (1) the distribution is stationary, (2) the exact energy of the system is known. Note that energy is time-conserved in a closed system.
 
-The maximum entropy distributions we obtain are typically in the [exponential family](../maths/probability.md), so thermodynamics amounts to the study of the exponential family manifold.
+This gives a distribution often referred to as the microcanonical ensemble, namely $p(x) \propto \delta(E(x) - E^*)$, for some given energy $E^*$.
 
-Concretely, suppose we have a classical system with Lagrangian $\mathcal{L}$, and we know the expected energy $\langle E \rangle$, where $E$ is a function on phase space $E(p,q) \in \mathbb{R}$. Then the appropriate distribution is $P(p,q) = \frac{1}{Z}e^{-\beta E(p,q)}$, where $\beta$ is a free parameter
+If we know the *expected* energy instead has a fixed value, the maximum entropy distribution is in the  [exponential family](../maths/probability.md), a distribution known as the *canonical ensemble*.
+
+Concretely, suppose we have a classical system with Lagrangian $\mathcal{L}$, and we know the expected energy $\langle E \rangle$, where $E$ (i.e. the Hamiltonian, more commonly written $H$ in classical mechanics) is a function on phase space $E(p,q) \in \mathbb{R}$. Then the appropriate distribution is $P(p,q) = \frac{1}{Z}e^{-\beta E(p,q)}$, where $\beta$ is the coordinate on the information manifold (i.e. for each value of $\beta$ we can a different distribution).
+
+We may have further constraints, like knowing the volume or number of particles. For example, the so-called *grand canonical ensemble* is the distribution $p(x, N) \propto e^{-\beta(E(x, N) - \mu N)}$ where $N$ is the number of particles.
+
+??? Stationarity
+
+    Being a function of an invariant quantity, the energy, the distribution is stationary as desired. More precisely, we have from classical mechanics that $\frac{d}{dt}\rho = \frac{\partial}{\partial t}\rho + \{H, \rho\}$, and by Louville's theorem, $\frac{d}{dt}\rho = 0$. Since $\rho$ is a function of $H$, we have $\{H, \rho\} = 0$ too, so $\frac{\partial}{\partial t}\rho = 0$.
+
+### Terminology: physics vs. probability
 
 The physics community uses a different terminology, reflecting the complicated history of the field. Here is a table of terminological correspondences between probability and physics:
 
+| Physics    | Probability |
+| -------- | ------- |
+| ensemble | distribution |
+| Boltzmann distribution | exponential family distribution |
+|partition function $Z$ | normalization constant |
+| Free energy $F$ | log of normalization constant |
+| (micro)energy $E$ | sufficient statistic |
+| (macro)energy $E$ or $\langle E\rangle$ | expectation of energy |
+| inverse temperature $\beta$ | natural parameter |
+| thermodynamic entropy | information theoretic entropy of equilibrium distribution |
+| equilibrium system | stationary maximum entropy distribution |
+| Legendre transform between ensembles | Legendre transform between mean and natural parameters |
 
-- partition function $Z$ <-> normalization constant
-- Free energy <-> log normalizer of exponential family
-- energy $E$ <-> sufficient statistic of the exponential family distribution $P$
-- temperature $T := \frac{1}{\beta}$ <-> natural parameter of the exponential family distribution
+### Classical vs quantum statistical mechanics
+
+#### Quantum
+
+Equilibrium statistical mechanics applies equally to classical and quantum systems.
+
+For quantum systems, the density matrix is the object which fully describes a distribution over states of the system. Unitarity is the counterpart to Louville's theorem, i.e. that probability density is conserved over time. The entropy has exactly the same form, but can be written:
+
+$$
+-\sum_i p_i\log p_i = -Tr(\rho\log \rho)
+$$
+
+For instance in the canonical ensemble,
+
+$$ Z = \sum_j e^{-\beta E_j} = \sum_n \langle n|e^{-\beta H}|n\rangle = Tr(e^{-\beta H})$$
+
+and 
+
+$$\rho = \frac{e^{-\beta H}}{Z}$$
+
+Also recall that, since for an operator $O$ and an eigenvector $O_n$, $p(O_n)=\langle O_n|\rho | O_n\rangle$, we have for $O=H$:
+
+$$p(E_n) = \langle E_n|\rho | E_n\rangle = \frac{e^{-\beta E_n}}{Z}$$
+
+#### Classical
+
+Classical statistical mechanics can be derived from quantum statistical mechanics. Recall that:
+
+- $[T,U] = O(\hbar)$. That is, the commutator of potential and kinetic energy (these being quadratic in position and momentum respectively) is of the order of Planck's constant.
+- $\langle x | p \rangle = \frac{1}{\sqrt{2 \pi\hbar}}e^{ixp/\hbar}$
+
+Then note that $Z = e^{-\beta H} = e^{-\beta T}e^{-\beta U}$, *up to a correction term on the order of Planck's constant*. Working in a convenient basis, for a single particle system:
+
+$$Z \approx Tr(e^{-\beta T}e^{-\beta U}) = \sum_{r,k} \langle x|e^{-\beta U} |x\rangle \langle x |p \rangle \langle p | e^{-\beta T} | p \rangle \langle p | x \rangle $$
+
+$$ = \frac{1}{2\pi \hbar}\int dpdq e^{-\beta \left( U(r) + \frac{p^2}{2m}\right)}$$
+
+which is an integral over phase space with a correction factor that makes dimensional sense.
+
+For a multiparticle system, we need to also account for the symmetrization in quantum mechanics, and obtain:
 
 
-think:
-    relationship between energy befing sufficient stat and stationarity:
-        a symmetry argument?
+$$Z = \frac{1}{h^{dN}N!}\int dp^Nq^N e^{-\beta \left( U(r^n) + \sum_i\frac{p_i^2}{2m}\right)}$$
+
+What's happening here is that we're integrating over phase space, which at a very high resolution is really the discrete grid of position and momentum eigenvalues. 
 
 
+<!-- This gives us a (sub)manifold of exponential family distributions, which we can parametrize either in primal or dual coordinates, related by a Lagrange transform. These are either:
 
-Open system
-
-This gives us a (sub)manifold of exponential family distributions, which we can parametrize either in primal or dual coordinates, related by a Lagrange transform. These are either:
 - parametrized by mean energy
-- parametrized by temperature
+- parametrized by (inverse) temperature -->
 
 
 
-## First law of thermodynamics
+!!! Note
+
+    The language in which statistical physics is usually expressed is frequentist. That is, an ensemble is described as being "many copies of a system". The Bayesian way to think, followed here, is not to think of many systems, but just to think about uncertainty about a single system.
+
+### Dimensions
+
+For historical reasons, temperature is sometimes treated as having a new dimension, so that a dimensional constant is needed to convert between energy and temperature, i.e. so that $k_BT$ has dimensions of energy. It is much simpler to set temperature as having dimensions of energy.
+
+### The thermodynamic limit
+
+### Relationship between ensembles
+
+In the thermodynamic limit, which means the limit of a system of very many particles, the canonical and microcanonical ensemble converge. To see this, write:
+
+$$ Z = \sum_ie^{-\beta E_i} = \sum_{E_i}\Omega(E_i)e^{\beta E_i} \approx \Omega(E^{\\*})e^{\beta E^{\\*}}$$
+
+where $E^{\\*}$ is the maximum value of $E_i$, and the approximation is justified since both terms in the sum scale exponentially with $E_i$ which scales linearly (energy is extensive) with $N$, which is enormous. So we can differentiate the negative of the log of both sides of the above equation by $\beta$, to obtain:
+
+$$\langle E \rangle \approx -\pd{}{\beta}\log \Omega(E^{\\*})e^{\beta E^{\\*}} = -\pd{}{\beta}\log \Omega(E^{\\*}) + \pd{}{\beta}\beta E^{\\*} = E^{\\*}$$
+
+In other words, the energy is effectively a constant, for $N\to\infty$ in the canonical ensemble, which is precisely the constraint of the microcanonical ensemble.
+
+As for the variance, since $c_v$ is an intensive quantity, we now have that $Var(E)=(\Delta E)^2=k_BT^2NC_v \Rightarrow STD(H)=\Delta E\propto N$, and since $E$ is extensive with $E\propto \sqrt{N}$, it follows that $\frac{\Delta E}{E}\propto \frac{1}{\sqrt{N}}\to 0$ as $N\to \infty$.
+
+Suppose we are in the canonical ensemble, but wish to parameterize our distribution not by a choice of $\beta$, but by a choice of $\langle E \rangle$. $\langle E \rangle$ is effectively $E$ in the thermodynamic limit, so our new coordinates will parametrize microcanonical distributions. 
+
+Geometrically, this is a change of coordinates from primal to dual coordinates on our manifold (see e.g. https://www.amazon.com/Information-Geometry-Applications-Mathematical-Sciences/dp/4431559779), and corresponds to a Legendre transform. A similar story applies to parametrization in terms of pressure $p$ or volume $V$.
+
+### Entropy
+
+!!! Conventions
+    
+    It is conventional to write $E$ to mean the expected energy $\langle E \rangle$ in the context of thermodynamics. We define $T := \frac{1}{\beta}$.
 
 
-heat and work: todo
-## Second law of thermodynamics
+Entropy is a map from a distribution (i.e. a point on the information manifold) to a real number. So it's a function on the information manifold.
 
-This is a straightforward consequence of the principle of maximum entropy: the Gibbs entropy $\rho$ remains constant over time, by Louiville's theorem, but the equilibrium distribution is the maximum entropy distribution with the relevant constraint (expected energy), so must have greater or equal entropy to the Gibbs entropy. 
+For a microcanonical distribution, the entropy is:
 
-TODO: think through ^
+$$
+S[p] = -\sum p(x)\log p(x)dx = -\sum \frac{1}{\Omega} \log \frac{1}{\Omega} = \log \Omega
+$$
 
-It is only equal when the path from the initial distribution to the final one lies on the maximum entropy submanifold (i.e., the process is quasistatic).
+where $\Omega$ is the number of states. For the canonical distribution, the entropy is:
 
-TODO: third law
+$$
+S[p] = -\sum_x p(x)\log\frac{1}{Z}e^{-\beta E(x)} = \log Z + \beta\langle E \rangle
+$$
 
-## Free energy
+So we see that:
 
-$F \propto \log Z$. Why is it so important? It is minimized in equilibrium,
+$$
+\beta = \frac{\partial S}{\partial E}
+$$
 
-TODO: why??
+This in fact holds for all ensembles. Further, we can calculate the exterior derivative of $S$:
 
-and satisfies $F = \langle H \rangle - TS$, so that at high temperature, it is maximized by maximizing entropy, and at low temperature, by minimizing energy. 
+$$
+dS = d(\log Z) = d(\beta 
+langle E\rangle) = -\frac{1}{Z}\sum_a e^{-\beta E_a}(E_ad\beta + \beta dE_a) + \langle E\rangle d\beta + \beta d\langle E\rangle
+$$
 
-TODO: why minimized?
+$$ = \beta(d\langle E\rangle - \langle dE \rangle)
+$$
+
+### Temperature
+
+
+import: explanation of temperature physically
+
+
+### Composing systems
+
+Given two closed systems with respective energies $E_1$ and $E_2$, we can merge them into one system, which is to say we forget the individual energies and only keep knowledge of $E = E_1 + E_2$. Physically, the systems do not interact (i.e. the Hamiltonian is of the form $H(p_1, q_1, p_2, q_2) = H_1(p_1, q_1) + H_2(p_2, q_2)$).
+
+A common scenario is where $E_1/E_2$ is huge, in which case we refer to system $1$ as a heat bath. 
+
+It is natural to ask what the marginal distribution $p_2(x_2)$ over system $2$ then looks like, where $x_2$ is a phase space point. We can calculate it by marginalizing:
+
+$$
+p_2(x_2) \propto \sum_{x_1}(x_1)\delta(E_1(x_1) + E_2(x_2) - E) \propto \Omega_1(E - E_2(x_2))$$
+
+$$ 
+= e^{S_1(E - E_2(x_2))} \approx e^{S_1(E) - \frac{\partial S_1}{\partial E}E_2(x_2)} \propto e^{-\beta_1E_2(x_2)}
+$$
+
+This is the marginal distribution of system $2$ when open (i.e. when it is a small part of a much larger system), and we see that the constraint of a fixed $\langle E \rangle$ will give rise to this same distribution, the canonical ensemble. So we say that for an open system, the expected energy is the relevant constraint.
+
+### Heat and work
+
+Consider the function which maps each point on the information manifold to the expected energy of the distribution in question. Note that we can calculate it as $\sum_i E_i p(E_i)$, where we work in discrete levels for simplicity and $p$ is the distribution over energies, *not states*. This is a function on the manifold, which we'll also call $E : \mathcal{M} \to \R$, so that $dE$ is a differential form.
+
+In particular:
+
+$$
+d\langle E \rangle = \sum_i dE_ip(E_i) + E_idp(E_i) := w + q
+$$
+
+
+!!! Note
+
+    Conventionally, we write $dE = dQ + dW$ or similar, but this is a misleading notation since $dQ$ and $dW$ are **not exact forms**. That is, there is no function $Q$ or $W$.
+
+
+Since $dE$ is exact, any integral of it over a path is path-independent. In particular, it is $0$ around any contractible loop. The same is *not* true of $q$ and $w$, and a loop may exchange heat and work, which is to say that $\int q \neq 0$ and $\int w \neq 0$ around a loop. We call $q$ the heat and $w$ the work of a system.
+
+In particular $w = \langle dE \rangle$, and $q = d\langle E \rangle - \langle dE \rangle$. $q$ measures the change in expected energy from a change in probabilities, while $w$ measure the change in expected energy from a change in the energy levels.
+
+If $E$ is a function of volume $V$, then $w = \frac{d\langle E \rangle}{dV}dV := -pdV$. And by our above calculation of $dS$, we have $q = TdS$. 
+
+This means that $q/T$ is an exact form. When integrated over a path, it gives the different between the entropy at the beginning and end, by Stokes' theorem:
+
+$$
+\int_{\gamma} \frac{q}{T} = \int_{\gamma} dS = S(\gamma(1)) - S(\gamma(0))
+$$
+
+Summarizing, we have $dE = TdS - PdV$, which is a formulation of the first law of thermodynamics.
+
+
+### The language of thermodynamics
+
+A process in thermodynamics is a path on the information manifold, i.e. a curve $\gamma : [0, 1] \to \mathcal{M}$. If $\int_\gamma q > 0$, we say that heat is gained, and similarly for work.
+
+A process $\gamma$ is adiabatic if $\int_\gamma q = 0$. This means that the probabilities don't change.
+
+A process is quasistatic (and reversible) if it lies entirely on the maximum entropy submanifold.
+
+
+<!-- by noting that if system $2$ is in a state $x_2$ (i.e. some tuple $x_2=(p_2,q_2)$) with energy $E_2(x_2)$, then its probability is proportional to the number of states of system $1$ with energy $E_1$ such that the total energy is $E_1 + E_2(x_2)$, i.e.  -->
+
+### Second law of thermodynamics
+
+As per the above table, entropy in statistical physics refers to the information entropy of the equilibrium distribution. This **is not the distribution you get by pushing an equilibrium distribution forward in time**. 
+
+!!! Example
+
+    Consider an ideal gas, and start in a distribution $d$ (not in equilibrium) at time $t$ where probability mass concentrates on states with all particles in a small area. The dynamics map, call it $U(t'-t)$, which maps the system's state to a new state at a later time $t'$, also induces a map on the distribution $d$ to a new distribution $d'$. Louville's theorem (incompressibility of phase space) states that the normalization constant will not change. This also means that the information entropy of the distribution at time $t'$ will be the same as at $t$. In this sense, systems **do not evolve towards a more entropic distribution over time**.
+
+Instead, the idea of equilibrium statistical physics is that at time $t'$, we take as our macrostate the distribution $d^*$ with maximum-entropy for the parameters (temperature, volume, etc).
+
+The second law of thermodynamics considers a situation where at time $t$ we have an equilibrium distribution $d$, and asks about the entropy at a later time, *given that parameters like volume and pressure are also being changed*. In general, $d'$ is still well defined, but by definition, it will have less entropy than $d^*$.
+
+We can now consider time evolution while also changing one of these parameters. For example, suppose we vary the Hamiltonian. However, we ensure that the process is adiabatic. In this case, the entropy of the pushforward distribution under the dynamics, at time $t'$ is still well defined, and by Louville's theorem still the same as the initial entropy, but by definition, will be less than the equilibrium distribution at $t'$ (since that is a maximum entropy distribution). This is the second law of thermodynamics. 
+
+More succinctly: $dS \geq 0$. It is only equal when the process from the initial distribution to the final one lies on the maximum entropy submanifold (i.e., the process is quasistatic).
+
+
+TODO: consequences (i.e. other formulations)
+
+### Temperature
+
+Consider a system of two parts with fixed volume, such that $S \approx S_1 + S+2$, is that $0 \leq dS = dS_1 + dS_2 = \frac{dS_1}{dE}dE_1 + \frac{dS_2}{dE}dE_2 = \frac{dS_1}{dE}dE_1 - \frac{dS_2}{dE}dE_1 = (\frac{1}{T_1} - \frac{1}{T_2})dE_1$.
+
+This implies that if $T_1 > T_2$, then $dE_1 > 0$, and if $T_1 < T_2$, then $dE_1 < 0$. In other words, energy change (here heat change) is from the hotter system to the colder system. This confirms that $T$ corresponds to the intuitive notion of temperature.
+
+One can make the same argument for pressure.
+
+<!-- This is a straightforward consequence of the principle of maximum entropy: the Gibbs entropy $\rho$ remains constant over time, by Louiville's theorem, but the equilibrium distribution is the maximum entropy distribution with the relevant constraint (expected energy), so must have greater or equal entropy to the Gibbs entropy.  -->
+
+
+
+
+### An effective theory: thermodynamics
+
+We can imagine an effective theory in which macrostates are actually physical states, and temperature is a physical variable. In this scenario, heat is a fluid which flows from hot systems to cooler ones. 
+
+!!! History
+
+    This is how thermodynamics was first conceptualized, without an understanding that the theory was only an effective description.
+
+### Free energy
+
+$F \propto \log Z$. It satisfies $F = \langle H \rangle - TS$, so that at high temperature, it is maximized by maximizing entropy, and at low temperature, by minimizing energy. 
+
+
 
 ## Non-equilibrium statistical physics
 
@@ -133,7 +350,7 @@ This form reveals several things:
 - by equipartition, we also know that $mv^2_0/2 = k_bT/2$, so $mk_BT/\tau = \int_0^\infty E(\xi(0)\xi(t))dt$. This relates dissipation ($\tau$) and fluctuation ($\xi$).
 - the *diffusion constant* D measures the rate of change of variance: it has dimensions $L^2T^{-1}$ accordingly
 
-## Phase transition
+## Phase transitions
 
 Thermodynamic states live on the information manifold, and observables (functions from the manifold to $\R$) can be measured experimentally.
 
@@ -249,6 +466,48 @@ Calculating $Tr(V_3V_1)$ is difficult and requires us to rewrite the Pauli matri
 
 **Under construction**
 
+### Critical exponents
+
+For a function $f$, we write 
+
+$$
+f(x) \sim x^\alpha
+$$
+
+to mean 
+
+$$
+\alpha = \lim_{x\to 0} \frac{\log|f(x)|}{\log|x|}
+$$
+
+These are the conventions:
+
+$$
+c \sim t^{-\alpha}
+$$
+
+$$
+m \sim t^{\beta} \sim B^{\frac{1}{\delta}}
+$$
+
+$$
+\chi \sim t^{-\gamma}
+$$
+
+$$
+\xi \sim t^{-\nu}
+$$
+
+<!-- 
+$$
+F[(T)\phi] = \int d^dx \frac{1}{2}\alpha_2(T)\phi^2 + \frac{1}{4}\alpha_4(T)\phi^4 + \frac{1}{2}\gamma(T)(\nabla\phi)^2
+$$
+
+First consider $\alpha_4=0$. Then when $\alpha_2 > 0$, taking functional derivative and solving the Helmholtz equation gives 
+
+Define $\xi^2 = \gamma/\mu^2$. From this, we can calculate the normal facts like $\langle \phi(x)\phi(0)\rangle \sim \frac{e^{-r/\xi}}{r^{(d-1)/2}}$ in the $r >> \xi$ regime. Further, since $\mu^2 \sim t$, we have $\xi \sim t^{-\nu}=t^{-\frac{1}{2}}$ -->
+
+
 ## Renormalization
 
 Suppose you have some field, for instance the discrete field $s : \Z \to C$ for some $C$. This is a (1D) lattice with a value at each site. There is a natural projection map $\pi$ which drops the even sites, to obtain a new lattice which can be expressed as a new field $s' : \Z \to C$. It is as if we have zoomed out by a factor of 2.
@@ -299,20 +558,23 @@ This real-space approach to renormalization isn't particularly general; in the 2
 
 ### Real space, continuous
 
-The simplest example of renormalization in real space is to consider the (infinite dimensional) Gaussian distribution, which is a distribution over functions $\phi : \R^d \to \R$:
+The simplest example is to consider the (infinite dimensional) Gaussian distribution, which is a distribution over functions $\phi : \R^d \to \R$:
 
 $$
 Z(m) = \int D\phi \quad e^{-S_m(\phi)} \\
-S(\phi) = \int \nabla^2\phi(x) + m\phi(x)^2dx
+S(\phi) = \int \nabla^2_x\phi(x) + m\phi(x)^2dx
 $$
 
 We first note that a change of variables $x' = x/b$ has the following effect:
 
 $$
-S(\phi) = \int \nabla^2\phi(x'b) + m\phi(x'/b)^2d(x'/b) \\ = b^{d}\int b^{-d}\nabla^2\phi'(x') + mb^{2-d}\phi'(x')^2dx' 
+S(\phi) = \int \nabla^2_{x'b}\phi(x'b) + m\phi(x'b)^2d(x'b)$$ 
+
+$$
+= b^{d}\int b^{-d}\nabla^2\phi'(x') + mb^{2-d}\phi'(x')^2dx' 
 $$
 
-where $b^{(2-d)/2}\phi'(x/b) = \phi(x)$. Defining $m' = b^{-2}m$, we have:
+where $\phi(x'b) = \phi(x) = b^{(2-d)/2}\phi'(x/b)$. Defining $m' = b^{-2}m$, we have:
 
 $$
 S_m(\phi) = \int \nabla^2\phi'(x) + m'\phi'(x)^2dx = S_{m'}(\phi')
@@ -410,12 +672,6 @@ The key fact is then that **we know $m^*$ must be $0$ above the critical tempera
 
 But observe that the bifurcation diagram of the above polynomial (i.e. plotting the minimum $m^*$ of $F(m, T)$ as a function of $T$) shows two non-zero minima appearing precisely when $r_0(T) \geq 0$. So we can deduce $r_0(T) = a(T-T_c)$, at least close to $T_c$.
 
-TODO: spontaneous symmetry breaking:
-
-$$
-m = \lim_{B\to 0} \lim_{N\to \infty} \frac{1}{N}\sum_i \langle s_i \rangle
-$$
-
 <!-- 
 
 In the Ising model, position is discrete, and the value at each position is boolean. So the state is a function $m_d : \Z \times Z \to \{-1,1\}$. If we generalize to $m_c : \R \times \R \to \R$, we can use more interesting methods. We can obtain $m_c$ as the average of $m_d$ in a ball around any point.
@@ -430,7 +686,7 @@ First write $Z(T) = \int Dm e^{-\frac{1}{T}\int g(m(x))dx} := \int Dm e^{-G(m,T)
 
 Since $m^*$ is minimal: $0 = 2r_0(T)m^* + 4r_1(T)m^{*3} \Rightarrow m^*(T) = \pm \sqrt{\frac{2|r_0(T)|}{4u_0(T)}}$.
 
-## Landau-Ginzburg
+### Landau-Ginzburg
 
 We can generalize the above to a field. Let $m : \R\times\R \to \R$, and write as above:
 
@@ -449,10 +705,18 @@ $$
 For which $p(m)\propto e^{-F(m)}$ is a (infinite dimensional) Gaussian. At and above criticality, we observe that for all $x$, the marginal distribution $m(x)$ must be $0$, so at $T=T_c$, $\mu=0$. 
 <!-- Note that if $F$ were interpreted as the Lagrangian of a QFT, excitations would be massless. -->
 
-TODO: explain: helmholtz?
 
+## Linear Response Theory
 
-### Magnetic field and chemical potential
+The following assumes the basics of statistical mechanics (see notes). Suppose we have a system whose Hamiltonian is $H$ and we perturb it to $H_T = H - K(t)A(p,q)$. We then want to calculate the resulting change in expectation $\Delta B(t) = E_{H_T}[B(t)] - E_{H}[B(t)]$.
+
+Ostensibly, this would require knowing the (time varying) distribution of the system resulting from the perturbation, but we can get what we want by exploiting the a quite general form of the fluctuation-dissipation theorem. The critical assumption is that this applies in the limit of $K$ small:
+
+$$ \Delta B(t) = \beta E_H[\dot{A}(0)B(t)] * K(t) $$
+
+The expected perturbation is the output of a linear system with input $K$ and a kernel representing the correlation of the change of input variable and the output variable, under the original system. So you can predict the response to a small perturbation of the system just by seeing the behavior of the system without the perturbation.
+
+## Magnetic field and chemical potential
 
 There is a relationship between magnetic fields and chemical potentials.
 
@@ -470,64 +734,8 @@ $$
 
 This is the same distribution, with a different interpretation. It suggests that to model a sort of thing with fixed number in a field (e.g. spins) is the same as modeling things with no fixed number without a field. 
 
-### Critical exponents
-
-For a function $f$, we write 
-
-$$
-f(x) \sim x^\alpha
-$$
-
-to mean 
-
-$$
-\alpha = \lim_{x\to 0} \frac{\log|f(x)|}{\log|x|}
-$$
-
-These are the conventions:
-
-$$
-c \sim t^{-\alpha}
-$$
-
-$$
-m \sim t^{\beta} \sim B^{\frac{1}{\delta}}
-$$
-
-$$
-\chi \sim t^{-\gamma}
-$$
-
-$$
-\xi \sim t^{-\nu}
-$$
-
-# notes
-
-$$
-F[(T)\phi] = \int d^dx \frac{1}{2}\alpha_2(T)\phi^2 + \frac{1}{4}\alpha_4(T)\phi^4 + \frac{1}{2}\gamma(T)(\nabla\phi)^2
-$$
-
-First consider $\alpha_4=0$. Then when $\alpha_2 > 0$, taking functional derivative and solving the Helmholtz equation gives 
-
-Define $\xi^2 = \gamma/\mu^2$. From this, we can calculate the normal facts like $\langle \phi(x)\phi(0)\rangle \sim \frac{e^{-r/\xi}}{r^{(d-1)/2}}$ in the $r >> \xi$ regime. Further, since $\mu^2 \sim t$, we have $\xi \sim t^{-\nu}=t^{-\frac{1}{2}}$
-
-
-## Linear Response Theory
-
-The following assumes the basics of statistical mechanics (see notes). Suppose we have a system whose Hamiltonian is $H$ and we perturb it to $H\_T = H - K(t)A(p,q)$. We then want to calculate the resulting change in expectation $\Delta B(t) = E\_{H\_T}[B(t)] - E\_{H}[B(t)]$.
-
-Ostensibly, this would require knowing the (time varying) distribution of the system resulting from the perturbation, but we can get what we want by exploiting the a quite general form of the fluctuation-dissipation theorem. The critical assumption is that this applies in the limit of $K$ small:
-
-$$ \Delta B(t) = \beta E\_H[\dot{A}(0)B(t)] * K(t) $$
-
-This is sort of amazing: the expected perturbation is the output of a linear system with input $K$ and a kernel representing the correlation of the change of input variable and the output variable, under the original system. So you can predict the response to a small perturbation of the system just by seeing the behavior of the system without the perturbation.
-
 ## Spontaneous symmetry breaking
 
-todo
-
-non-commuting limits
 
 To say that the Ising model has a spontaneously broken symmetry is to say that in the limit
 
@@ -537,4 +745,309 @@ $$
 
 That is, in the limit of an infinitely large system ($N \to \infty$) and $0$ temperature, an arbitrarily small magnetic field $b$ will make the system choose either the all-spins-up or the all-spins-down state.
 
-More generally, spontaneous symmetry breaking involves a system with a symmetry of the Hamiltonian that exhibits this kind of arbitrary sensitivity to perturbation.
+More generally, spontaneous symmetry breaking involves a system with a symmetry of the Hamiltonian that exhibits this kind of arbitrary sensitivity to perturbation, expressed by a non-commuting limit.
+
+## Examples of systems
+
+There are a few systems which are ubiquitous in statistical physics, often because their thermodynamic properties can be calculated exactly, or because they exhibit interesting phenomena, like phase transitions.
+
+Some principles these experiments demonstrate:
+
+- it is usually possible to work in either the microcanonical or canonical ensemble, and derive the same results from either
+- the equation of state (relationship between energy, entropy and volume) is often analytically derivable, and leads to experimentally testable predictions
+
+### Classical ideal gas
+
+Let $m$ be the mass of a single particle, and assume we have $N$ non-interacting particles trapped in a volume $V$. Let $U$ be the potential function, so that $U(q_i)=0$ if the particle is in the box, and $\infty$ otherwise.
+
+#### Fixed energy (microcanonical)
+
+First choose some value of $E$. Then:
+
+$$N!h^{3N}\rho(p,q) = \frac{1}{\Omega(E)}$$
+
+where 
+
+$$\Omega(E) = \int_{E \leq H(p,q) \leq E + \Delta E}  dp_i\ldots dp_n,dq_i\ldots dq_n = \int_{E \leq \sum_i^{3N}\frac{p_i^2}{2m} + U(q_i) \leq E + \Delta E} dp_i\ldots dp_n,dq_i\ldots dq_n 
+$$
+
+$$ = \int_{\sum_i^{3N}\frac{p_i^2}{2m} + U(q_i) \leq E + \Delta E} dp_i\ldots dp_n,dq_i\ldots dq_n - \int_{\sum_i^{3N}\frac{p_i^2}{2m} + U(q_i) \leq E} dp_i\ldots dp_n,dq_i\ldots dq_n = \tilde{\Omega}(E+\Delta E) - \tilde{\Omega}(E)   
+$$
+
+where 
+
+$$\tilde{\Omega}(J) = \int_{\sum_i^{3N}\frac{p_i^2}{2m} + U(q_i) \leq J} \frac{1}{\Omega(E)} dp_i\ldots dp_n,dq_i\ldots dq_n
+$$ 
+
+Note that 
+
+$$\tilde{\Omega}(J) = V^N\cdot Vol(S_{3N,\sqrt{J}})$$
+
+where the volume of the d-sphere with radius $R$ is
+$Vol(S_{d,R})=\frac{\pi^{\frac{d}{2}}\sqrt{2mE}^{d}}{\Gamma(\frac{d}{2}+1)}$
+
+Since $\Delta E$ is differentially small, we have:
+
+$$ \frac{1}{\Delta E}N!h^{3N}\rho(p,q) =  \frac{\tilde{\Omega}(E+\Delta E) - \tilde{\Omega}(E) }{\Delta E} \to \tilde{\Omega}'(E)  $$
+
+Then:
+
+$$\tilde{\Omega}'(E) = \frac{d}{dE}V^N\frac{\pi^{\frac{3N}{2}}\sqrt{2mE}^{3N}}{\Gamma(\frac{3N}{2}+1)} = \frac{3N}{2}\cdot 2m\cdot V^N\frac{\pi^{\frac{3N}{2}}(2mE)^{\frac{3N}{2}-1}}{\Gamma(\frac{3N}{2}+1)}
+$$
+
+$$ 
+= \frac{3N}{2E} \cdot V^N\frac{(2\pi mE)^{\frac{3N}{2}}}{\Gamma(\frac{3N}{2}+1)} = \frac{1}{E} \cdot V^N\frac{(2\pi mE)^{\frac{3N}{2}}}{\Gamma(\frac{3N}{2})} $$
+
+And putting it all together:
+
+$$ \rho(p,q) = \Delta E\frac{1}{EN!h^{3N}} \cdot V^N\frac{(2\pi mE)^{\frac{3N}{2}}}{\Gamma(\frac{3N}{2})} $$
+
+#### Fixed temperature (canonical)
+
+Since particles are independent, $Z=\frac{Z_i^N}{N!}$
+
+$$Z_1(\beta) = \frac{1}{h^{3}} \int e^{-\beta H(p,q)} dp_i\ldots dp_n,dq_i\ldots dq_n = V^N\cdot \left(\int_{-\infty}^{\infty} e^{\frac{-\beta p_i^2}{2m}}\right)^{3}
+$$
+
+$$ 
+= V\cdot\left(\frac{\sqrt{2\pi mT}}{h}\right)^3 = V\cdot\left(\frac{\sqrt{mT}}{\sqrt{2\pi}\hbar}\right)^3 = V\cdot\left(\frac{mT}{2\pi\hbar^2}\right)^{\frac{3}{2}} $$
+
+Defining the thermal de-Broglie wavelength as:
+
+$$\lambda = \left(\frac{2\pi\hbar^2}{mT}\right)^{\frac{1}{2}}$$
+
+with dimensions, where $E=ML^2T^{−2}$, of $\left(E^2T^2M^{-1}E^{-1}\right)^{\frac{1}{2}} = \left(ML^2T^{−2}T^2M^{-1}\right)^{\frac{1}{2}}=L$ 
+
+
+we then have:
+
+$$ Z_i(\beta) = \frac{V}{\lambda^3}$$
+
+
+$$ p = -\pd{A}{V} = -\pd{-T\log Z}{V} = NT\pd{}{V}\log V = \frac{NT}{V}$$
+
+(This is the usually seen as $pV = Nk_BT$.)
+
+$$ E = -\pd{\log Z}{\beta} = \frac{3}{2}NT$$
+
+Then note that energy per particle is then $\frac{3}{2}T=\frac{\dot{q}^2}{2m}$, where $\dot{q}$ is the momentum of a single particle, so that $\sqrt{3Tm}=\dot{q}$
+
+But recalling that $\lambda_{dB}=\frac{h}{p}$ is the de Broglie wavelength, we see why $\lambda$ is called the thermal de Broglie wavelength, since it is, up to a constant, the wavelength of the average particle.
+
+
+#### Equation of state
+
+The equation of state for the ideal gas is known as the Sackur-Tetrode formula. We can derive it as follows:
+
+$$ S = -\pd{A}{T} = \pd{}{T} T\left(\log \left(\frac{V}{\lambda^3}\right)^N - \log N!\right) = \pd{}{T} T\left(\log \left(\frac{V}{\lambda^3}\right)^N - N\log N + N \right) = \pd{}{T} TN\left(\log \left(\frac{V}{\lambda^3}\right) - \log N + 1 \right)   $$
+
+$$ = \pd{}{T} TN\left(\log \left(\frac{V}{N\lambda^3}\right) + 1 \right) $$
+
+Now note that $\pd{}{T} N\left(\log \left(\frac{V}{N\lambda^3}\right) + 1 \right) = -N\pd{}{T}\log(\lambda^3)=-N\pd{}{T}\log\left(\frac{2\pi\hbar^2}{mT}\right)^{\frac{3}{2}}=\frac{3}{2}N$
+
+so 
+
+$$ S = \pd{}{T} TN\left(\log \left(\frac{V}{N\lambda^3}\right) + 1 \right) = N\left(\log \left(\frac{V}{N\lambda^3}\right) + \frac{5}{2} \right)  $$
+
+### Quantum Harmonic Oscillator
+
+The state space is $\mathbb{N}$, the natural numbers, with $E(n)=(n+\frac{1}{2})\hbar\omega$. Then:
+
+$$Z = \sum_{n=0}^{\infty} e^{-\beta(n+\frac{1}{2})\hbar\omega} = e^{-\beta\frac{1}{2}\hbar\omega}\sum_{n=0}^{\infty} \left(e^{-\beta \hbar\omega}\right)^n =  e^{-\beta\frac{1}{2}\hbar\omega} \frac{1}{1- e^{-\beta \hbar\omega}} = \frac{1}{e^{\frac{\beta\hbar\omega}{2}}- e^{-\frac{\beta \hbar\omega}{2}}} $$
+
+Proceeding in the normal fashion, we obtain as energy and heat capacity:
+
+$$ E = \hbar\omega\left( \frac{1}{2} + \frac{1}{e^{\beta\hbar\omega}-1}  \right) $$
+
+$$
+C_v = \frac{\omega ^2 \hbar ^2
+   e^{\frac{\omega  \hbar }{T}}}{T^2
+   \left(e^{\frac{\omega  \hbar
+   }{T}}-1\right)^2}
+$$
+
+At low $T$, we can see that $E$ becomes increasingly constant (in $T$), but at high $T$, becomes linear in $T$ (you need to consider the locally linear region near $\beta=0$, since otherwise we get division by $0$. This is the  thermodynamic behaviour predicted by the corresponding classical model.
+
+Further note that $\omega = \sqrt{\frac{k}{m}}$, so similar remarks hold for oscillators with a strong spring constant, for example.  
+
+
+**Note**: one example of a physically useful consequence of this: a gas of diatomic molecules should have vibrational energy from the molecules (which are harmonic oscillators), but if their spring constant is high enough relative to the temperature of the system, we can treat them as frozen. More generally, we get locking of certain degrees of freedom. This explains why macroscopic systems have lower energy than classical statistical mechanics predicts, and similarly the heat capacity of solids (lattices of harmonic oscillators) was overestimated classically. Another example is a vibrating string. If each complex exponential (harmonic oscillator) in its Fourier series had energy equal to the temperature, the total energy would be unbounded. We need instead to say that the high frequency oscillators have exponentially small temperature.
+
+### A crystal
+
+For simplicity, assume we have a 1D lattice (same ideas apply in 3D). The configuration of the lattice can be represented by a vector $\textbf{q}$, giving the displacement from equilibrium of each atom. Moreover assume periodic boundary conditions so that $q_{N+1}=q_N$. Kinetic energy is then straightforward, namely $\sum_i^N \frac{p_i^2}{2m}$. 
+
+The problem is the potential, which could be enormously complex. What we can do is to consider the low temperature case, where displacements are small, and so a Taylor expansion is justified, with:
+
+$$ U(q) \approx U(q_0) +\left(q-q_0\right)\left(\nabla U|_{q_0}\right) + \left(q-q_0\right)^T\left(\nabla^2U|_{q_0} \right)\left(q-q_0\right) $$
+
+We can then diagonalize $H=\left(\nabla^2U|_{q_0} \right)$ to obtain a new formula for $N$ independent oscillators, which allows us to express the partition function as a sum of independent harmonic oscillators (either quantum or classical).
+
+The next step is to approximate the sum by an integral, which requires us to provide a density $\sigma(\omega)d\omega$ over frequencies for our harmonic oscillators. Notice that this is a continuum approximation of the solid.
+
+The Debye model provides one choice of $\sigma$.
+
+The much simpler Einstein model of a solid, which qualitatively captures the fact that the heat capacity drops with temperature, is to treat a solid as a set of $3N$ harmonic oscillators, all sharing the same $\omega$. 
+
+
+### Gas with quantized energy levels
+
+([These lecture notes](https://ps.uci.edu/~cyu/p115A/LectureNotes/Lecture13/lecture13.pdf) were helpful here)
+
+Suppose that we have $N$ particles, energy levels denoted $e(i)$, and number of particles per level denoted $R(n_i)$ (in a full state of the system $R$. Then $N=\sum_ie(i)R_n(i)$ in that state. Assume that temperature (and chemical potential) are fixed.
+
+$$ \langle n_j \rangle = \frac{1}{\sum_R e^{-\beta\sum_ie(i)R(n_i)}}\sum_R R(n_j) e^{-\beta\sum_ie(i)R(n_i)} = -\frac{1}{\beta}\pd{}{e(j)}\log Z $$
+
+Then under different assumptions we obtain different values of $Z$, and can proceed from there.
+
+### With distinguishable particles (Maxwell-Boltzmann statistics)
+
+If the particles are distinguishable, we have:
+
+$$ \log Z = \log \xi^N = N \log \xi $$
+
+where $\xi = \sum_ie^{-\beta e(i)}$
+
+Then 
+
+$$ \langle n_j \rangle = -\frac{1}{\beta}\pd{}{e(j)}\log Z = -\frac{1}{\beta}\pd{}{e(j)}N\log \sum_ie^{-\beta e(i)} = N \frac{e^{-\beta e(j)}}{\sum_ie^{-\beta e(i)}}   $$
+
+### With indistinguishable bosons with no fixed number (Bose-Einstein statistics)
+
+Here we have to use the Grand Canonical Ensemble, namely:
+
+with $R(E) = \sum_ie(i)R(n_i)$ and $R(N) = \sum_i R(n_i)$:
+
+$$\mathcal{Z} = \sum_R e^{-\beta (R(e) - \mu R(N) )} = \sum_R e^{-\beta (\sum_i e(i)R(n_i) - \mu R(n_i) )} = \sum_{n_1=0}^{\infty} e^{-\beta(e(1)-\mu)n_1}\cdot\sum_{n_2=0}^{\infty} e^{-\beta(e(2)-\mu)n_2}\ldots  $$
+
+$$ = \frac{1}{1- e^{-\beta(e(1)-\mu)}}\cdot \frac{1}{1- e^{-\beta(e(2)-\mu)}}\ldots $$
+
+So 
+
+$$ \log \mathcal{Z} = -\sum_{r=1}^{\infty} \log(1 - e^{-\beta(e(1)-\mu)}) $$
+
+and 
+
+$$  \langle N \rangle = \frac{1}{\beta}\pd{}{\mu}\log \mathcal{Z} = \sum_{r=1}^{\infty} \frac{e^{-\beta(e(r)-\mu)}}{(1 - e^{-\beta(e(r)-\mu)})} = \sum_{r=1}^{\infty} \frac{1}{e^{\beta(e(r)-\mu)} - 1}   $$
+
+Similarly: $\langle n_j \rangle = \frac{1}{e^{\beta(e(j)-\mu)} - 1}$
+
+
+Note that since $\forall j: \langle n_j \rangle \gt 0$, we have $\forall j: E_j\gt \mu$. In particular, as $\mu$ approaches the lowest energy $E_0$, $\langle n_0 \rangle \to \infty$ and so almost all of the particles reside in the ground state. This is Bose-Einstein condensation, and leads to weird macroscopic effects of quantum behaviour.
+
+### With indistinguishable fermions with no fixed number (Fermi-Dirac statistics)
+
+Now assume the particles are Fermions. Proceeding in the same fashion, but summing $n_i$ up to $1$, not to infinity, in order to respect the Pauli exclusion principle for Fermions, we obtain:
+
+$$ \langle n_j \rangle = \frac{1}{e^{\beta(e(j)-\mu)} + 1}  $$
+
+This is a useful model of electron and hole density in semiconductors. Note that $\langle n_j \rangle \leq 1$, as we would want. 
+
+
+
+### Two spin system
+
+A state $s$ is an array of $N$ Booleans, and the energy is $E=\epsilon\cdot N_T(s)$, where $N_T(s)$ is the number that are true (or spin-up, if you prefer). 
+
+Note that in this system, we have fixed number and volume, so don't have to worry about those.
+
+#### Two Spin System: Microcanonical Ensemble
+
+The microcanonical ensemble is binomial, and so the entropy is $0$ at $E(s)=N_T(s)\epsilon=0$.
+
+Using [Stirling's approximation](/maths/probability), entropy at $E=\epsilon N_T$: 
+
+$${N \choose N_T} = \log N! - \log N_T - \log (N-N_T)$$ 
+
+$$
+\approx N\log N - N - N_T\log N_T + N_T - (N-N_T)\log(N-N_T) + N - N_T
+$$
+
+Symbolically solving, to save effort, and working in units where $k_B=1$, we calculate $S(E)$ and $E$ in terms of $T$:
+
+$$S = -\frac{E}{\epsilon}\log\frac{E}{\epsilon} + N\log N - (-\frac{E}{\epsilon} + N)\log(-\frac{E}{\epsilon} + N)$$
+
+which forms roughly a semicircle when graphed ($S$ on y-axis, $E$ on x-axis). From this, we see that temperature is negative when $E \gt \frac{N_T}{2}$. Further, negative temperatures are hotter than positive ones, in the sense that heat flows from a system with negative temperature to a system with positive temperature. To see this, suppose we place system $1$ with positive temperature next to system $2$ with negative temperature. $dS \gt 0$, so 
+
+$\frac{dS_1}{dE_1} = \frac{1}{T_1} \gt 0$ and $\frac{dS_2}{dE_2} = \frac{1}{T_2} \lt 0$
+
+Then energy must be added to system $1$ to increase energy, and removed from system $2$.
+
+
+#### Schottky anomaly
+
+Inverting the equation for $S(E)$ to obtain $E(S)$, we see that:
+
+$$E = \frac{N \epsilon}{e^{\frac{\epsilon}{T}} + 1}$$
+
+Heat capacity is defined as:
+
+$$C = \frac{dE}{dT}$$
+
+Graphing this shows a non-monotonic curve. This non-monotonicity is known as the Schottky anomaly, anomalous relative to the monotonic heat capacity for many types of systems.
+
+#### Two Spin System: Canonical Ensemble
+
+We calculate:
+
+$$Z = \frac{N\epsilon}{e^{\frac{\epsilon}{T}} + 1}$$
+
+$$\langle E \rangle = \frac{N \epsilon}{e^{\frac{\epsilon}{T}} + 1}$$
+
+Note that this agrees with the same result obtained from the microcanonical ensemble after a Legendre transform.
+
+
+### Classical Harmonic Oscillator
+
+#### Microcanonical ensemble
+
+$1 = \int d^{6N}\mu \rho = C'\cdot A$, for $A=\int_{E \leq \sum_{i}^{3N}\frac{p_i^2}{2m}+\frac{kq_i^2}{2}\leq E+\delta E} dq_1...q_n,p_1...p_n$
+
+To evaluate this integral, we can note that for $\tilde{\Omega}(E)=\int_{\sum_{i}^{3N}\frac{p_i^2}{2m}+\frac{kq_i^2}{2}\leq E} dq_1...q_n,p_1...p_n$, we have that $A=\tilde{\Omega}(E+\delta E)-\tilde{\Omega}(E)$.
+
+$\tilde{\Omega}(E)$ is can be obtained by the formula for the volume of a sphere, and a change of variables to $(\frac{p_1}{\sqrt{m}}...\frac{p_n}{\sqrt{m}},\sqrt{k}q_1...\sqrt{k}q_n)$, which incurs a Jacobian determinant of $(\frac{m}{k})^{\frac{3N}{2}}$. In particular:
+
+$$\tilde{\Omega}(E) = \int_{\sum_{i}^{3N}(\frac{p_i}{\sqrt{m}})^2+(\sqrt{k}q_i)^2\leq 2E} dq_1...dq_n,dp_1...dp_n = (\frac{m}{k})^{\frac{3N}{2}} \int_{\sum_{i}^{3N}(\frac{p_i}{\sqrt{m}})^2+(\sqrt{k}q_i)^2\leq 2E} d\frac{p_1}{\sqrt{m}}...d\frac{p_n}{\sqrt{m}},d\sqrt{k}q_1...d\sqrt{k}q_n = (\frac{m}{k})^{\frac{3N}{2}} Sph(6N,\sqrt{2E})$$
+
+$$=\sqrt{\frac{m}{k}}^{3N}\frac{\pi^{3N}(2E)^{3N}}{\Gamma(3N+1)}$$
+
+So in the limit of small $\Delta E$, we have that $\frac{A}{\Delta E}=\frac{\partial A}{\partial E} = \sqrt{\frac{m}{k}}^{3N}\frac{\pi^{3N}(2E)^{3N}}{\Gamma(3N+1)}=\frac{6N\sqrt{\frac{m}{k}}^{3N}\pi^{3N}(2E)^{3N-1}}{\Gamma(3N+1)}$
+
+Then, again in the limit of small $\Delta E$, $C'=\frac{1}{\Delta E}\frac{\Gamma(3N+1)}{6N\sqrt{\frac{m}{k}}^{3N}\pi^{3N}(2E)^{3N-1}}$
+
+#### Canonical ensemble
+
+Let's consider a single, 1D classical harmonic oscillator. I use $\mu$ to denote a point in phase space, with coordinates $(p,q)$. Assume units where $k_B$ is $1$.
+
+$$H(q,p)=\frac{p^2}{2m}+\frac{kq^2}{2}$$
+
+$$Z = \int e^{-\beta H(\mu)}d\mu = \left(\int_{\RR} dp e^{-\beta T(p)}\right)\cdot\left( \int_{\RR} e^{-\beta V(q)} \right) = \sqrt{\frac{2m\pi}{\beta}}\cdot \sqrt{\frac{2\pi}{\beta k}} = \frac{2\pi}{\omega\beta}$$
+
+where $\omega$ is $\sqrt{\frac{k}{m}}$, which is the frequency of the oscillator.
+
+So $E = -\frac{\partial \log Z(\beta)}{\partial\beta} = \frac{1}{\beta} \Rightarrow E = T$
+
+This means that for *any spring constant*, the oscillator is equal to the temperature. This turns out not to be the correct model for nature: it turns out that at low temperatures and high spring constants, heat capacity decreases. Explaining this requires quantum mechanics.
+
+
+
+
+
+
+
+## Kinetics
+
+Kinetics is the application of actual mechanics to obtain physical behaviors of large systems. So for example, you could take the Maxwell speed distribution of particles in an ideal gas, and look at their collisions with the sides of a box, for example, to work out how much force they should impart, and thus what the pressure is. 
+
+
+<!-- ### Conserved current
+
+A closely connected relation between discrete and continuum systems is as follows: let $\rho(x)\Delta x$ be the density of the quantity of interest, and $J(x)$ the rate of this quantity moving through $x$. Then 
+
+$$\frac{d \rho(x)\Delta x}{dt} = J(x)-J(x+\Delta x) \Rightarrow \frac{d \rho(x)}{dt} = -\frac{J(x+\Delta x)-J(x)}{\Delta x} \to -\frac{dJ}{dx}  $$
+
+Given conserved current and a further assumption that $J=-a\frac{\partial \rho}{\partial t}$, we recover the diffusion equation. This second assumption is, Sethna notes, sensible in the context of perturbations of equilibrium systems, which can be studied more formally.
+ -->
+
+
+

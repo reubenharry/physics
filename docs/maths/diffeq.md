@@ -553,14 +553,48 @@ $$ V(r,\theta) = \sum_{l=0}^{\infty} (A_lr^l+\frac{B_l}{r^{l+1}})P_l(\cos\theta)
 
 ### Diffusion Equation
 
-  
-  
+**Under construction** (duplication of material below from probability.md)
+
+#### Derivation
+
+
+For a simple random walk, we can describe not only the macroscopic equilibrium state, but also the approach to equilibrium, which is diffusion.
+
+For a density $\rho(x,t)$, the following equation describes diffusion:
+
+$$ \frac{\partial \rho}{\partial t} = a\frac{\partial^2 \rho}{\partial x^2} $$
+
+This can be seen to be the continuum limit of random walks. The following derivation is from Sethna's excellent *Statistical Mechanics: Entropy, Order Parameters, and Complexity*.
+
+Let $X(t)$ be the random variable (with density $\rho(x, t)$) for a particle's position at time $t$, and assume a discrete time step $\Delta t$, so that $X(t+\Delta t)=X(t)+L$, where $L$ is a random variable representing a step, with $E[L]=0$ and density $\chi$.
+
+The density $\rho(x, t+\Delta t)$ is then the sum of the random variables $X(t)$ and $L$, which is the convolution of their densities:
+
+$$\rho(x, t+\Delta t) = \int_{-\infty}^{\infty}\rho(x-z,t)\cdot \chi(z)dz$$
+
+If we assume that the step size is very small compared to the varying of $\rho$ with $x$ then we can Taylor expand:
+
+$$\rho(x, t+\Delta t) = \int_{-\infty}^{\infty}\left( \rho(x,t)-\frac{\partial \rho}{\partial x}z + \frac{\partial^2\rho}{\partial x^2}\frac{z^2}{2} \right)\cdot \chi(z)dz$$
+
+$$ = \rho(x,t)\int_{-\infty}^{\infty}\chi(z)dz - \frac{\partial \rho}{\partial x}\int_{-\infty}^{\infty}\left(z \right)\cdot \chi(z)dz + \frac{1}{2}\frac{\partial^2\rho}{\partial x^2}\int_{-\infty}^{\infty}\left(z^2 \right)\cdot \chi(z)dz $$
+
+$$ = \rho + \frac{1}{2}\frac{\partial^2\rho}{\partial x^2}\cdot Var[L] $$
+
+Now suppose that we also assume that $\rho$ changes very little in each time step. Then, in the limit we can equate $\rho(x,t+\Delta t)-\rho(x,t)$ with $\frac{\partial\rho}{\partial t}\Delta t$
+
+Putting together these two interpretations for $\rho(x,t+\Delta t)$ gives:
+
+$$\frac{\partial\rho}{\partial t}= \frac{Var[L]}{2\Delta t} \frac{\partial^2\rho}{\partial x^2} $$
+
+which not only derives the diffusion equation, but gives us the form of $a$.
+
+#### Solution
 
 For any choice of $t$, we first express $x\mapsto \rho(x,t)$ in the basis of complex exponentials (i.e. we express it as the inverse Fourier transform of its Fourier transform):
 
   
 
-$$\rho\_t(x) = \int_{\R} \mathcal{F}\rho\_t(k)e^{i2\pi xk}dk$$
+$$\rho_t(x) = \int_{\R} \mathcal{F}\rho_t(k)e^{i2\pi xk}dk$$
 
   
 
@@ -568,7 +602,7 @@ Then $\frac{\partial \rho}{\partial t} = \int_{\R} \frac{d}{dt}(\mathcal{F}\rho_
 
   
 
-And $\frac{\partial^2 \rho}{\partial x^2} = \int_{\R} \mathcal{F}\rho\_t(k)e^{i2\pi xk}\cdot(-4\pi^2k^2)dk$
+And $\frac{\partial^2 \rho}{\partial x^2} = \int_{\R} \mathcal{F}\rho_t(k)e^{i2\pi xk}\cdot(-4\pi^2k^2)dk$
 
   
 
@@ -576,7 +610,7 @@ So, since $\frac{\partial \rho}{\partial t} = a\frac{\partial^2 \rho}{\partial x
 
   
 
-$$\int_{\R} \frac{d}{dt}(\mathcal{F}\rho_t)(k)e^{i2\pi xk}dk = \int_{\R} \mathcal{F}\rho\_t(k)e^{i2\pi xk}\cdot(-a4\pi^2k^2)dk$$
+$$\int_{\R} \frac{d}{dt}(\mathcal{F}\rho_t)(k)e^{i2\pi xk}dk = \int_{\R} \mathcal{F}\rho_t(k)e^{i2\pi xk}\cdot(-a4\pi^2k^2)dk$$
 
   
 
@@ -584,7 +618,7 @@ Comparing terms, we have that:
 
   
 
-$$ \frac{d}{dt}(\mathcal{F}\rho_t)(k) = -a4\pi^2k^2\mathcal{F}\rho\_t(k) $$
+$$ \frac{d}{dt}(\mathcal{F}\rho_t)(k) = -a4\pi^2k^2\mathcal{F}\rho_t(k) $$
 
   
 
@@ -600,7 +634,7 @@ $$\rho_t(x) = \int_{\R} (\mathcal{F}\rho_0)(k)e^{-a4\pi^2k^2t}e^{i2\pi xk}dk$$
 
   
 
-This tells us that as $t$ increases, only values of $k$ close to $0$ will matter, which means that $\rho\_t(x)$ will be increasingly uniform. As you'd expect for diffusion.
+This tells us that as $t$ increases, only values of $k$ close to $0$ will matter, which means that $\rho_t(x)$ will be increasingly uniform. As you'd expect for diffusion.
 
   
 
@@ -612,7 +646,7 @@ Any vector field $F$ which is differentiable and goes to $0$ quicker than $\frac
 
   
 
-$$ F(r ) = \frac{1}{4\pi} \left(\nabla\times\left( \int \frac{\nabla\_{r'}\times F(r')}{||r-r'||} \right) - \nabla\left( \int\frac{\nabla\_{r'}\cdot F(r')}{||r-r'||} \right) \right)$$
+$$ F(r ) = \frac{1}{4\pi} \left(\nabla\times\left( \int \frac{\nabla_{r'}\times F(r')}{||r-r'||} \right) - \nabla\left( \int\frac{\nabla_{r'}\cdot F(r')}{||r-r'||} \right) \right)$$
 
 ## Continuity
 

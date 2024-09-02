@@ -77,29 +77,20 @@ Example:
   
 
 $$
-
 (A=1, B=1) : 0.3
-
 $$
 
 $$
-
 (A=1, B=0) : 0.3
-
 $$
 
 $$
-
 (A=0, B=1) : 0.3
-
 $$
 
 $$
-
 (A=0, B=0) : 0.1
-
 $$
-
   
 
 ??? Note
@@ -154,11 +145,8 @@ The most importance fact about this manifold is that there is a canonical way to
 
   
 $$
-
 g_{ij} = E[\delta_i\log p(x;\theta)\delta_j\log p(x;\theta)]
-
 $$
-
 
 The upshot is that we can talk about the distance between distributions in a parametrization-invariant (i.e. coordinate free) way.
 
@@ -179,7 +167,6 @@ Or:
   
 
 $$ F_Y(A) = P(Y\in A) = P(g(X)\in A) = P(X\in g^{-1}(A)) = \int_{g^{-1}(A)}f_X(x)dx $$
-
   
 
 By the general form of the substitution rule, we then have that
@@ -187,7 +174,6 @@ By the general form of the substitution rule, we then have that
   
 
 $$ P(Y\in A) = \int_{A}(f_X\circ g^{-1})(y)\cdot|J_{g^{-1}}(y)|dy $$
-
   
 
 But $J_{g^{-1}}(y) = det D(g^{-1}(y)) = det (Dg(g^{-1}(y)))^{-1} = J_g(g^{-1}(y))^{-1}$ so
@@ -195,7 +181,6 @@ But $J_{g^{-1}}(y) = det D(g^{-1}(y)) = det (Dg(g^{-1}(y)))^{-1} = J_g(g^{-1}(y)
   
 
 $$ P(Y\in A) = \int_{A}(f_X\circ g^{-1})(y)\cdot|J_g(g^{-1}(y))^{-1}|dy = \int_{A}\frac{(f_X\circ g^{-1})(y)}{|J_g(g^{-1}(y))^{-1}|}dy $$
-
   
 
 So $\frac{d}{dy}P(Y\in A) = f_Y(y) = \frac{(f_X\circ g^{-1})(y)}{|J_g(g^{-1}(y))|}$
@@ -210,11 +195,12 @@ So $(f_X\circ g^{-1})(y) = f_Y(y)\cdot|J_g(g^{-1}(y))^{-1}|$
 
   
 
-$$ F_{X+Y}(z) = \int_{-\infty}^{\infty}\int_{-\infty}^{z-x} f_{(X,Y)}(x,y) dydx $$
-
+$$F_{X+Y}(z) = \int_{-\infty}^{\infty}\int_{-\infty}^{z-x} f_{(X,Y)}(x,y) dydx$$
   
 
-$$ = \int_{-\infty}^{\infty}\int_{-\infty}^{z} f_{(X,Y)}(x,v-x) dvdx = \int_{-\infty}^{z}\int_{-\infty}^{\infty} f_{(X,Y)}(x,v-x) dvdx $$. Then, taking the derivative with respect to $x$, using the fundamental theorem of calculus, and assuming independence of $X$ and $Y$, we have that $f_{X+Y}(z) = \int_{-\infty}^{\infty} f_X(x)\cdot f_Y(z-x) dx$.
+$$= \int_{-\infty}^{\infty}\int_{-\infty}^{z} f_{(X,Y)}(x,v-x) dvdx = \int_{-\infty}^{z}\int_{-\infty}^{\infty} f_{(X,Y)}(x,v-x) dvdx$$ 
+
+Then, taking the derivative with respect to $x$, using the fundamental theorem of calculus, and assuming independence of $X$ and $Y$, we have that $f_{X+Y}(z) = \int_{-\infty}^{\infty} f_X(x)\cdot f_Y(z-x) dx$.
 
   
 
@@ -240,9 +226,7 @@ Various increasingly powerful versions, but simplest is that for a sequence $\{X
   
 
 $$MGF_{X_n}(t) = [MGF_{X_i}(t)]^n $$
-
 $$ MGF_{Z_n}(t) = [MGF_{X_i}(\frac{t}{\sqrt{n}\sigma})]^n$$
-
   
 
 Further, we can Taylor expand the first MGF as follows:
@@ -250,7 +234,6 @@ Further, we can Taylor expand the first MGF as follows:
   
 
 $$ MGF_{X_n}(t) = MGF(0) + tMGF'(0) + \frac{t^2}{2}MGF''(0) + o(t^2) = 1 + \frac{t^2}{2}\sigma^2 + o(t^2) $$
-
   
 
 (The last step happens by fact that the derivatives of the MGF at $0$ are the moments of the distribution in question.)
@@ -262,7 +245,6 @@ But then:
   
 
 $$ MGF_{Z_n}(t) = [1 + \frac{(\frac{t}{\sqrt{n}\sigma})^2}{2}\sigma^2 + o(t^2)]^n = [1 + \frac{t^2}{2n} + o((\frac{t}{\sqrt{n}\sigma})^2)]^n$$
-
   
 
 But this converges to $e^{\frac{t^2}{2}}$ as $n$ goes to infinity. That's the MGF of a standard normal, so we're done.
@@ -289,14 +271,13 @@ The challenge is to minimize $KL(q || p)$ without knowing $p$. Here's the idea: 
   
 
 $$L(q) := -\sum_x q(x)\log\frac{q(x)}{\hat{p}(x)} = -\sum_x q(x)\log\frac{q(x)}{p(x)} + \log Z = - KL(q || p) + \log Z$$
-
-  KL divergence is always positive (a basic fact of information theory), so:
-
   
+  
+KL divergence is always positive (a basic fact of information theory), so:
 
 $$ \log Z = KL(q || p) + L(q) \geq L(q) $$
 
-  
+
 which means that $L(q)$ is a lower bound (in Bayesian inference contexts known as the evidence lower bound, or ELBO) on $Z$. So we maximize $L$ to minimize the KL.
   
 #### Mean Field Variational inference
@@ -509,33 +490,23 @@ does **not** represent the right definition. The most obvious way to see that it
   
 
 $$
-
 - \int (p(x)\log p(x))dx
-
 $$
 
 $$
-
 = - \int (p'(f(x)))|\frac{df}{dx}|\log(p'(f(x))|\frac{df}{dx}|) dx
-
 $$
 
 $$
-
 = - \int (p'(f(x)))\log(p'(f(x))|\frac{df}{dx}|) df(x)
-
 $$
 
 $$
-
 = - \int (p'(y))\log(p'(f(x))|\frac{dy}{dx}|) dy
-
 $$
 
 $$
-
 \neq - \int p'(y)\log p'(y)dy
-
 $$
 
   
@@ -802,39 +773,27 @@ $p(y) \propto \sum_{d \in D} I[d=y]$
 ### Exponential Family
 
 
-Not to be confused with the exponential distribution. Really it's a family of families. For fixed functions $b$ and $T$ but with $\eta$ varying, we have a family:
+Not to be confused with the exponential distribution. For fixed functions $b$ and $T$ but with $\eta$ varying, we have a manifold of distributions:
 
   
 
 $$P(x;\eta) = b(x)e^{\eta^TT(x)-a(\eta)}$$
 
-  
+With $T(X)$ the sufficient statistic, $\eta$ the natural parameter, $a(\eta)$ the log-normalizer, $b$ the base measure.
 
-$T(X)$: sufficient statistics, $\eta$ : natural parameter, $a(\eta)$: log-normalizer, $b$ : base measure.
 
-  
-
-Canonical Parameters: $\mu,\sigma...$ : $\Omega$ (the sample space)
-
-  
-
-Natural Parameters: $\eta : \R$
-
-  
-
+<!-- 
 Link function: $L : \Omega \to \R$
 
-  
 
-Response function: $R : \R \to \Omega$
-
-  
-
-So $\eta$ parametrizes a family. For instance, we can choose $T$ and $b$ to make $\eta$ range over all Gaussians, or Bernoulli, Poisson, Exponential, Von-Mises, Gamma etc distributions. $a$ is determined by $T$ and $b$ and is the log of the normalizing constant.
+Response function: $R : \R \to \Omega$ -->
 
   
 
-The reason this is useful is that we can prove a bunch of super useful things about distributions in this form. In particular:
+So $\eta$ parametrizes a family. For instance, we can choose $T$ and $b$ to make $\eta$ range over all Gaussians, or Bernoulli, Poisson, Exponential, Von-Mises, Gamma distributions. $a$ is determined by $T$ and $b$ and is the log of the normalizing constant.
+
+  
+Important facts about exponential family distributions:
 
   
 
@@ -854,13 +813,14 @@ To find the maximum likelihood $\theta$ for an observation $D$, one wants to tak
 
   
 
-$$ \frac{d}{d\theta} log \sum_{x'}e^{\theta^T\cdot f(x')} = \frac{1}{\sum_{x'}e^{\theta^T\cdot f(x')}}
+$$\frac{d}{d\theta} log \sum_{x'}e^{\theta^T\cdot f(x')} = \frac{1}{\sum_{x'}e^{\theta^T\cdot f(x')}}
+\cdot \sum_{x'} \frac{d}{d\theta} e^{\theta^T\cdot f(x')}$$
 
-\cdot \sum_{x'} \frac{d}{d\theta} e^{\theta^T\cdot f(x')} $$
 
   
 
-$$ = \frac{1}{Z(\theta)} \cdot \sum_{x'}e^{\theta^T\cdot f(x')} \cdot f(x') = \sum_{x'} P(x'|\theta) \cdot f(x') = E_{x\sim p(x|\theta)}[f(x)] $$
+$$
+= \frac{1}{Z(\theta)} \cdot \sum_{x'}e^{\theta^T\cdot f(x')} \cdot f(x') = \sum_{x'} P(x'|\theta) \cdot f(x') = E_{x\sim p(x|\theta)}[f(x)]$$
 
   
 
@@ -910,11 +870,8 @@ For a process P:
   
 
 $$
-
 \int_0^\tau g(t)dP(t) := \lim_{v\to\infty}\sum_{k=0}^{v-1}g(t_k)(P(k+1)(\tau/v))-P(k(\tau/v))
-
 $$
-
   
 
 where $t_k = k(\tau/v)$ in the **Ito formulation** of the integral, and $t_k = (k + \frac{1}{2})(\tau/v)$ in the **Stratonovich formulation**.
@@ -926,11 +883,8 @@ where $t_k = k(\tau/v)$ in the **Ito formulation** of the integral, and $t_k = (
   
 
 $$
-
 W(t) = lim_{dt \to 0}\sqrt{dt}\sum_{k=0}^{t/dt}J_k
-
 $$
-
   
 
 So $W$ is the limit of a random walk in a high density of steps.
@@ -946,14 +900,12 @@ Moreover, for $Y(t) = \int_0^t g(s)dW(s)$:
   
 
 $$
-
 E(Y(t)) = 0
 $$
+
 $$
 E(Y^2(t)) = \int_0^t g(s)^2ds
-
 $$
-
   
 
 <!-- ## Chain rule for stochastic processes
@@ -965,7 +917,6 @@ In the Ito formulation, we have:
   
 
 $$
-
 d\phi(X) = \phi'(X)(a(X,t))
 
 $$ -->
@@ -1000,9 +951,7 @@ Let $dP = -\gamma Pdt + \sqrt{2\gamma T m} dW$. Then it isn't hard to show that 
   
 
 $$
-
 X(t) = \sqrt{Tm}N(0,1)
-
 $$
 
   
@@ -1018,37 +967,21 @@ Physically, this is a model of the approach the equilibrium distribution (of mom
 This is basically Ornstein-Uhlenbeck coupled to Hamiltonian dynamics, in the following sense:
 
   
-
 $$
-
 d\begin{bmatrix}
-
 q \\
-
 p
-
 \end{bmatrix}
-
 =
-
 \begin{bmatrix}
-
 M^{-1}p \\
-
 -(\nabla U(q) + \gamma p)
-
 \end{bmatrix}dt
-
 +
-
 \begin{bmatrix}
-
 0 \\
-
 \sqrt{2\gamma T}M^{\frac{1}{2}}
-
 \end{bmatrix}dW
-
 $$
 
   
@@ -1086,13 +1019,9 @@ where (via integration by parts) we have that $\mathcal{L}^\dagger\rho = -\frac{
 Or more explicitly in 1D:
 
   
-
 $$
-
 \frac{\partial}{\partial t}\rho(x,t)
-
 = \frac{1}{2}\frac{\partial^2}{\partial x^2}(b^2(x,t)\rho(x,t))-\frac{\partial}{\partial x}(a(x,t)\rho(x,t))
-
 $$
 
   
@@ -1104,11 +1033,8 @@ $$
 For $dX = 0a(X,t)dt + b^0(X,t)dW = dW$, $\mathcal{L}^\dagger = \frac{1}{2}\frac{d^2}{dx^2}$, so
 
   
-
 $$
-
 \dot \rho = \frac{1}{2}\frac{d}{dx^2}\rho
-
 $$
 
   
@@ -1125,25 +1051,19 @@ This is known as the **diffusion equation**.
 	  
 	
 	$$
-	
 	P(f(t+dt)=x | x_0, t_0) = \int dx' P(f(t)=x'|x_0,t_0)P(f(t+dt)=x|x',t')
-	
 	$$
 	
 	  
 	
 	$$
-	
 	= \int dx' P(f(t)=x'|x_0,t_0)E(\delta(x'-x(t+dt)))
-	
 	$$
 	
 	  
 	
 	$$
-	
 	\approx \int dx' P(f(t)=x'|x_0,t_0)E(\delta(x-x') + \frac{\partial}{\partial x'}(\delta(x-x')\Delta X) + \frac{1}{2}\frac{\partial^2}{\partial x^2}(\delta(x-x')(\Delta x)^2))
-	
 	$$
 	
 	  
@@ -1157,9 +1077,7 @@ This is known as the **diffusion equation**.
 	  
 	
 	$$
-	
 	\frac{d}{dt}f(t) = v(f)(t) + \xi(t)
-	
 	$$
 	
 	  
@@ -1169,13 +1087,9 @@ This is known as the **diffusion equation**.
 	  
 	
 	$$
-	
 	P(f(t+dt)=x | x_0, t_0) = \\
-	
 	\int dx' P(f(t)=x'|x_0,t_0)
-	
 	(1 - v(x')dt\frac{d}{dx} + Ddt\frac{d^2}{dx^2})\delta(x-x') \\
-	
 	$$
 	
 	  
@@ -1185,18 +1099,15 @@ This is known as the **diffusion equation**.
 	  
 	
 	$$
-	
 	\frac{\partial}{\partial t}\rho(x,t) = \frac{P(f(t+dt)=x | x_0, t_0) - P(f(t)=x | x_0, t_0)}{dt} \\
-	
 	= D\frac{\partial^2}{\partial x^2}\rho(x,t)-\frac{\partial}{\partial x}(v(x)\rho(x,t))
-	
 	$$
 	
 	  
   
 
 
-## Dynamical systems
+#### Dynamical systems
 
 !!! References
 
@@ -1219,7 +1130,9 @@ More generally, one can do Monte Carlo inference in the sense of approximating t
 
   
 
-This mathematics is crucial for field theories in physics (particularly statistical and quantum field theories), since they amount to distributions over fields, where "field" is the physics term for a [section of a fiber bundle](topology.md), which in the simplest case is a function $f : \R^n \to G$ for some space $G$.
+This mathematics is crucial for field theories in physics (particularly statistical and quantum field theories), since they amount to distributions over functions of space.
+
+<!-- , where "field" is the physics term for a [section of a fiber bundle](topology.md), which in the simplest case is a function $f : \R^n \to G$ for some space $G$. -->
 
   
 
@@ -1240,18 +1153,14 @@ When $F$ only has quadratic terms, $Z$ is a Gaussian integral:
   
 
 $$
-
 F(\phi) := \int d^dx \partial_i\phi(x)\partial_i\phi(x) + \mu^2\phi^2(x) - B(x)\phi(x)
-
 $$
 
   
   
 
 $$
-
 Z = \int d\phi e^{\langle\phi , A\phi\rangle - \langle B, \phi \rangle}
-
 $$
 
   
@@ -1265,9 +1174,7 @@ In finite dimensional vector spaces, we use the formula: $Z = \int y e^{-\frac{1
   
 
 $$
-
 AA^{-1} = \delta
-
 $$
 
   
@@ -1289,9 +1196,7 @@ Then since:
   
 
 $$
-
 \delta^4(x) = \int d^4k \frac{1}{(2\pi)^4}e^{ikx}
-
 $$
 
   

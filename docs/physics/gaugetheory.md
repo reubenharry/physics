@@ -3,11 +3,11 @@
 
 [Fiber bundles](../maths/topology.md) are the objects on which gauge theories are defined, which are the field theories that describe modern physics, from electromagnetism (a $U(1)$ bundle), Yang-Mills (a g-bundle where g is a more general, non-Abelian, Lie group) to general relativity (a tangent bundle).
 
-The idea is that the field which the action takes as argument is a connection on the bundle, so that the connection (and in turn curvature of the space) is a dynamic variable. For example, in electromagnetism the curvature is the electromagnetic field strength, and the bundle has spacetime as the base manifold and fibers of $U(1)$. For general relativity, we work with a tangent bundle, for which the base manifold is also spacetime, so that curvature is Riemamnian curvature.
+The idea is that the field which the action takes as argument is a connection on the bundle, known in physics as a gauge field, so that the connection (and in turn curvature of the space) is a dynamic variable. For example, in electromagnetism the curvature is the electromagnetic field strength, and the bundle has spacetime as the base manifold and fibers of $U(1)$. For general relativity, we work with a tangent bundle, for which the base manifold is spacetime, which has a canonical connection, and curvature is Riemamnian curvature.
 
-### General
+## General
 
-For a bundle $E$, a group action $g(x) = e^{ic(x)^aA_a}$, a physical field $\phi \in \Gamma(E)$, a gauge field $A$, a gauge transformation is the map:
+For a G-bundle $E$, i.e. a bundle with fibers isomorphic to some group $G$, a group action $g(x) = e^{ic(x)^aA_a}$, a physical field $\phi \in \Gamma(E)$, a gauge field $A$, a gauge transformation is the map:
 
 $$
 \phi(x) \mapsto g(x)\phi(x)
@@ -21,6 +21,10 @@ In particular, the covariant derivative operator $D_\mu\phi(x)^i = \partial_\mu\
 
 A gauge theory has a Lagrangian with a kinetic term defined by the covariant derivative so that the entire action is gauge transformation invariant.
 
+### Quantum
+
+The path integral formulation of quantum physics gives a setting where we have a distribution over connections. Typically, one is interested in gauge invariant quantities, such as the expectation of the trace of the [holonomy](../maths/differential_geometry.md) of the connection around a loop, known as a Wilson loop. That is, one ranges over all possible connections, and for each, calculates the linear map on the group induced by parallel transport (i.e. lifting the loop onto the fibers), and then takes the trace of that.
+
 ## Electromagnetism as a gauge theory
 
 Choose $U(1)$ as our gauge group. Then from the above, we see that the transformation is $\phi(x)\mapsto e^{i\Lambda(x)}\phi(x)$
@@ -33,7 +37,7 @@ $$
 \\ \Rightarrow \partial_\mu\phi(x) \mapsto e^{i\Lambda(x)}(\partial_\mu\phi(x) + i\partial_\mu\Lambda(x)\phi(x))
 $$
 
-Since the kinetic term is quadratic, we would want the result instead to be $e^{i\Lambda(x)}\partial_\mu\phi(x)$, which we can achieve by introducing a **gauge field** $A$ with $A_\mu(x) \mapsto A_\mu(x) + \partial_\mu\Lambda(x)$, and instead of $\partial_\mu$, having $D_\mu := \partial_\mu\phi(x)-iA_\mu(x)\phi(x)$.
+Since the kinetic term is quadratic, we would want the result instead to be $e^{i\Lambda(x)}\partial_\mu\phi(x)$, which we can achieve by introducing a gauge field $A$ with $A_\mu(x) \mapsto A_\mu(x) + \partial_\mu\Lambda(x)$, and instead of $\partial_\mu$, having $D_\mu := \partial_\mu\phi(x)-iA_\mu(x)\phi(x)$.
 
 
 ## Differential forms for electromagnetism
@@ -152,7 +156,20 @@ $$8\pi^2 = \int_Y Tr(F\wedge F) = \int_M Tr(F\wedge F) - \int'_M Tr(F\wedge F)$$
 
 where the first equality follows from the integrality of the second Chern class over a cycle. This then fixes $k$ to be integer.
 
+Note that the Chern-Simons Lagrangian is manifestly (read: as can be seen from the absence of a metric in the Lagrangian) metric independent. It is in fact a topological field theory, and can be expressed as a functor from a category of cobordisms (these are manifolds with boundaries on either end and are the morphisms) to a category of vector spaces.
+
 ## General relativity
 
 A Riemannian manifold (a manifold with a metric) comes equipped with a natural connection, so the natural formulation of general relativity is to have an action that depends on the metric. This yields equations for the metric. 
+
+## Elitzur's theorem
+
+Elitzur's theorem states that in gauge theories (typically this is shown in the context of **lattice** gauge theories), the only operators that can have non-zero expectation values are invariant under local gauge transformations.
+
+An important implication is that gauge symmetry cannot be spontaneously broken."
+todo: incorp
+
+
+
+## Lattice gauge theories
 

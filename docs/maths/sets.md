@@ -62,7 +62,7 @@ $\mathbb{R}$ is uncountably infinite, so is bigger than the rationals.
 
 $\sqrt{2}$ is an example of a number which is in $\mathbb{R}$ but not in $\mathbb{Q}$, proving that the two sets are not isomorphic. See wikipedia for a [proof](https://en.wikipedia.org/wiki/Square_root_of_2#Proofs_of_irrationality).
 
-## Fields
+<!-- ## Fields
 
 **Under construction**
 
@@ -84,4 +84,4 @@ However, the really important thing is how the field works.
 
 
 
-
+ -->

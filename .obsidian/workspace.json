@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/index.md",
+                "file": "docs/maths/conformal.md",
                 "mode": "source",
                 "source": false
               }
@@ -121,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/index.md",
+                "file": "docs/maths/conformal.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +138,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/index.md",
+                "file": "docs/maths/conformal.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/index.md"
+                "file": "docs/maths/conformal.md"
               }
             }
           }
@@ -184,6 +184,9 @@
   },
   "active": "0599e9f09e302055",
   "lastOpenFiles": [
+    "docs/physics/condensedmatter.md",
+    "docs/maths/conformal.md",
+    "docs/index.md",
     "overrides/partials/comments.html",
     "overrides/partials",
     "overrides",
@@ -191,8 +194,6 @@
     "docs/overrides/partials",
     "docs/overrides",
     "docs/maths/complexanalysis.md",
-    "docs/index.md",
-    "docs/maths/conformal.md",
     "docs/maths/fourier.md",
     "docs/maths/differential_geometry.md",
     "docs/physics/symmetry.md",
@@ -210,7 +211,6 @@
     "docs/physics/quantum.md",
     "docs/maths/measuretheory.md",
     "docs/maths/probability.md",
-    "docs/physics/condensedmatter.md",
     "physics/statisticalphysics.md",
     "physics",
     "docs/physics/gaugetheory.md",

@@ -1,3 +1,9 @@
+$\newcommand{\R}{\mathbb{R}}$
+$\newcommand{\Z}{\mathbb{Z}}$
+$\newcommand{\RR}{\mathbb{R}}$
+$\newcommand{\C}{\mathbb{C}}$
+$\newcommand{\N}{\mathbb{N}}$
+
 ## Notation
 
 The notation mostly follows what is standard in mathematics and physics; anything that might be unfamiliar to people with that background is described below. 
@@ -45,9 +51,3 @@ Einstein notation is used by default.
 $$
 a^ib_i := \sum_ia^ib_i
 $$
-
-## 
-
-(5+)
-
-todo: explain

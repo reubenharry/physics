@@ -4,7 +4,41 @@ This is the application of quantum statistical physics to matter. A typical exam
 
 It is an appealing subject because it is phenomonologically rich (many unpredictable things happen in systems that are simple to describe), these phenomena are actually observed experimentally, and it involves nice physics (quantum field theories, topology, gauge theories, phase transitions, emergence).
 
-## Example: Fermi gas
+## Many body models
+
+It is typical of a variety of condensed matter models to start with a graph (i.e. a simplex with vertices and edges), and associate Hilbert spaces $\mathcal{H}_i$ to all vertices, edges or both, so that configurations live in the tensor product space $\bigotimes_i \mathcal{H}_i$.
+
+For instance, we might have a system in which we have a chain of sites, and each site has states in a qubit Hilbert space.
+
+The transerve quantum Ising system is one example, with Hamiltonian:
+
+$$
+-g \sum_{\langle ab\rangle}\sigma_a^z\sigma_b^z - \frac{1}{g}\sum_a \sigma^x_a
+$$
+
+This system exemplifies many of the themes of condensed matter theorem - see below.
+
+## Classical - quantum correspondence
+
+Given a classical statistical system in $(d,0)$ dimensions[^1], like the Ising model (with $(2,0)$), we can often obtain a quantum mechanical system in $(d-1, 1)$ dimensions that has the same partition function.
+
+For instance, the transverse quantum Ising system above is the quantum counterpart of the classical 2D Ising model.
+
+[^1]: Understand $(p,q)$ to mean $p$ space dimensions and $q$ time dimensions.
+
+## Duality
+
+Quantum systems often have duals. For example, as explained very clearly [here](http://www.spintwo.net/Courses/Gauge-Theory-Student-Meetings/resources/Z2Ig.pdf), the tranverse quantum Ising model is dual (read: isomorphic) to a $\Z^2$ lattice gauge model, i.e. a system with qubits on edges (of a lattice which we can view as being dual to the original lattice). 
+
+While the transverse Ising model has a global symmetry, the $\Z^2$ gauge model has a local symmetry, i.e. a gauge freedom.
+
+## Statistical mechanics
+
+Sometimes we are interested in the ground state of the system, since this dominates at low temperature. Other times we are interested in the thermodynamic quantities (expectations of the distribution, derivatives of those, etc).
+
+Here is a computation which showcases many of the tools used (path integrals, complex analysis, Fourier transforms, Grassman numbers, coherent states).
+
+Example: Fermi gas
 
 Given a system $H = \sum_k e_k\hat c^\dagger \hat c$, we will calculate the expected number of particles $N = -\frac{\partial F}{\partial \mu}$.
 
@@ -36,13 +70,26 @@ We then perform a contour integral to obtain $N = \sum_k\frac{1}{e^{\beta \xi_k}
 
 todo
 
-# Superconductors
+## Electronic structure
+
+Here, one views a metal as a crystal of ions, with electrons moving around freely. For reasons to do with renormalization, it turns out that this can be modeled as a gas of fermions.
+
+Since position on a lattice is discrete and periodic, its Fourier transform (momentum) is also discrete and periodic. 
+
+This holds also in 3D, in which case each possible momentum $k$ is a vector in $\R^3$ (with integer coefficients). In this case, since only a single fermion can occupy a given $k$, a system with $N$ fermions at low temperature will be in the ground state, in which case, the occupied states will form a sphere. 
+
+The boundary of this sphere is known as the Fermi surface, and the presence of interactions in real metals alters the shape of the surface, although it typically remains closed.
+
+For a current to exist in response to a voltage, electrons must be able to occupy higher TODO
+
+
+<!-- # Superconductors
 
 Phenomenologically, superconductivity is a phase of some metals characterized by effects including the expulsion of magnetic fields from the interior of the metal in question (Meissner effect) and a non-decaying current.
 
-Reasonably good models exist for *some* cases of superconductivity, but even there, it's fraught with difficulty.
+Reasonably good models exist for *some* cases of superconductivity, but even there, it's fraught with difficulty. -->
 
-## Models
+<!-- ## Models
 
 To model it, one can hard-code an attractive force between the fermions of your model, in which case is it not hard to show that the electrons pair into *Cooper pairs*, and that the ground state has $B=0$ (part of the Meissner effect). These bosons Bose-condense in the ground state under the critical temperature. 
 
@@ -52,109 +99,9 @@ This phonon-electron interaction gives rise to an effective low energy Hamiltoni
     which regime
     ??
 
-One can then take a mean field approximation of this Hamiltonian. 
+One can then take a mean field approximation of this Hamiltonian.  -->
 
 
-# Questions!
-
-13.27: getting the constants right
-
-14.32
-
-p267: all poles are simple poles
-
-Exercises a) and b)
-
-15.35
-
-p281: the non-interacting regime: can we go through it please?
-
-Legendre integral
-
-
-
-
-in what sense is the mean field theory a weak coupling theory?
-
-" This should not come as a big surprise, because we
-already learned that the superconducting ground state is characterised
-by a broken phase rotation symmetry, which implies fluctuations in the
-particle number."
-
-"It is straightforward to convince yourself that in order to turn a product
-of two creation operators into a (diagonal) number operator, the transformation needs to contain a superpositions of particle and hole states"
-
-"It is straightforward to verify that these equations imply the famous
-expression for the BCS wave function:"
-
-"These processes can only take place if
-a Cooper pair sits next to an empty site. In that case, the electrons gain
-a bit of kinetic energy in their virtual excursions, in direct analogy to
-the kinetic energy gain that gave rise to antiferromagnetic interactions
-in the repulsive-U Hubbard model."
-    - but don't they want to lose energy?
-
-    "The virtual hopping allowed the system to gain kinetic energy, and as a result neighbouring spins favoured an anti-aligned
-    arrangement."
-
-phase coherent vs spin coherent
-
-is excited state over bcs 0 order param?
-
-in what sense does the bcs wavefunction represent a bose-condensed state? surely many different k?
-
-In the BCS model, the number of particles was not a conserved quantity.
-
-As ∆ becomes non-zero, the vacuum energy in equation (12.12) is
-lowered by the gain in interaction energy associated with the emerging, ordered, superconducting phase.
-
-eq 11.15
-
-n and phase conjugate
-
-Where did the A come from in the tight binding model in the first place?
-    Why wasn't it there before?
-
-    in what sense can we argue about the value of A in the ground state?? is A part of the state of the system?
-
-Why the gauge transform in 10.28? how does this help?
-
-What does it mean for chemical potential to be integrated into the Hamiltonian??
-
-The reasoning about photons: seems crazy
-
-
-10.28
-
-temperature assumed to be low compared to phonon energy (below 11.10)
-
-
-
-Why are ordered states product states? Is that obvious?
-
-
-exercise 7.9
-
-why: +U \sum inˆi,↑nˆi,↓. as the hubbard approximation: i'm v confused
-
-7.18
-
-Why is this easy to see? If S_i measures the spin, then why wouldn't the Neel state be the most negative in energy?
-
-The origin of the second term in 7.1
-
-the exercise beneath 7.9
-
-remind yourself about spin and its characterization
-
-"Strongly correlated materials (for example, Mott insulators) simply cannot be understood in terms of single-electron states."
-    we can't always diagonalize?
-
-
-understanding fock space in the context of qho:
-    doesn't seem like the additional particles change the dimension of the Hilbert space...
-
-Why can the energy reference point be changeable? Doesn't this affect Goldstone's theorem?
 
 ------------------
 
@@ -225,20 +172,6 @@ we now consider the weak coupling limit (meaning coulomb weak compared to kineti
 
 
 
-
-
-
-
-
-
-# Revision
-
-filling of bands: when it conducts and when it insulates
-
-inspect cheatsheet you made
-
-
-
 ## Condensed matter
 
 ### Bloch's Theorem
@@ -257,7 +190,7 @@ When modeling electrons in a solid, the ions tend to be much more massive than t
 
 **Bands** In $\psi_{nk}$, the $n$ index is discrete and corresponds to the *band* while $k$ varies continuously (in the thermodynamic limit) across the Brilloun zone.
 
-We view $\psi_{nk}$ as the wavefunction of an electron. $\hbar k$ is the *crystal momentum*, which is conversed only modulo a lattice vector.
+We view $\psi_{nk}$ as the wavefunction of an electron. $\hbar k$ is the *crystal momentum*, which is conserved only modulo a lattice vector.
 
 **Proof outline of Bloch's theorem**
 
@@ -369,6 +302,8 @@ For unitary $U$ with $U = e^{iQ}$, and $[U,H] = 0$, we have $[Q,e^{iH}] = 0$, so
 
 ## Symmetry breaking
 
+covered in statistcal physics: revise or remove todo
+
 From notes:
 
 > "Spontaneous symmetry breaking (SSB) is the phenomenon in which a stable state of a system (for example the ground state or a thermal equilibrium state) is not symmetric under a symmetry of its Hamiltonian, Lagrangian, or action."
@@ -460,3 +395,34 @@ is the braid group BN in 2+1 dimensions."
 reference is MacLane [1971], which was written long before the idea of
 topological quantum field theory was around. A beautiful masters thesis
 by Bartlett [2005] discusses TQFTs from the category perspective"
+
+"As with the toric code, the vertex and plaquette operators provide just enough constraints so that the ground state on a spherical surface is unique and the ground state on a higher-genus manifold will have a degeneracy that depends on the topology of the system, but does not depend on the number of lattice points we use in our lattice. That is, the ground-state space is described by a TQFT."
+The TQFT that results is known as the quantum double or Drinfel’d double of the group G.
+
+"To emphasize: A quasiparticle type is described by a conjugacy class C, and an irreducible representation R of the centralizer of a representative element r C of the conjugacy class.
+
+It is conventional to call the conjugacy class the magnetic charge and the representation R the electric charge (despite the fact that we are here thinking of the conjugacy class as being a vertex defect!). The origin of these names are discussed in Section 31.7 when we discuss the relationship to gauge theory."
+
+reminder: in a discrete context, a gauge transformation is to put a group element u)i on each vertex i, so that the elements on the paths  go from g to ugu^-1. this is the same as gauging a tn!!
+
+"
+The
+branching rules (Gauss’ law) require that if three strings
+E1, E2, E3 meet at a point, then the product of the representations E1 ⊗ E2 ⊗ E3 must contain the trivial representation. (For example, in the case of SU(2), the
+strings are labeled by half-integers E = 1/2, 1, 3/2, ...,
+and the branching rules are given by the triangle inequality: {E1, E2, E3} are allowed to meet at a point if and
+only if E1 ≤ E2 + E3, E2 ≤ E3 + E1, E3 ≤ E1 + E2 and
+E1 + E2 + E3 is an integer (Fig. 3c)) [37]. These stringnets provide a general dual formulation of gauge theory
+"
+
+"
+It is highly non-trivial to find solutions of (8). However, it turns out each group G provides a solution. The
+solution is obtained by (a) letting the string-type index i
+run over the irreducible representations of the group, (b)
+letting the numbers di be the dimensions of the representations and (c) letting the 6 index object F
+ijm
+kln be the 6j
+symbol of the group. The low energy effective theory of
+the corresponding string-net condensed state turns out to
+be a deconfined gauge theory with gauge group G.
+"

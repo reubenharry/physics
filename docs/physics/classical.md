@@ -36,9 +36,7 @@ $$
 = -\int_T m\ddot x_s(t) f(t) \\
 $$
 
-TODO CHECK ^^
-
-Where in the last step, we integrate by parts, and **crucially** assume that the boundary term is $0$. Since this holds for all $f$, we have $\ddot x = 0$.
+where in the last step, we integrate by parts, and **crucially** assume that the boundary term is $0$. Since this holds for all $f$, we have $\ddot x = 0$.
 
 The physical interpretation is that an object acted on by no forces (namely for the free Lagrangian, $\frac{1}{2}m\dot x^2$), an object maintains constant velocity. Or, if we think of the system as a line in spacetime, it is a straight line.
 
@@ -59,9 +57,9 @@ $$
 ## Invariants
 
 
+Suppose that $\phi(a : \R,x : A) : B$ is a family of configurations of a system, i.e for each choice of $a$, $\phi(a,x)$ describes the state of the system at every point in space and time. Additionally, suppose that $x(a) : \R \to A$ is a family of transformations of the space $A$.
 
-
-Suppose that $\phi(a : \R,x : A) : B$ is a family of configurations of a system, i.e for each choice of $a$, $\phi(a,x)$ describes the state of the system at every point in space and time. Then we say that the system has a symmetry if $\frac{d\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x), x(a))}{da}|_{a=0} = \partial_\mu J^\mu$, since in that case, to first order, a change in $a$ will have no effect on the action, and therefore will map a solution of the equations of motion to a new solution.
+Then we say that the system has a symmetry if $\frac{d\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x), x(a))}{da}|_{a=0} = \partial_\mu J^\mu$, since in that case, to first order, a change in $a$ will have no effect on the action, and therefore will map a solution of the equations of motion to a new solution.
 
 Such symmetries imply an invariant. To see this, first note:
 
@@ -75,12 +73,8 @@ by virtue of the chain rule, commutation of partial derivatives and the product 
 Suppose that the function $x \mapsto \phi(0,x)$ is "on-shell", i.e. satisfies the equations of motion. In that case, 
 
 
- $$\frac{d\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x))}{da}|_{a=0} = \partial_\mu\pd{\mathcal{L}}{(\partial_\mu\phi)}\pd{\phi}{a}|_{a=0} := \partial_\mu K^\mu$$
+$$\frac{d\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x))}{da}|_{a=0} = \partial_\mu\pd{\mathcal{L}}{(\partial_\mu\phi)}\pd{\phi}{a}|_{a=0} := \partial_\mu K^\mu$$
  
-
-
-
-
 Then for $j^\mu := K^\mu - J^\mu$, we evidently have $\partial_\mu j^\mu = 0$, *as long as $x \mapsto \phi(0,x)$ follows the equations of motion*. We say that $j$ is the Noether current. Or in the language of forms, $d\star j = 0$.
 
 ??? Advanced
@@ -93,135 +87,84 @@ Then for $j^\mu := K^\mu - J^\mu$, we evidently have $\partial_\mu j^\mu = 0$, *
 
 ### Examples
 
-For a particle theory, with $\phi(a : \R^3, t : \R) : \R^3$,  with $\mathcal{L}(\phi, \dot \phi, t) = \frac{1}{2}m\dot \phi(a,t)^2$, let our transformation be $\phi(a,t) = \phi(0,t)+a$. Then $J^\mu = 0$, since $\dot \phi(a,t) = \dot \phi(0,t)$ which does not depend on $a$, and $K^\mu = m\dot q$, so $j^\mu = m\dot q$, and $m\partial_\mu  \dot q = 0 \Rightarrow \frac{d}{dt}\dot q = 0$, so *momentum is conserved*.
+For a particle theory, with $\phi(a : \R^3, t : \R) : \R^3$,  with $\mathcal{L}(\phi, \dot \phi, t) = \frac{1}{2}m\dot \phi(a,t)^2$, let our transformation be $\phi(a,t) = \phi(0,t)+a$. Then $J^\mu = 0$, since $\dot \phi(a,t) = \dot \phi(0,t)$ which does not depend on $a$, and $K^\mu = m\dot q$, so $j^\mu = m\dot q$, and $m\partial_\mu  \dot q = 0 \Rightarrow \frac{d}{dt}\dot q = 0$ (noting that $\partial_\mu = \pd{}{t}$), so *momentum is conserved*.
 
-Similarly, for the transformation $\phi(a,t) = \phi(0,t+a)$ and $t(a) = a + t(0)$, we find that $\pd{\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x))}{a}|_{a=0} = \pd{\mathcal{L}}{t}$, and noting that $\partial_\mu = \pd{}{t}$, we see that $J^\mu = \mathcal{L} = \frac{1}{2}m\dot q^2$. $K^\mu = m\dot q^2$, so $j^\mu = \frac{1}{2}m\dot q^2 = \mathcal{H}$, i.e. the Hamiltonian, or energy of the system.
+Similarly, for the transformation $\phi(a,t) = \phi(0,t+a)$ and $t(a) = a + t(0)$, we find that $\pd{\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x))}{a}|_{a=0} = \pd{\mathcal{L}}{t}$, so that $J^\mu = \mathcal{L} = \frac{1}{2}m\dot q^2$. $K^\mu = m\dot q^2$, so $j^\mu = \frac{1}{2}m\dot q^2 = \mathcal{H}$, i.e. the Hamiltonian, or energy of the system.
 
-TODO rotation
+Now consider a rotation, so $\phi(a,t) = U(a)\phi(0,t)$, where $U(r)$ is a rotation transform around some axis, say $\hat n$. The [Lie algebra](../maths/representations.md) of the 3D rotation group consists of transformations which in coordinates look like $\phi(a,t) = \phi(0,t) + a \hat n \times \phi(0,t)$. This gives $j^\mu = p \cdot (n \times \phi) - 0 = n \cdot (\phi \times p)$ which is the inner product of the angular momentum with the axis of rotation.
 
-Now consider an infinitesimal rotation. The [Lie algebra](../maths/representations.md) of the 3D rotation group consists of transformations which in coordinates look like $\phi(a,t)_i = \phi(0,t)_i + \epsilon_{ijk}\phi(0,t)_ja_k$. 
+For fields, the same reasoning holds. Consider a spacetime translation $x(a) = x + a$ and any Lagrangian $\mathcal{L}$. Then $j^\mu_\nu = \pd{\mathcal{L}}{(\partial_\nu \phi)}\pd{\phi}{x_\mu} - \delta^\mu_\nu\mathcal{L}$. In this context, $T := j$ is known as the energy-momentum tensor. The corresponding conserved quantities are $E = \int d^3 x T^0_0$ and $P_i = \int d^3 x T^0_i$ .
 
-For fields, the same reasoning holds. Consider a spacetime translation $x(a) = x + a$ and any Lagrangian $\mathcal{L}$. Then $j^\mu_\nu = \pd{\mathcal{L}}{\partial(\partial_\nu \phi)}\pd{\phi}{x_\mu} - \delta^\mu_\nu\mathcal{L}$. In this context, $T := j$ is known as the energy-momentum tensor. The corresponding conserved quantities are $E = \int d^3 x T^0_0$ and $P_i = \int d^3 x T^0_i$ .
-
-
-
-TODO CHECK
-
-
-
-$$
-
-$$
-
-
-todo: integrate vvv and understand why true
-
-For translational symmetry, we have the energy-momentum tensor $T$ as the current: 
-
-$$
-T^\nu_\mu = \frac{\partial \mathcal{L}}{\partial (\partial_\nu \phi)}\frac{\partial \phi}{\partial x_\mu} - \delta^\nu_\mu\mathcal{L}
-$$
-
-which we note gives $T^0_0$ to be the energy density $\pi \dot\phi - \mathcal{L}$, as per the Legendre transform.
-
-
-
-### Field theories
-
-We use $x$ to refer to a point in spacetime, and assume that this is the domain of our field $\phi$.
-
-By assumption, the general form of a free (interaction-less) Lagrangian will be:
-
-$$
-\mathcal{L}(\phi)(x) = A\phi(x)^0 + B\phi(x)^1 + C\phi(x)^2 + D\partial_\mu\phi + E\partial_\mu\phi\partial^\mu\phi + F\phi\partial_\mu\phi
-$$
-
-We'll use symmetry considerations to throw out more terms.
-
-### Scalar
-
-In this case, we want invariance under the Lorentz group, so the $E$ and $C$ terms survive. The $A$ and $B$ terms don't affect the resulting equations of motions (beyond a constant).
-
-Conventionally, we rescale to:
-
-$$
-\mathcal{L}(\phi)(x) = \frac{1}{2}(\partial_\mu\phi(x)\partial^\mu\phi(x) - m^2\phi^2(x))
-$$
-
-from which Euler-Lagrange gives 
-
-$$
-0 = (\partial_\mu\partial^\mu + m^2)\phi(x)
-$$
-
-Clearly anything of the form $ae^{\pm ip\cdot x}$ is a solution when $m^2=p^2$, and we take this as a basis, expressing a general solution, i.e.:
-
-$$
-\phi(x) = \int d^4k\frac{1}{(2\pi)^3} \delta(p^2-m^2)\Theta(k_0)(a(p)e^{-ip\cdot x}+b(p)e^{ip\cdot x})
-$$
-
-(where $b=a^\dagger$ would ensure the field's output is real).
-
-Physically, we only want positive energy solutions, which is the source of $\Theta(k_0)$.
-
-We then rewrite the measure, with the standard notation of $\omega_p = \sqrt{p^2+m^2}$:
-
-
-$$
-\int d^4k \delta(p^2-m^2) \Theta(k_0)f(\hat k, k_0) \\
-=\int d^4k \delta(p_0^2 - \omega_k^2) \Theta(k_0)f(\hat k, k_0) \\
-=\int d^4k \delta((k_0-\omega_k)(k_0+\omega_k)) \Theta(k_0)f(\hat k, k_0) \\
-=\int d^4k\frac{1}{2k_0}(\delta(k_0-\omega_k)+\delta(k_0+\omega_k)) \Theta(k_0)f(\hat k, k_0) \\
-=\int d^4k\frac{1}{2k_0}\delta(k_0-\omega_k) f(\hat k, k_0) \\
-=\int d^3k\frac{1}{2\omega_k}f(\hat k, \omega_k) $$
-
-so that 
-
-$$
-\phi(x) = \int d^3k \frac{1}{(2\pi)^3\omega_k}(a(p)e^{-ip\cdot x}+b(p)e^{ip\cdot x})
-$$
-
-Meanwhile, the Hamiltonian is 
-
-$$
-\frac{\partial \mathcal L(\phi)}{\partial (\partial_0\phi)}\partial_0\phi - \mathcal{L} \\
-= (\partial_0\phi)^2 - \frac{1}{2}(\partial_\mu\phi(x)\partial^\mu\phi(x) - m^2\phi^2(x))
-$$
-FIX todo
 
 
 
 ## Hamiltonian mechanics
 
+The Lagrangian is a function of the tangent bundle. A Legendre transform gives us a function of the cotangent bundle, namely:
+
+$$
+H(\pd{\mathcal{L}}{\dot q}, q, t) = \dot q \pd{\mathcal{L}}{\dot q} - \mathcal{L}
+$$
+
+$$
+\frac{dq}{dt} = \{q,H\} = \pd{H}{p}
+$$
+
+and
+
+$$
+\frac{dp}{dt} = \{p,H\} = -\pd{H}{q}
+$$
+
+where $\{f, g\} = \pd{f}{q}\pd{g}{p} - \pd{f}{p}\pd{g}{q}$ is the Poisson bracket.
+
+This is the Hamiltonian formulation of classical mechanics: it describes a differential equation $\frac{d}{dt} \begin{pmatrix} q \\ p \end{pmatrix} = \begin{pmatrix} \pd{H}{p} \\ -\pd{H}{q} \end{pmatrix}$.
+
+
 ### Symplectic geometry
 
 This is the geometrical structure associated with classical mechanics.
+
+Geometrically, the configuration space, of which the Lagrangian is a function, is the tangent bundle, while phase space is the cotangent bundle. The evolution of a system can be described by a map from the cotangent bundle to itself.
 
 Let $\mathcal{M}$ be the $n$ dimensional manifold on which states of your physical system live. Then $TM$, the tangent bundle, is the configuration space, and $T^*M$, the cotangent bundle, is the phase space. More concretely, points in $T^*M$ are pairs $(p,q)$, for $p : \mathcal{M}$ and $q : T^*_pM$. 
 
 Recall that $T^*M$ is itself a ($2n$ dimensional) manifold, on which we may define differential forms.
 
-The idea is to view any particular Hamiltonian dynamics as a map from this space to itself, defined such that a differential form $\omega$ (specified below) is preserved under the map.
+In fact, there is a natural form $\theta$:
 
-In particular, since we are in a category of smooth manifolds, the map will be a diffeomorphism $f$, and it will act on $\omega$ by the pullback $f^*\omega$.
+$$
+\theta_{(p,q)} : T_xT^*M \to \R
+$$
 
-What is $\omega$?
+$$
+\theta_{(p,q)} = p \circ d\pi_1
+$$
+
+where $\pi_1(q,p)=q$. Examination shows that this is well-typed.
+
+In coordinates, we find:
 
 $$
 \theta := -p_idq^i
 $$
 
+**Under construction**: derivation
+
+Any particular Hamiltonian dynamics is a map from the cotangent bundle to itself, and is defined such that the differential form $\omega := d\theta$ is preserved under the map.
+
+Concretely, since we are in a category of smooth manifolds, the map will be a diffeomorphism $f$, and it will act on $\omega$ by the pullback $f^*\omega$. In coordinates:
+
+
 $$
 \omega := d\theta = dq^i\wedge dp_i
 $$
 
-$$
-\Omega := \omega^n = \omega \wedge  \omega...\wedge\omega 
-$$
+$\omega$ is known as the *symplectic form*, and $\Omega := \omega^n = \omega \wedge  \omega..._n\wedge\omega$ is the *volume form*. 
 
-$\omega$ is known as the *symplectic form*, and $\Omega$ as the *volume form*. $\theta$ is invariant under changes of coordinate (since $p$ and $q$ transform inversely), and so $\omega$ and $\Omega$ are too.
+<!-- $\theta$ is invariant under changes of coordinate (since $p$ and $q$ transform inversely), and so $\omega$ and $\Omega$ are too. -->
 
-Now for the flow. Given a function $f : T^*\mathcal{M}\to \R$, let $L(f)$ be the map such that $df = (\lambda x \mapsto \omega(L(f), x))$. Calling our Hamiltonian $H$, we consider paths on the manifold that follow $L(H)$.
+Now for the flow. Given a function $f : T^*\mathcal{M}\to \R$, let $L(f)$ be the map such that $df(x) \mapsto \omega(L(f), x)$. Calling our Hamiltonian $H$, we consider paths on the manifold that follow $L(H)$.
 
 Observe that in coordinates:
 
@@ -235,7 +178,7 @@ $$
 \omega(L(f),L(H)) = df(L(H)) = L(H)(f) = \frac{\partial f}{\partial t}
 $$
 
-So we have the familiar statement of Hamiltonian mechanics:
+So we have:
 
 $$
 \frac{\partial f}{\partial t} = \{f, H\}
@@ -243,11 +186,10 @@ $$
 
 so that $\frac{\partial H}{\partial t} = L(H)(H) = \{H,H\} = 0$ (energy preservation).
 
-We also recover volume preservation: todo
 
 
-<!--
-$$
+
+<!-- $$
 J^\mu(x)  = \pd{\mathcal{L}}{(\partial_\mu\phi_a)}(x)\Delta\phi_a(x) - F^\mu(\phi(x))
 $$
 
@@ -258,13 +200,11 @@ where $\Delta\phi_a(x)=\lim_{a\to 0} (T_a(\phi)(x)-\phi(x))$. So for example, if
 
 The general statement relies on the idea that for a representation onto a space of functions, we call the infinitesimal additive shift from the old $\phi$ to the new $\phi'$ function $\delta \phi = \epsilon^rf_r^a(\phi, \partial_\mu\phi)$. 
 
-TODO
+
 
 more generally: action symmetry
 
 For instance, if the transform is $\forall x, \phi(x) \mapsto \phi(x)\cdot e^{ia}$
-todo
-Then, if 
 
-$$
-\delta \mathcal{L}(\phi,
+Then, if  -->
+
