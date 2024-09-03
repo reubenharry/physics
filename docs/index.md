@@ -39,7 +39,7 @@ graph TB
     DG --> GR((<a href='/physics/relativity' style=color:green >Relativity </a>))
     GR --> QFT((<a href='/physics/qft'>Quantum Field Theory</a>))
     D((<a href='/physics/classical' style=color:green >Classical physics</a>))
-    TM((<a href='/physics/statisticalphysics'>Statistical Physics</a>)) --> QFT
+    TM((<a href='/physics/statisticalphysics' style=color:green >Statistical Physics</a>)) --> QFT
     Stats((<a href='/physics/statistics' style=color:green >Statistics</a>))
     
     end
