@@ -91,11 +91,11 @@ QFT CMT{<a href='/physics/condensedmatter'>Condensed Matter</a>}
 
 #### What material is included?
 
-In general, I try to be sparse, given only the bare bones. For example, I state the spectral theorem in the notes on linear algebra, but not the proof.
+The premise of the notes is that it contains everything you need in order to understand quantum field theory, which happens to be most of the nice undergraduate mathematics and physics.
 
-The idea is to give a "map" of each subject, and cover the core ideas.
+In general, I try to be sparse, given only the bare bones. For example, I state the spectral theorem in the notes on linear algebra, but not the proof. The goal is to give an outline of each subject, with clear technical detail.
 
-The level of the material should be roughly what a smart undergraduate would know about physics and mathematics before grad school.
+The level of the material should be roughly what a smart theoretical physics undergraduate would know before grad school.
 
 #### Is the material standard?
 
