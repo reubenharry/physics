@@ -74,7 +74,6 @@ $$
 D(x) = \int \frac{d^4k}{(2\pi)^4}\frac{e^{ik\cdot (x-y})}{k^2-m^2+i\epsilon} = -i\int \frac{d^3k}{(2\pi)^32\omega_k}(e^{-i(\omega_kt-k\cdot x)}\theta(x^0) + e^{i(\omega_kt-k\cdot x)}\theta(-x^0) )
 $$
 
-TODO: compare to D in (1) of 1.4
 
 ### Force 
 
