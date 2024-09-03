@@ -41,7 +41,7 @@ Groups play an important role in describing the real and complex numbers.
 
 To see this, note that for every real number $r$, there is a function $f_r(x) = x+r$. 
 
-todo: the isomorphism between numbers and functions
+: the isomorphism between numbers and functions
 
 $\mathbb{R}$ forms a group, in the sense that elements of the group are functions $f_n : \mathbb{R}\to \mathbb{R}$, where $f_n(x) = x+n$. As we see, $n \in \mathbb{R}$ labels these functions, with $f_n(e)=n+e = n$.
 

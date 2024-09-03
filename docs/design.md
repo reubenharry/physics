@@ -2,7 +2,7 @@ If you write a piece of code and a user can't understand it, it's your fault. If
 
 The design of these notes is based on the idea that the culture of software engineering, when it comes to versioning, open source, modularity, abstraction and collaboration, would improve maths and physics textbooks[^1].
 
-[^1]: One can even take this analogy literally; a formalization of mathematics is literally a [code library](https://leanprover-community.github.io/mathlib4_docs/Mathlib/FieldTheory/Finite/Basic.html).
+[^1]: One can take this analogy seriously; a formalization of mathematics is literally a [code library](https://leanprover-community.github.io/mathlib4_docs/Mathlib/FieldTheory/Finite/Basic.html).
 
 Here are some relevant principles of software design:
 
@@ -37,7 +37,7 @@ Because the "code" is open source, anyone is welcome to contribute.
 
 Finally, there is an emphasis on "code reuse". Whenever possible, a new concept is explained in terms of more fundamental ones, rather than starting from nothing. This is why (elementary) concepts from category theory appear here and there, for example, because they are valuable in unifying complex mathematical ideas.
 
-## Example
+## Example: quantum mechanics
 
 As an example of these ideas in practice, take the presentation of quantum mechanics, Fourier transforms and linear algebra. The approach taken here is to organize the material like this:
 
@@ -71,3 +71,38 @@ The notes on linear algebra are responsible for introducing the spectral theorem
 The notes on Fourier analysis then present the Fourier transform as an instance of such an eigendecomposition, which explains it in terms of recognizable concepts (a unitary operator) in a new context (an infinite dimensional vector space), rather than a new idea coming out of left field. The idea that differentiation is an operator requires a knowledge of calculus, so this is also a dependency.
 
 The notes on quantum mechanics can then introduce the idea that states of known momentum are eigenstates of a self-adjoint operator without needing to spend time on the maths - that work has been done elsewhere.
+
+## Second example: statistical physics
+
+```mermaid
+graph TB
+    subgraph Maths
+    
+    DG((<a href='/maths/differential_geometry' style=color:green >Manifolds</a>))
+    DG --> P((<a href='/maths/probability' style=color:green >Probability</a>))
+    
+    
+
+    end
+
+    subgraph Physics
+    Q((<a href='/physics/quantum' style=color:green >Quantum</a>))
+    D((<a href='/physics/classical' style=color:green >Classical physics</a>))
+    TM((<a href='/physics/statisticalphysics'>Statistical Physics</a>))
+    Stats((<a href='/physics/statistics' style=color:green >Statistics</a>))
+
+    DG --> D
+    P --> Stats
+    P --> Q
+    D --> TM
+    Q --> TM
+    Stats --> TM
+    
+    end
+```
+
+Here, all the purely mathematical notions of distributions, entropy, expectations, variance and so on are put in the notes on probability. Statistics, by contrast, is about the application of these tools to uncertainty in the world, so fits in the remit of physics (or perhaps more generally should be under "applications").
+
+The notes on statistical physics then don't spend any time justifying the idea that a maximum-entropy distribution should represent uncertainty, but instead focus on the particulars of the physics, namely what constraints are known and how physical notions of temperature, entropy and so on are recovered.
+
+In addition, the language of differential forms, which is important for thermodynamics, and the idea that distributions are points on a manifold, are already introduced, in the notes on differential geometry.

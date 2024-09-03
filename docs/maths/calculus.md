@@ -38,14 +38,14 @@ $$ L(f) = \lim_{h\to 0} ||f(a+h) - f(a) - L(a)(h)|| = o_{lim_{h\to 0}}(||h||) $$
 ## Infinite dimensional calculus
 
 As per 
-    todo link, we can think of a function as the limit of $n\to\infty$ of an n-dimensional vector. In this limit, we can also consider doing calculus.
+     link, we can think of a function as the limit of $n\to\infty$ of an n-dimensional vector. In this limit, we can also consider doing calculus.
 
 In particular, we define $\frac{\delta S}{\delta f}$ by its inner product with a function, namely:
 
 $$
 \frac{S(f+\epsilon g)-S(f)}{\epsilon} = \langle \frac{\delta S}{\delta f}, g \rangle = \int \frac{\delta S}{\delta f}g
 $$
-TODO check
+ check
 -->
 
 ## Integrals

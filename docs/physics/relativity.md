@@ -56,10 +56,9 @@ If we view space and time together as a vector space (just doing this in itself 
 
 <!-- The trajectory of light makes a world line which looks like a straight line, since it has constant speed. -->
 
-Of course, we are free to choose coordinates in many ways. Newton's first law amounts to the claim that there is *some* set of coordinates for which objects under no force move in straight lines. Moreover, given one such set of coordinates, we 
-TODO
+Of course, we are free to choose coordinates in many ways. Newton's first law amounts to the claim that there is *some* set of coordinates for which objects under no force move in straight lines (inertial coordinates). Moreover, given one such set of coordinates, certain transformations give us new coordinates which are also inertial.
 
- don't change the laws of physics, in the sense that the same differential equation determines them. Moreover, the rule is that for an object with no external forces, its velocity is constant, which corresponds to a straight line trajectory in spacetime.
+<!-- don't change the laws of physics, in the sense that the same differential equation determines them. Moreover, the rule is that for an object with no external forces, its velocity is constant, which corresponds to a straight line trajectory in spacetime. -->
 
 Inertial transforms should form a group (closed under composition and are associative, invertible, have identity). Secondly, since they map lines to lines, they must also be linear (or at least affine) maps.
 
@@ -152,11 +151,11 @@ It is typical to set $c=1$, and make it dimensionless, so that $t$ and $x$ both 
 
 
 <!-- 
-  todo: really this should be in classical physics
+  : really this should be in classical physics
 Recall that classical physics gives a procedure for starting from a pair of spacetime points $(p_1, p_2)$ (the start and end point of a particle trajectory), and determining the path that has these points as its boundary $P(p_1,p_2)$.
 
 The procedure has the property that it commutes with metric-preserving linear maps $L$. That is, $L(P(p_1,p_2))=P(L(p_1), L(p_2))$.
-  TODO: really two metrics are preserved classically
+  : really two metrics are preserved classically
   In non-relativistic physics, there is a metric on space, and a separate metric on time, both of which must be preserved.  -->
 
 
@@ -171,7 +170,7 @@ This means we can regard time and length as having the same dimensions, and take
 
 <!-- 
 While the Minkovski metric is preserved, the Euclidean metric on space alone (or time alone) need not be. The physical consequence is that a change in reference frame may alter the Euclidean distance between points in space, or points in time.
-  TODO: examples and check
+  : examples and check
 
 
 
@@ -229,7 +228,7 @@ We can actually derive what the Lorentzian transform must be, given the assumpti
     \end{bmatrix} \begin{bmatrix} t \\ x
     \end{bmatrix}$$
 
-    TODO -->
+     -->
 
 
 
@@ -272,8 +271,6 @@ The last step is by Stokes' theorem, with the assumption that $J$ vanishes on th
 
 So we have a conserved quantity of the system as a whole (not a function of position).
 
-TODO: electric current is 4 current
-
 ## Field theories
 
 As mentioned, the finite speed of light implies locality, which is to say that the value of an event should only depend on the values of events in its past light cone.
@@ -282,8 +279,6 @@ Viewed algorithmically, this is to say that time evolution is comonadic. Imagine
 
 Field theories are a natural way to encode locality, by having an integrand that is a function of the field at a single point, i.e. $x \mapsto \mathcal{L}(\phi(x), \partial_\mu\phi(x), x)$.
 
-TODO: but why does this imply local time propagation?
-
 ## Lagrangians
 
 The Lagrangians of field theories must transform under change of coordinates according to representations of the Lorentz group. This constraint provides a way to determine the fundamental laws of physics.
@@ -291,9 +286,7 @@ The Lagrangians of field theories must transform under change of coordinates acc
 The simplest case is the $(0,0)$ [representation](../maths/representations.md) of $SO(1,3)$, which is trivial (all group elements map to the identity). So the Lagrangian must be invariant.
 
 
-# TODO: add this stuff VV
-
-We use $x$ to refer to a point in spacetime, and assume that this is the domain of our field $\phi$.
+### Deriving Lagrangians 
 
 By assumption, the general form of a free (interaction-less) Lagrangian will be:
 
@@ -303,7 +296,7 @@ $$
 
 We'll use symmetry considerations to throw out more terms.
 
-### Scalar
+#### Scalar
 
 In this case, we want invariance under the Lorentz group, so the $E$ and $C$ terms survive. The $A$ and $B$ terms don't affect the resulting equations of motions (beyond a constant).
 
@@ -352,8 +345,8 @@ $$
 \frac{\partial \mathcal L(\phi)}{\partial (\partial_0\phi)}\partial_0\phi - \mathcal{L} \\
 = (\partial_0\phi)^2 - \frac{1}{2}(\partial_\mu\phi(x)\partial^\mu\phi(x) - m^2\phi^2(x))
 $$
-FIX todo
 
+#### Under construction: other Lorentz representations
 
 ### Mass and energy
 
@@ -377,11 +370,8 @@ with $\omega^2 = k^2 + m^2$. -->
 
 Note that $\omega$ is the energy (up to Planck's constant, which we set to $1$), so putting in dimensional constants, we have $E^2 = p^2c^2 + m^2c^4$, and with momentum $0$, $E = mc^2$.
 
-todo:
-velocity 
-speed of massless particle
 
-##
+<!-- ##
 
 Transformations of reference frame must preserve the metric. This is the Poincare group diag (1, -1,-1,-1).
 
@@ -395,4 +385,4 @@ General form:
 
 $$
 Λ = e^{iJ\cdot \theta + iK\cdot \Phi}
-$$
+$$ -->

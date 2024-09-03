@@ -266,8 +266,22 @@ We can now consider time evolution while also changing one of these parameters. 
 
 More succinctly: $dS \geq 0$. It is only equal when the process from the initial distribution to the final one lies on the maximum entropy submanifold (i.e., the process is quasistatic).
 
+#### Consequences of second law
 
-TODO: consequences (i.e. other formulations)
+Consider a process running on a system that has two separate parts, one hotter, one colder. Let $Q_H$ be the heat taken from the hot body by the process, and let $Q_C$ be the heat given to the cool body. Then the efficiency $\eta$ is:
+
+$$\eta := \frac{W}{Q_H} = \frac{Q_H-Q_C}{Q_H} = 1 - \frac{Q_C}{Q_H} $$
+
+By the second law, the heat given to the cool body and the heat taken from the hot body are positive, so $\eta < 1$. 
+
+Another consequence is that a reversible engine has the best efficiency. To see this, suppose we have a process $\tau$ which takes heat from the hot to the cool body, and gives its work to a reversible engine $R(\pi)$ running in reverse. Let $Q_H$ and $Q_C$ be as before, for system $\tau$, and $Q'_H, Q'_C$ be the heat *given* to the hot bath and taken from the cold bath respectively by $R(\pi)$. 
+
+By the second law, considering the two processes as a single process, $Q_H \gt Q'_H $, since otherwise heat would be flowing into the hot body at no work cost (all the work transfer is internal to the joint system, not to anywhere else). Also, we have that $Q_H-Q'_H = Q_C-Q'_C$. But then:
+
+$$\eta(\tau) = 1 - \frac{Q_C}{Q_H} = 1 - \frac{Q_H-Q'_H+Q'_C}{Q_H} = \frac{Q'_H-Q'_C}{Q_H} \leq \frac{Q'_H-Q'_C}{Q'_H} = \eta(R(\pi))  $$
+
+Further, any two reversible engines are equally efficient, *when both operating between the same pair of heat baths*, by the above argument applied in both directions. Note that efficiency is a function of the temperatures of the two heat baths, $\eta(T_1,T_2)$.
+
 
 ### Temperature
 
@@ -558,42 +572,14 @@ This real-space approach to renormalization isn't particularly general; in the 2
 
 ### Real space, continuous
 
-The simplest example is to consider the (infinite dimensional) Gaussian distribution, which is a distribution over functions $\phi : \R^d \to \R$:
+The standard approach is to write the theory, like Landau did, in terms of a normalization constant $Z(a_i, \Lambda) = \int_\Lambda e^{-F(\phi)}D\phi$, but where $F$ is an analytic functional with all terms ($a_1\phi^n, a_2\nabla^n\phi^m\ldots$), and $\Lambda$ is the maximum frequency of functions ranged over by $D\phi$.
 
-$$
-Z(m) = \int D\phi \quad e^{-S_m(\phi)} \\
-S(\phi) = \int \nabla^2_x\phi(x) + m\phi(x)^2dx
-$$
+Our interest is in cutting out high frequencies, so in distributions $Z(a_i, \Lambda/b)$. In general, $Z(a_i, \Lambda/b) \propto Z(T(b)(a)_i, \Lambda)$, and the goal is to find $T(b)$.
 
-We first note that a change of variables $x' = x/b$ has the following effect:
-
-$$
-S(\phi) = \int \nabla^2_{x'b}\phi(x'b) + m\phi(x'b)^2d(x'b)$$ 
-
-$$
-= b^{d}\int b^{-d}\nabla^2\phi'(x') + mb^{2-d}\phi'(x')^2dx' 
-$$
-
-where $\phi(x'b) = \phi(x) = b^{(2-d)/2}\phi'(x/b)$. Defining $m' = b^{-2}m$, we have:
-
-$$
-S_m(\phi) = \int \nabla^2\phi'(x) + m'\phi'(x)^2dx = S_{m'}(\phi')
-$$
-
-We then do a change of variable of the *outer* integral $D\phi$, so that $\log Z(m) = \log Z(m') + C$
-wait that's wrong!!
-
-**Under construction**
-TODO: finish ^
-
-In this case, rather than marginalizing every other site
-
-
-
-
-The standard approach is to write the theory, like Landau did, in terms of a normalization constant $\int e^{-F(\phi)}D\phi$, but where $F$ is an analytic function(al) around $\phi=0$ with all terms ($a_1\phi^n, a_2\nabla^n\phi^m\ldots$). Then the following transformation, known as renormalization, can be seen as a map from the infinite dimensional parameter space of $a_i$ to itself. 
-
-Working in Fourier space, with $\Lambda$ the reciprocal of the minimum grid spacing, $\Lambda' = \Lambda/\zeta$ for some $\zeta \in [1, \infty)$, and $F[\phi] = F_0[\phi^-]+F_0[\phi^+] + F_I[\phi^-,\phi^+]$, where $\phi^\pm$ are the parts of $\phi$ composed of frequencies above/below $\Lambda'$, we define:
+<!-- 
+Working in Fourier space, with $\Lambda$ the reciprocal of the minimum grid spacing, $\Lambda' = \Lambda/b$ for some $\zeta \in [1, \infty)$, and $F[\phi] = F_0[\phi^-]+F_0[\phi^+] + F_I[\phi^-,\phi^+]$, where $\phi^\pm$ are the parts of $\phi$ composed of frequencies above/below $\Lambda'$, we define: -->
+<!-- 
+To this end:
 
 $$
 % e^{-F'[\phi^-]} := e^{F_0[\phi^-_k]}\int\prod_{\Lambda' < k < \Lambda}d\phi_k^+e^{F_0[\phi^+_k]}e^{F_I[\phi^-_k, \phi^+_k]}
@@ -606,33 +592,109 @@ $$Z = \int D\phi^- e^{F_0[\phi^-]}\int D\phi^+e^{F_0[\phi^+]}e^{F_I[\phi^-, \phi
 := \int D\phi^-e^{-F'[\phi^-]}
 $$
 
-$F'$ is also analytic, so differs from $F$ by the coefficients $a_i$, however the path integral is over functions whose Fourier components only go up to $\Lambda'$. We therefore rescale by $k \mapsto \zeta k$, so $x \mapsto x/\zeta$, and also rescale so that the $\nabla \phi \cdot \nabla\phi$ term has the same coefficient as in $F$.
+$F'$ is also analytic, so differs from $F$ by the coefficients $a_i$, however the path integral is over functions whose Fourier components only go up to $\Lambda'$. We therefore rescale by $k \mapsto b k$, so $x \mapsto x/b$, and also rescale so that the $\nabla \phi \cdot \nabla\phi$ term has the same coefficient as in $F$.
+-->
 
-This procedure is parametrized by $\zeta \in [1,\infty)$, and each $F$ describes a point on the information manifold over fields, so what we have is a flow on the manifold. Certain fixed points of the flow are critical points.
+This procedure is parametrized by $b \in [1,\infty)$, and each $a_i$ describes a point on the information manifold over fields, so what we have is a flow on the manifold. Certain fixed points of the flow correspond to critical points (i.e. points of phase transition), therefore our interest is in these points and their stability (i.e. the local linearization of the flow around these points).
 
-**Example**
+#### Gaussian example
 
-Take $F[\phi] = \frac{1}{2}\int (\nabla_x\phi(x))^2 + m^2\phi(x)^2dx$. Then since the Fourier basis is an eigenbasis of the Laplacian, we get $F_I=0$, and
+$$
+Z(m, \Lambda) = \int_\Lambda D\phi \quad e^{-F_m(\phi)}
+$$
 
+$$
+F_m(\phi) = \int \nabla_x\phi(x)\cdot \nabla_x\phi(x) + m\phi(x)^2dx
+$$
+
+where the maximum frequency for functions $\phi$ ranged over by the measure $D\phi$ is $\Lambda$.
+
+We then write:
+
+$$
+Z(m, \Lambda/b) = \int_{\Lambda}D\phi e^{-F_m(\phi)} = \int_{\Lambda/b}D\phi e^{-F_m'(\phi)}
+$$
+
+The challenge is to solve for $F'$, i.e. to find a relationship $F'_m(\phi) = F_{m(b)}(f \circ \phi \circ g)$, where $f$ and $g$ are scaling functions of the form $x \mapsto cx$ (different $c$ for $f$ and $g$).
+
+In that case, $Z(m, \Lambda) = \int_{\Lambda/b}D\phi e^{-F_m(\phi)} = \int_{\Lambda}D\phi e^{-F_{m(b)}(f \circ \phi \circ g)} = K\int_{\Lambda/b}D\phi e^{-F_{m(b)}(\phi)} = K Z(m(b), \Lambda/b)$, where $K$ comes from the change of measure $D(f \circ \phi \circ g) = K D\phi$.
+
+
+In the Gaussian case, we see that
+
+$$
+\int_{\Lambda}D\phi e^{-F_m'(\phi)} 
+= Z(m, \Lambda/b) 
+$$
+
+$$ 
+= \int_{\Lambda/b} D\phi^- e^{F_m[\phi^-]}\int_{[\Lambda/b, \Lambda]} D\phi^+e^{F_m[\phi^+]}
+= \mathcal{N}\int_{\Lambda/b} D\phi e^{F_m[\phi]}
+$$
+
+We then observe that a change of variables $x' = x/b$ has the following effect:
+
+$$
+F_m(\phi) = \int \nabla_{x'b}\cdot \nabla_{x'b}\phi(x'b) + m\phi(x'b)^2d(x'b)$$ 
+
+$$
+= \int \nabla_{x'}\phi'(x')\cdot \nabla_{x'}\phi'(x') + mb^{2}\phi'(x')^2dx' 
+$$
+
+where $\phi(x'b) = \phi(x) = b^{(2-d)/2}\phi'(x/b)$. Defining $m(b) = b^{2}m$, we have:
+
+$$
+F_m(\phi) = \int \nabla^2\phi'(x) + m(b)\phi'(x)^2dx = F_{m'}(\phi')
+$$
+
+so that
+
+$$
+Z(m, \Lambda/b) = K Z(m(b), \Lambda)
+$$
+
+Note here that in changing variables from $D\phi'$ to $D\phi$, we move from $\Lambda/b$ to $\Lambda$.
+
+We are really concerned with derivatives of $\log Z$ (which are the expectations of interest), so the constant $K$ is irrelevant. In this case, we find a fixed point for $m_0 = 0$ or $m_0 = \infty$.
+
+In the more general case, things are much harder. This is because we can no longer trivially marginalize out the high frequencies, and instead have to resort to peturbative methods, e.g. via Feynman diagrams. However, calculations of this sort have been extremely important both in statistical physics and quantum field theory.
+
+<!-- 
 $$
 e^{-F'[\phi^-]} = e^{F_0[\phi^-]}\int D\phi^+e^{F_0[\phi^+]} = \mathcal{N}e^{-F[\phi^-]}
 $$
 
-We then rescale, with $x \mapsto x/\zeta$
+We then rescale, with $x' = x/ b$ or $k' = kb$:
 
 $$
-F'(\phi^-) \propto F_0(\phi^-) = \frac{1}{2}\int (\nabla_x\phi^-(x))^2 + m^2\phi^-(x)^2d^dx \\ \quad \\ 
-= \frac{1}{2(2\pi)^d}\int^{\Lambda/\zeta} (k^2 + m^2)\phi_k^-\phi_{-k}^- d^dk \\ \quad \\
-\mapsto \frac{1}{2(2\pi)^d}\int^{\Lambda} ((\frac{k}{\zeta})^2 + m^2)\zeta^{2w}\phi_k^-\phi_{-k}^- d^dk' \frac{1}{\zeta^n} \\ \quad \\
+F'(\phi^-) \propto F_m(\phi^-) = \frac{1}{2}\int (\nabla_x\phi^-(x))^2 + m^2\phi^-(x)^2d^dx \\ \quad \\ 
 $$
 
-so that with $w = \frac{2+n}{2}$, we have
-
 $$
-F'(\phi^-) \propto \frac{1}{2(2\pi)^d}\int^{\Lambda} (k^2 + \zeta^2m^2)\phi_k^-\phi_{-k}^- d^dk' \\ \quad \\
+= \frac{1}{2(2\pi)^d}\int^{\Lambda/ b} (k^2 + m^2)\phi_k^-\phi_{-k}^- d^dk \\ \quad \\
 $$
 
-which means that renormalization has induced a change of $m^2 \mapsto \zeta^2m^2$, which gives us a fixed point at $\mu^2 = 0$ or $\mu^2=\infty$. The first is the Gaussian fixed point. This is more or less the central limit theorem.
+$$
+= \frac{1}{2(2\pi)^d}\int^{\Lambda} ((\frac{k'}{ b})^2 + m^2) b^{2w}\phi_{k'}'\phi_{-k'}' d^dk' \frac{1}{ b^d} \\ \quad \\
+$$
+
+with $w = \frac{2+d}{2}$ and $\phi'_{k'} = b^{-w}\phi^-_k$, so that:
+
+$$
+F'(\phi^-) \propto \frac{1}{2(2\pi)^d}\int^{\Lambda} (k^2 +  b^2m^2)\phi_k\phi_{-k} d^dk \\ \quad \\
+$$
+
+which means that renormalization has induced a change of $m^2 \mapsto  b^2m^2$, which gives us a fixed point at $\mu^2 = 0$ or $\mu^2=\infty$. The first is the Gaussian fixed point. This is more or less the central limit theorem.
+
+Note that $F_I = 0$ in this case, so all we have to do is rescale to $x' = x/b$.
+
+
+
+We first note 
+
+We then do a change of variable of the *outer* integral $D\phi$ to $D\phi'$, which incurs a factor of the determinant of the transformation. This is constant in $m$, so $\log Z$ only changes by a constant term. -->
+
+
 
 
 ## Landau theory

@@ -1292,7 +1292,7 @@ we find that $\langle \phi(x), \phi(y)\rangle = A^{-1}(x,y) = (\nabla^2_x + \mu^
 **Under construction**
   
 
-<!-- todo:
+<!-- :
 
 - fix negation and constants
 

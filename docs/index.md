@@ -36,12 +36,12 @@ graph TB
     DG --> D
     LA --> DIM((<a href='/physics/dimensions' style=color:green >Dimensions </a>))
     DIM --> QFT
-    DG --> GR((<a href='/physics/relativity'>Relativity </a>))
+    DG --> GR((<a href='/physics/relativity' style=color:green >Relativity </a>))
     GR --> QFT((<a href='/physics/qft'>Quantum Field Theory</a>))
     D((<a href='/physics/classical' style=color:green >Classical physics</a>))
     TM((<a href='/physics/statisticalphysics'>Statistical Physics</a>)) --> QFT
     Stats((<a href='/physics/statistics' style=color:green >Statistics</a>))
-    QFT --> CMT{<a href='/physics/condensedmatter'>Condensed Matter</a>}
+    
     end
     D --> TM
     D --> QFT
@@ -69,6 +69,9 @@ graph TB
     P --> Q
 ```
 
+<!-- 
+QFT CMT{<a href='/physics/condensedmatter'>Condensed Matter</a>} 
+-->
 
 !!! Caveat
 
@@ -92,7 +95,7 @@ In general, I try to be sparse, given only the bare bones. For example, I state 
 
 The idea is to give a "map" of each subject, and cover the core ideas.
 
-The material should be roughly what a smart undergrad should know about physics and mathematics before grad school.
+The level of the material should be roughly what a smart undergraduate would know about physics and mathematics before grad school.
 
 #### Is the material standard?
 

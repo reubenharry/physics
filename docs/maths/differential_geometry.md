@@ -189,7 +189,7 @@ When a connection is expressed as a form on a principal g-bundle (rather than on
 
 <!-- ## Gauge transformations
 
-todo: what are they
+: what are they
 
 $$
 D_{\gamma'(t)}u(t) =: \frac{d}{dt}u(t) + A(\gamma'(t))u(t) = 0

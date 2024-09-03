@@ -166,10 +166,11 @@ A Riemannian manifold (a manifold with a metric) comes equipped with a natural c
 
 Elitzur's theorem states that in gauge theories (typically this is shown in the context of **lattice** gauge theories), the only operators that can have non-zero expectation values are invariant under local gauge transformations.
 
-An important implication is that gauge symmetry cannot be spontaneously broken."
-todo: incorp
+<!-- An important implication is that gauge symmetry cannot be spontaneously broken. -->
 
 
 
 ## Lattice gauge theories
+
+**Under construction**
 
