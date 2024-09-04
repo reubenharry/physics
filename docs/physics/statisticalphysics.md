@@ -1,6 +1,7 @@
 
 $\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}$
 $\newcommand{\R}{\mathbb{R}}$
+$\newcommand{\Z}{\mathbb{Z}}$
 $\newcommand{\RR}{\mathbb{R}}$
 $\newcommand{\C}{\mathbb{C}}$
 $\newcommand{\N}{\mathbb{N}}$
@@ -534,7 +535,7 @@ A key insight is that fixed points of $f$ are critical points of phase transitio
 
 ### Real space, discrete (Migdal-Kadanoff)
 
-The simplest example of renormalization is illustrated with the 1D Ising model. Recall that the Ising model (aka Markov Random Field) has the form $p(\bold{s}) = e^{\sum_{\langle i,j\rangle}Ks_is_j}$. Call $I_{MRF}$ the space of distributions on the 1D lattice, parametrized by the choice of $K$, so that $Z(K)$ denotes a particular such distribution.
+The simplest example of renormalization is illustrated with the 1D Ising model. Recall that the Ising model (aka Markov Random Field) has the form $p({s}) = e^{\sum_{\langle i,j\rangle}Ks_is_j}$. Call $I_{MRF}$ the space of distributions on the 1D lattice, parametrized by the choice of $K$, so that $Z(K)$ denotes a particular such distribution.
 
 We are interested in some expectation, e.g. $G(k, K) := \langle x_0x_k\rangle_K$. We then make three key observations:
 
@@ -572,9 +573,26 @@ This real-space approach to renormalization isn't particularly general; in the 2
 
 ### Real space, continuous
 
-The standard approach is to write the theory, like Landau did, in terms of a normalization constant $Z(a_i, \Lambda) = \int_\Lambda e^{-F(\phi)}D\phi$, but where $F$ is an analytic functional with all terms ($a_1\phi^n, a_2\nabla^n\phi^m\ldots$), and $\Lambda$ is the maximum frequency of functions ranged over by $D\phi$.
+!!! Note
 
-Our interest is in cutting out high frequencies, so in distributions $Z(a_i, \Lambda/b)$. In general, $Z(a_i, \Lambda/b) \propto Z(T(b)(a)_i, \Lambda)$, and the goal is to find $T(b)$.
+    Most references aren't very clear on the fact that the space of distributions is a function of $\Lambda$, and don't mention that we are performing a change of variables in the infinite-dimensional measure $D\phi$, but without making these points explicit, the logic of renormalization is difficult to follow.
+
+Our setting here is distributions over fields, i.e distributions over functions of space. Without (much) loss of generality, we consider distributions of the form:
+
+$$
+p(\phi) \propto e^{-F(\phi)}
+$$
+
+where $F$ is local. For example, we could have $F=\int dx \phi(x)^2$ or $\int dx a_1\phi^n + a_2\nabla^n\phi^m\ldots$. The coefficients $a_i$ fully determine $F$, so we can write a distribution as $\rho(a)$. 
+
+We also want to specify the support of the distribution, in particular the band of frequencies allowed for a field in the support of the distribution. Call the maximum frequency $\Lambda$ and write $\rho(a, \Lambda)$ for a given distribution. Write $Z(a, \Lambda) := Z(\rho(a, \Lambda)) := \int (D\phi) \rho(a, \Lambda)(\phi)$.
+
+Note that fixing $\Lambda$ specifies an information manifold of distributions $\rho(\_, \Lambda)$ for which $a$ are coordinates.
+
+
+Our interest is in marginalizing out high frequencies (i.e. low length scales), to obtain a distribution $Z(a'_i, \Lambda/b)$, and then rescaling back to the original support, to get  a distribution $Z(T(b)(a)_i, \Lambda)$, where the goal is to find $T(b)$.
+
+More concretely, let $f_{\Lambda}(\phi)$ be a function which filters out frequencies above some $\Lambda$, so that the pushforward $Z(a'_i, \Lambda) = f_{\Lambda/b}\rho(a, \Lambda)$ is a distribution over fields with frequencies below $\Lambda$. We then marginalize (i.e. pushforward by this map), to obtain a distribution $(f_{\Lambda/b}^*\rho(a, \Lambda)) \propto \int_{[\Lambda/b, \Lambda]}\rho(a, \Lambda)$.
 
 <!-- 
 Working in Fourier space, with $\Lambda$ the reciprocal of the minimum grid spacing, $\Lambda' = \Lambda/b$ for some $\zeta \in [1, \infty)$, and $F[\phi] = F_0[\phi^-]+F_0[\phi^+] + F_I[\phi^-,\phi^+]$, where $\phi^\pm$ are the parts of $\phi$ composed of frequencies above/below $\Lambda'$, we define: -->
@@ -591,11 +609,9 @@ so that
 $$Z = \int D\phi^- e^{F_0[\phi^-]}\int D\phi^+e^{F_0[\phi^+]}e^{F_I[\phi^-, \phi^+]} \\ \quad \\
 := \int D\phi^-e^{-F'[\phi^-]}
 $$
-
-$F'$ is also analytic, so differs from $F$ by the coefficients $a_i$, however the path integral is over functions whose Fourier components only go up to $\Lambda'$. We therefore rescale by $k \mapsto b k$, so $x \mapsto x/b$, and also rescale so that the $\nabla \phi \cdot \nabla\phi$ term has the same coefficient as in $F$.
 -->
 
-This procedure is parametrized by $b \in [1,\infty)$, and each $a_i$ describes a point on the information manifold over fields, so what we have is a flow on the manifold. Certain fixed points of the flow correspond to critical points (i.e. points of phase transition), therefore our interest is in these points and their stability (i.e. the local linearization of the flow around these points).
+This procedure is parametrized by $b \in [1,\infty)$, and each $a$ describes a point on the information manifold over fields, so what we have is a flow on the manifold. Certain fixed points of the flow correspond to critical points (i.e. points of phase transition), therefore our interest is in these points and their stability (i.e. the local linearization of the flow around these points).
 
 #### Gaussian example
 
@@ -609,43 +625,50 @@ $$
 
 where the maximum frequency for functions $\phi$ ranged over by the measure $D\phi$ is $\Lambda$.
 
-We then write:
+<!-- We then write:
 
 $$
-Z(m, \Lambda/b) = \int_{\Lambda}D\phi e^{-F_m(\phi)} = \int_{\Lambda/b}D\phi e^{-F_m'(\phi)}
+Z(m, \Lambda/b) = \int_{\Lambda/b}D\phi e^{-F_m(\phi)} = \int_{\Lambda}D\phi e^{-F_m'(\phi)}
 $$
 
-The challenge is to solve for $F'$, i.e. to find a relationship $F'_m(\phi) = F_{m(b)}(f \circ \phi \circ g)$, where $f$ and $g$ are scaling functions of the form $x \mapsto cx$ (different $c$ for $f$ and $g$).
+The challenge is to solve for $F'$, i.e. to find a relationship $F'_m(\phi) = F_{m(b)}(f \circ \phi \circ g)$, where $f$ and $g$ are scaling functions of the form $x \mapsto cx$ (different $c$ for $f$ and $g$). -->
 
-In that case, $Z(m, \Lambda) = \int_{\Lambda/b}D\phi e^{-F_m(\phi)} = \int_{\Lambda}D\phi e^{-F_{m(b)}(f \circ \phi \circ g)} = K\int_{\Lambda/b}D\phi e^{-F_{m(b)}(\phi)} = K Z(m(b), \Lambda/b)$, where $K$ comes from the change of measure $D(f \circ \phi \circ g) = K D\phi$.
+In this case, we begin by marginalizing out frequencies above $\Lambda/b$, to obtain a distribution $Z(m', \Lambda)$.
+
+<!-- $Z(m, \Lambda) = \int_{\Lambda/b}D\phi e^{-F_m(\phi)} = \int_{\Lambda}D\phi e^{-F_{m(b)}(f \circ \phi \circ g)} = K\int_{\Lambda/b}D\phi e^{-F_{m(b)}(\phi)} = K Z(m(b), \Lambda/b)$, where $K$ comes from the change of measure $D(f \circ \phi \circ g) = K D\phi$. -->
 
 
-In the Gaussian case, we see that
+<!-- In the Gaussian case, we see that -->
 
-$$
+<!-- $$
 \int_{\Lambda}D\phi e^{-F_m'(\phi)} 
 = Z(m, \Lambda/b) 
-$$
+$$ -->
+
 
 $$ 
-= \int_{\Lambda/b} D\phi^- e^{F_m[\phi^-]}\int_{[\Lambda/b, \Lambda]} D\phi^+e^{F_m[\phi^+]}
-= \mathcal{N}\int_{\Lambda/b} D\phi e^{F_m[\phi]}
+Z(f_{\Lambda/b}^*(\rho(m,\Lambda))) = \int_{\Lambda/b} D\phi^- e^{F_m[\phi^-]}\int_{[\Lambda/b, \Lambda]} D\phi^+e^{F_m[\phi^+]}$$
+
+$$
+= \mathcal{N}\int_{\Lambda/b} D\phi e^{F_m[\phi]} = \mathcal{N}Z(m, \Lambda/b)
 $$
 
-We then observe that a change of variables $x' = x/b$ has the following effect:
+for a constant $\mathcal{N}$. This shows that in this case, $m'=m$. We now need to pushforward the distribution by a map $g_w(\phi) = (x \mapsto xb^w) \circ \phi \circ (x \mapsto xb)$, for $w$ to be determined shortly, which scales the fields in the support. Note that the initial multiplication by $b$ in real space amounts to a division by $b$ in Fourier space, so that the support will contain functions that take frequencies up to $\Lambda$.
+
+<!-- $$\phi(x) = b^{(2-d)/2}\phi'(x/b)$$ -->
+
+To determine $w$, observe that:
 
 $$
 F_m(\phi) = \int \nabla_{x'b}\cdot \nabla_{x'b}\phi(x'b) + m\phi(x'b)^2d(x'b)$$ 
 
 $$
-= \int \nabla_{x'}\phi'(x')\cdot \nabla_{x'}\phi'(x') + mb^{2}\phi'(x')^2dx' 
+= \int \nabla_{x'}f(\phi)(x')\cdot \nabla_{x'}f(\phi)(x') + mb^{2}f(\phi)(x')^2dx' = F_{m'}(f(\phi))
 $$
 
-where $\phi(x'b) = \phi(x) = b^{(2-d)/2}\phi'(x/b)$. Defining $m(b) = b^{2}m$, we have:
+where $\phi(x'b) = \phi(x) = b^{(2-d)/2}f(\phi)(x/b)$ and $m' = mb^2$, so that $w = \frac{d-2}{2}$.
 
-$$
-F_m(\phi) = \int \nabla^2\phi'(x) + m(b)\phi'(x)^2dx = F_{m'}(\phi')
-$$
+This means that $Z(g_w^*(f^*_{\Lambda/b}(\rho(m, \Lambda)))) \propto \int_\Lambda D(f(\phi))e^{-F_{m'}(\phi)} = Z(\rho(m', \Lambda))$,
 
 so that
 
@@ -653,9 +676,9 @@ $$
 Z(m, \Lambda/b) = K Z(m(b), \Lambda)
 $$
 
-Note here that in changing variables from $D\phi'$ to $D\phi$, we move from $\Lambda/b$ to $\Lambda$.
+Note here that in changing variables from $D\phi$ to $D(g_w(\phi))$, we move from $\Lambda/b$ to $\Lambda$, as desired. Note also that the change of measure from $D\phi$ should incur a Jacobian determinant, and without going into the theory of functional determinants, let us assume that this is a constant $K$.
 
-We are really concerned with derivatives of $\log Z$ (which are the expectations of interest), so the constant $K$ is irrelevant. In this case, we find a fixed point for $m_0 = 0$ or $m_0 = \infty$.
+Since we are eventually concerned with derivatives of $\log Z$ (which are the expectations of interest), the constant $K$ is irrelevant. In this case, we find a fixed point for $m = 0$ or $m = \infty$.
 
 In the more general case, things are much harder. This is because we can no longer trivially marginalize out the high frequencies, and instead have to resort to peturbative methods, e.g. via Feynman diagrams. However, calculations of this sort have been extremely important both in statistical physics and quantum field theory.
 
@@ -956,7 +979,7 @@ The much simpler Einstein model of a solid, which qualitatively captures the fac
 
 ([These lecture notes](https://ps.uci.edu/~cyu/p115A/LectureNotes/Lecture13/lecture13.pdf) were helpful here)
 
-Suppose that we have $N$ particles, energy levels denoted $e(i)$, and number of particles per level denoted $R(n_i)$ (in a full state of the system $R$. Then $N=\sum_ie(i)R_n(i)$ in that state. Assume that temperature (and chemical potential) are fixed.
+Suppose that we have $N$ particles, energy levels denoted $e(i)$, and number of particles per level denoted $R(n_i)$ (in a full state of the system $R$). Then $N=\sum_ie(i)R_n(i)$ in that state. Assume that temperature (and chemical potential) are fixed.
 
 $$ \langle n_j \rangle = \frac{1}{\sum_R e^{-\beta\sum_ie(i)R(n_i)}}\sum_R R(n_j) e^{-\beta\sum_ie(i)R(n_i)} = -\frac{1}{\beta}\pd{}{e(j)}\log Z $$
 
