@@ -384,6 +384,47 @@ cf. solution of poisson equation in 2D vs 3D
 
 At low temperature, vortices are bound in pairs, while at high temperature, they are free. There's an analogy to insulating and conducting phases of a metal.
 
+## Lattice gauge theories
+
+## String-net models
+
+Take the $\Z_2$ lattice gauge theory, and observe that basis states are a made by choosing, for each edge of the lattice, whether it is a spin up or spin down state. One can then observe that the two Hamiltonian terms, 
+
+turaev viro: spacetime triangulation: roughly a lagrangian approach
+
+string net Hamiltonian is a set of commuting projectors, so that ground state is the +1 eigenstate shared by them
+
+These models are gapped, because an excitation causes a discrete jump in the energy
+
+TODO
+
+respectively are minimized when
+
+
+This means that the ground state is a loop gas, and above a certain value of 
+TODO
+we have a deconfined phase, which is to say that many large loops are preferred.
+
+String-nets are models which generalize this loop gas picture. 
+
+Every is in: https://www.youtube.com/watch?v=WjfaMl6-Tek
+    
+the basis states are:
+- for each edge, a choice of a 
+- branching rule
+- equivalences by F and \gamma, which must obey certain conditions, namely the conditions of a fusion category
+
+one can devise a Hamiltonian to produce such a ground state. It resembles the Toric code Hamiltonian, in having a vertex and a plaquette term. In this case, 
+
+In the special case:
+    SU(2): 6j symbols
+
+    First one takes some more interesting group than $\Z_2$, in which case the operators on the edges are group representations, and the 
+    TODO
+    energy term prefers 
+
+
+
 ## Topology
 
 "The topologically different paths of N particles in space-time form
@@ -398,6 +439,13 @@ by Bartlett [2005] discusses TQFTs from the category perspective"
 
 "As with the toric code, the vertex and plaquette operators provide just enough constraints so that the ground state on a spherical surface is unique and the ground state on a higher-genus manifold will have a degeneracy that depends on the topology of the system, but does not depend on the number of lattice points we use in our lattice. That is, the ground-state space is described by a TQFT."
 The TQFT that results is known as the quantum double or Drinfel’d double of the group G.
+
+"The Drinfeld center of a fusion category 𝒜 describes a (2+1)-dimensional topological order whose gapped boundaries enumerate all (1+1)-dimensional gapped phases with the fusion category symmetry, which may be spontaneously broken."
+
+"A quite general 2D topological order can be constructed through the string-net theory. Here, if the input data is some braided fusion category 𝐶
+ (i.e. the 𝐹
+-symbols), the elementary excitations are simple objects of the Drinfeld center 𝑍(𝐶)
+."
 
 "To emphasize: A quasiparticle type is described by a conjugacy class C, and an irreducible representation R of the centralizer of a representative element r C of the conjugacy class.
 

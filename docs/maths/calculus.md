@@ -201,7 +201,7 @@ The following is also true (using index notation):
 
 $$ Df(x)_{ij} = \frac{\partial f(x)_i}{\partial x_j}$$
 
-## Chain rule
+### Chain rule
 
 
 $$D_x(f(g(x)))_{ij} = \sum_k \frac{\partial f(g(x))_i}{\partial g(x)_k}\frac{\partial g(x)_k}{\partial x_k} $$
@@ -210,13 +210,13 @@ Or without index notation:
 
 $$D(f\circ g)(x)=[(Df)(g(x)][(Dg)(x)]$$
 
-## Gradient $\nabla$ and Hessian $H$
+### Gradient $\nabla$ and Hessian $H$
 
 $$ \nabla_x{f(x)}_i = \dfrac{df(x)}{dx_i}$$
 
 $$ H_xf(x)_{ij} = \dfrac{df(x)}{dx_idx_j}$$
 
-## Examples:
+### Examples:
 
 $$ (D_x Ax)_{ij} = \frac{d(Ax)_{i}}{dx_j} = \frac{dA_{ik}x_k}{dx_j} = A_{ij} $$
 
@@ -234,7 +234,10 @@ $$ H_{A^{-1}x}f(x) = H_{k}f(Ak) = A^TH_{Ak}f(Ak)A = A^TH_xf(x)A $$
 
 The idea is that instead of integrating $f$ with respect to its input $x$ (i.e. calculating $\int_Af(x)dx$), we can view $x$ as a function of $u$ (i.e. $x=g(u)$) and then pull back to an integral over $u$ (i.e. $\int_{g^{-1}(A)}f(g(u))du$). But this is a differently valued integral. So this new integral requires a term to offset the change, which rather nicely happens to be $|Det(D_ug(u))|$. The intuition is that we account for the change in area of the differential (as it approaches the limit). The absolute value is because the sign of the determinant only measures the order of the dimensions and we don't care about this here. The equation looks as follows:
 
-$$\int_{g(A)} (f\circ g)(x)dg(x) = \int_{A} (f\circ g)(x)\cdot |Dg(x)|dx $$ where $Dg(x)$ is the determinant of the matrix of partial derivatives of $g(x)$ wrt. $x$.
+$$\int_{g(A)} (f\circ g)(x)dg(x) = \int_{A} (f\circ g)(x)\cdot |Dg(x)|dx
+$$ 
+
+where $Dg(x)$ is the determinant of the matrix of partial derivatives of $g(x)$ wrt. $x$.
 
 ### Arguments with differentials
 
@@ -269,6 +272,134 @@ e^{t\psi}=\sum_{i=0}^{\infty}\frac{t^i\psi^i}{i!}=I+t\sum_{i=1}^{\infty}\frac{t^
 $$
 
 We can then rather cleverly observe that the this final sum goes to $\psi$ as we take $t$ to $0$, because the term of the sum with $i=0$ is $\frac{0^0\psi}{0!}=\psi$.
+
+
+## Non-linear dynamics
+
+
+!!! Note
+
+	This section is based on Strogatz's *Nonlinear Dynamics and Chaos*, and was cowritten with Sandra Romero Pinto.
+
+In general, we're interested in functions $x : \mathbb{R^n}\to\mathbb{R^m}$ satisfying some differential equation $x'(t)=f(x(t))$, so that their local linearizations at a point are linear maps also of $\mathbb{R^n}\to\mathbb{R^m}$. Note that this is a first order differential equation, but higher order ones can be reformulated as first order by considering $x, x', x''...$ as a vector of variables.
+
+When $f$ is a linear map, the solution takes the form $e^{ft}$ and everything is nice, because linear algebra provides powerful tools that are applicable in this case. But when $f$ is not a linear map, things can be hard. Calculus provides a powerful tool for handling non-linear systems, namely that the first order approximation of a non-linear system is linear. Sometimes the linear approximations tell you everything important about the non-linear system (see the *Hartman-Grobman* theorem). Often, however, even this isn't enough. 
+
+When it isn't, one can instead study the fixed points, which are points $x^*$ where $f(x^*)=0$, called as such because if you start at such a point, you stay at it. 
+
+There's an intuitive notion of stability of fixed points, namely whether arbitrarily small pertubations of a fixed point result in a return to the fixed point (stable) or not (unstable). 
+
+Fixed points are a sort of *topological* feature of an ODE, in the sense that we can qualitatively characterize a solution by asking about the number and stability of its fixed points, rather than finding the exact value of $x$ at all $t$.
+
+This leads naturally to the notion of a *bifurcation*, where you have an ODE parametrized by some parameter  $p \in \mathbb{R}$ and as you vary $p$, you find that at some point the number or stability of the fixed points changes. This is a bifurcation.
+
+<!-- TODO: link to above: 1D systems can change their behavior (e.g. stability of their fixed points, number of fixed points, etc) as
+a function of some control parameter. *Bifurcations* are the values of this control parameters
+at which these changes in the system's behavior happen.
+ -->
+
+
+
+### Linear Stability Analysis
+
+We can be clever about analyzing stability by forming a new ODE in terms of a perturbation around a fixed point. That is, for a fixed point $x_0$, and in the 1D case:
+
+$$ \eta(t) := x(t)-x_0 $$
+
+Then it follows that:
+
+$$ \dot{\eta} = \dot{x} = f(x) = f(\eta+x_0) = f(x_0) + \eta f'(x_0)+O(\eta^2) = \eta f'(x_0)+O(\eta^2) \approx \eta f'(x_0) $$
+
+This final approximation is true for  $f'(x^*)\neq 0$ *in the limit of small $\eta$*. Solving this ODE ($\dot{\eta}=\eta f'(x_0)$)  shows that for $f'(x_0)>0$, the perturbation grows, and for $f'(x_0)<0$ is shrinks, returning the trajectory back to the fixed point. For $f'(x_0)=0$ we're back to square one.
+
+This generalizes to the n-dimensional case  (see [these ODE notes](https://reubencohngordon.com/maths/odes/)), where $f'$ becomes the Jacobian. Then, the case of all eigenvalues with negative real part gives stability, all positive real part gives instability. More generally if all eigenvalues have a real part, this is known as a hyperbolic fixed point. The cases where at least one eigenvalue has real part $0$ are the difficult ones, as the linearization around a fixed point doesn’t always reflect the true phase portrait of the non-linear system
+
+### Definitions to describe stability of fixed points (linear/nonlinear)
+
+Considering $\textbf{x}^*$ the fixed point of a dynamical system:
+
+- $\textbf{x}^*$ is an *attracting point*  if $x(t) \to \textbf{x}^*,\text{as}, t \to \infty $ (trajectories starting near it eventually converge to $\textbf{x}^*$) . It can be called *globally* attracting if it attracts all trajectories (but sometimes it has a certain *basin of attraciton*. Focuses on the condition of $t \to \infty$
+- $\textbf{x}^*$ is a *Lyapunov  stable*: if  trajectories starting sufficiently close to $\textbf{x}^*$,remain close to it *at all times*.
+
+A given $\textbf{x}^*$ can be both attracting and Lyapunov stable, or only either.
+
+-  $\textbf{x}^*$  can be  attracting but not Lyapunov stable: if trajectories actually diverge from the fixed point to then converge on it as $t \to \infty $ (no particular name for this)
+-  If  it’s only Lyapunov stable then $\textbf{x}^*$ is  *neutrally stable*: trajectories remain near it but never actually converge on it.
+-  If it’s both, $\textbf{x}^*$ is *asymptotically stable*
+-  if it’s neither, $\textbf{x}^*$ is *unstable*
+
+### 1D ODEs
+
+For $x : \mathbb{R}\to\mathbb{R}$, the kinds of solutions are limited (all solutions either approach a fixed point or diverge to $\pm\infty$, as are the kinds of birfurcations.
+
+The following is a list of the kinds of birfurcations in 1D. For each kind, I list the *normal forms*. These are simple ODEs which provide an example of the kind of bifurcation, but note that *not all bifurcations are of the normal form*. For example, $\dot{x}=-x + \beta\tanh x$ has a saddle node bifurcation. *However*, to a first order approximation (i.e. locally) the normal form is equivalent to any other bifurcation of that class.
+
+Normal forms are therefore the 1st order approximation to all these canonical bifurcations. Here are the 1D normal forms:
+
+- *saddle-node bifurcations*: at which the number of fixed point changes
+  - normal forms: $x^2 - r$ and $x^2 + r$ <img src="/img/saddle_node.png" alt="image" style="zoom:50%;" />
+- *transcritical bifurcations*: at which the fixed points change their stability  
+  - normal forms: $ rx - x^2$ <img src="/img/transcritical.png" alt="image" style="zoom:50%;" />
+- *pitchfork bifurcations*: number of fixed point changes but also the stability changes (...). The core feature is that the system has symmetry (it behaves the same if $x\mapsto -x$ ). Can be sub-or supercritical depending on the stability of the remaining fixed points after the bifurcation (the names are counter-intuitive for the stability of the remaining fixed points)
+  - supercritical normal form: $rx - x^3$  <img src="/img/supercritical_pitchfork.png" alt="image" style="zoom:100%;" />
+  - subcritical normal form: $rx + x^3$  <img src="/img/subcritical_pitchfork.png" alt="image" style="zoom:100%;" />
+  - subcritical with hysteresis: $rx + x^3 - x^5$ <img src="/img/subcritical_with_hysteresis.png" alt="image" style="zoom:70%;" />
+
+As an example of a complicated ODE which takes a well-known normal form in the 1st order, consider:
+
+$$ \dot{x} = r\ln x + x -1 $$
+
+For $u := x -1$, $\dot{u} = r\ln(1+u)+u = r[u-\frac{1}{2}u^2 + O(u^3)] + u = (r+1)u - \frac{1}{2}ru^2 + O(u^3)$. Up to rescaling, this is the normal for for a supercritical pitchfork bifurcation.
+
+
+
+
+<!-- While there are many many ODEs, a few particular *normal form* cases serve to capture the core phenomena. (sort of the prototypes for the types of bifucations)  -->
+
+### Usefulness of graphs
+
+
+
+
+Stability of a fixed point can be determined by
+just looking at the vector field of the system: in a 1D system, this is given by an $\dot{x}$ against $x$ graph.
+
+
+
+Points crossing the x-axes are the *fixed points* and the stability can just be determined by looking at the
+sign of $\dot{x}$ around that fixed point (basically checking whether x would approach or diverge from that fixed point given the
+sign of the derivative $\cdot{x}$). 
+
+<!-- TODO RCG: section 4.3: ghost, bottlenecks, and scaling laws -->
+
+### 2D ODEs
+
+Some common kinds of fixed points include:
+
+<!-- ​ tODO : classification of fixed points Fig 5.2.8. Relate fixed points to e-values -->
+
+<!-- - TODO SR : classification of linear systems fixed points Fig 5.2.8. Relate fixed points to e-values and go through the examples - useful for when linearization around fixed points works
+  - 5.2.2 (saddle node, and prototypical trajectories along the ‘slow’ vs ‘fast‘ eigenvectors), 5.2.3 (center vs spiral depending on complex terms of the e-vectors),  5.2.5 (star node for equal eigenvectors ) ,5.2.5 (single eigenvalue and degenerate node ) -->
+
+**Limit cycles**
+
+They are closed & *isolated* trajectories, meaning that the trajectories neighboring it are not closed but are spirals toward (stable limit cycle) or away (unstable limit cycle) to /from it. Sometimes they can be half-stable (toward or away from it inside or outside of the closed trajectory) . They are inherent of nonlinear systems, as closed orbits in linear systems can’t be isolated by the definition above, and in contrast form families of closed orbits whose amplitude is scaled by a constant (determined by the initial conditions and preserved, there can never be spirals in linear systems).
+
+Limit cyles *can’t* exist if a **Lyapunov function** exists for the system. Intuitively, this is an energy-like function that decreases along trajectories. More formally: it’s a continuously differentiable real-valued function  $V(\textbf{x})$ that : 1) is **positive definite :** $V(\textbf{x})>0 ~ \forall \textbf{x} \neq \textbf{x}^*      , V(\textbf{x}^*)=0$  , 2) for which all trajectories go downhill in the V function towards $\textbf{x}^*$ : $\dot{V}<0 ~ \forall \textbf{x} \neq \textbf{x}^*$.
+
+Focusing on  property 2) this would make the fixed point to be globally stable (*all* trajectories move towards is) and would make it impossible to have a closed trajectory (i.e. limit cycle) as this would imply that $\dot{V} =0$.  
+
+Other ways of ruling out limit cycles are by determining whether the system is gradient system (very similar to figuring out whether a Lyapunov function exists), and Dulac’s criterion. The Poincaré-Bendixson theorem is used to determine whether a closed orbit exists in a system.
+
+**Bifurcations**
+
+All the 1D cases still apply, but there are now some more cases too. In 1D, eigenvalues lie on the real line, but in 2 or more dimensions, they can be complex. In particular, for 2D, the eigenvalues are the solution of a quadratic equation with real coefficients (see [linear algebra notes](https://reubencohngordon.com/maths/linearalgebra/)), so if $4ac$ is non-negative, they are both real, and if $4ac$ is negative, they are both complex conjugates (because $\sqrt{4ac}$ is purely imaginary, it's negative is its conjugate, and then the other terms of the quadratic formula shift and scale along the real axis).
+
+So now we have a new case, where the change of stability occurs when *both* eigenvalues cross the imaginary axis at once. These are **Hopf bifurcations**.
+
+### Chaos
+
+The original and typical example is the Lorenz equations. These are a 3D ODE whose long term behavior is **not** convergence to a fixed point or limit cycle, but **is** confined to a bounded region. Note that this would violate Poincaré-Bendixson in 2D. The surprising conclusion is that the long-term behavior converges to a *strange attractor*, which is a set of measure $0$ not unlike the Cantor set.
 
 
 ## Functional derivatives

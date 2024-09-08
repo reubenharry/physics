@@ -525,11 +525,25 @@ Define $\xi^2 = \gamma/\mu^2$. From this, we can calculate the normal facts like
 
 ## Renormalization
 
-Suppose you have some field, for instance the discrete field $s : \Z \to C$ for some $C$. This is a (1D) lattice with a value at each site. There is a natural projection map $\pi$ which drops the even sites, to obtain a new lattice which can be expressed as a new field $s' : \Z \to C$. It is as if we have zoomed out by a factor of 2.
+!!! Context
+
+    
+    For any distribution $p : Dist(A)$, in general we may have a function $f : A \to B$, which we can pushforward to obtain a new distribution of type $Dist(B)$. It is often the case that while $f$ has no fixed points, $f^* : Dist(A) \to Dist(B)$ **does**. A common example is [Markov Chain Monte Carlo](../maths.probability.md), where one finds a transition function $f : S \to Dist(S)$, for a state space $S$, but where $f^* : Dist(S) \to Dist(S)$ has the stationary distribution as a fixed point.
+
+    In the setting of statistical field theory, we are dealing with distributions over functions of space or spacetime. Two interesting functions on these functions are (1) to drop frequencies below a cutoff (i.e. filtering, see the notes on [Fourier analysis](../maths/fourier.md)). Call this function $g_s$, so that $g_s(f(k)) = 1[k < s]f(k)$. Note that here, we express $f$ in a frequency basis. Also note that if $C(\Lambda)$ is the space of functions of type $\R^n \to \R$ with frequencies less than $\Lambda$, then $g_s : C(\Lambda) \to C(s)$, and $g_s^* : Dist(C(\Lambda)) \to Dist(C(s))$.
+
+    A second function on functions can be defined by $h_s(f) = f \circ (x \maps xs)$. In that case, $h_s^* : Dist(C(\Lambda)) \to Dist(C(\Lambda s))$.
+
+    The renormalization group is then the operation $(h_{\Lambda/s} \circ g_s)^* : Dist(C(\Lambda)) \to Dist(C(\Lambda))$. The fixed points of this operation are critical points.
+
+    Moreover, one can in various non-trivial cases calculate the [stable manifold](../maths/calculus.md) of the fixed point analytically, and recover extremely useful information about phase transitions.
+    
+    
+<!-- Suppose you have some field, for instance the discrete field $s : \Z \to C$ for some $C$. This is a (1D) lattice with a value at each site. There is a natural projection map $\pi$ which drops the even sites, to obtain a new lattice which can be expressed as a new field $s' : \Z \to C$. It is as if we have zoomed out by a factor of 2.
 
 This projection map $\pi$ induces a map on distributions over configurations of the field, so a map $f : I(M) \to I(M)$, where $I(M)$ is the space of distributions over functions $\Z \to C$.
 
-A key insight is that fixed points of $f$ are critical points of phase transitions. Methods for discrete fields and continuous fields, in real and Fourier space exist.
+A key insight is that fixed points of $f$ are critical points of phase transitions. Methods for discrete fields and continuous fields, in real and Fourier space exist. -->
 
 <!-- The simplest example would be the Central Limit Theorem, where $M$ is $\R$ (for example), and we have the function $\lambda x \mapsto x+x$, which one can think of as a scale transformation where we squash the real line to half its size. The operation on PDFs is $f \mapsto (f * f) / 2$, that is, by the sum (or in fact, the mean) of a distribution with itself, and the fixed point is the Gaussian distribution. Note that this endomorphism can be seen as a scale transformation of discrete random (which are nothing but sums of variables), and so works on absolutely any distribution over a given space. -->
 
@@ -769,7 +783,7 @@ First write $Z(T) = \int Dm e^{-\frac{1}{T}\int g(m(x))dx} := \int Dm e^{-G(m,T)
 <!-- We now observe that $G$ is analytic (finite sum of exponentials) and even. So, neglecting constant terms, and in the vicinity of $m^*$: -->
 
 
-Since $m^*$ is minimal: $0 = 2r_0(T)m^* + 4r_1(T)m^{*3} \Rightarrow m^*(T) = \pm \sqrt{\frac{2|r_0(T)|}{4u_0(T)}}$.
+Since $m^*$ is minimal: $0 = 2r_0(T)m^* + 4r_1(T)m^{*3} \Rightarrow m^*(T) = \pm \sqrt{\frac{2|r_0(T)|}{4r_1(T)}}$.
 
 ### Landau-Ginzburg
 

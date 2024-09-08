@@ -68,7 +68,9 @@ graph TB
 
 The notes on linear algebra are responsible for introducing the spectral theorem (eigendecomposition of self-adjoint operators). 
 
-The notes on Fourier analysis then present the Fourier transform as an instance of such an eigendecomposition, which explains it in terms of recognizable concepts (a unitary operator) in a new context (an infinite dimensional vector space), rather than a new idea coming out of left field. The idea that differentiation is an operator requires a knowledge of calculus, so this is also a dependency.
+The notes on Fourier analysis then present the Fourier transform as an instance of such an eigendecomposition, which explains it in terms of recognizable concepts (a unitary operator) in a new context (an infinite dimensional vector space), rather than a new idea entirely. The idea that differentiation is an operator requires a knowledge of calculus, so this is also a dependency. 
+
+Theorems like Parseval's theorem or Plancherel's theorem can then be presented as facts about the unitarity of the Fourier transform, rather than new unfamiliar equations.
 
 The notes on quantum mechanics can then introduce the idea that states of known momentum are eigenstates of a self-adjoint operator without needing to spend time on the maths - that work has been done elsewhere.
 

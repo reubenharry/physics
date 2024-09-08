@@ -411,7 +411,11 @@ OK, so now we would like to analyze $\frac{\partial}{\partial t}J(x,t)$ further.
 
   
 
-Jacobi's formula (not derived here) is: $\frac{d}{dt}\det \phi = tr(\det(\phi)\phi^{-1}\frac{d\phi}{dt})$
+Jacobi's formula is: $\frac{d}{dt}\det \phi = tr(\det(\phi)\phi^{-1}\frac{d\phi}{dt})$
+
+??? Derivation
+
+	First note (e.g. by working on a diagonal basis) that $\det A = \prod_i A_{ii} = e^{tr(\log A)}$. The rest follows from the chain rule.
 
   
 
@@ -427,14 +431,7 @@ In other words, if the differential of $F$ is traceless, or in physics terminolo
 
 Note for example that in a Hamiltonian system, divergence is $0$. To see this:
 
-  
-??? Example
-
-	**Problem**: Let $F(x)=(DH(x)_1,-DH(x)_2)$. Show that $\nabla\cdot F=0$
-	
-	  
-	
-	**Solution**: $\nabla\cdot F = D_1D_2H(x)-D_2D_1H(x)=D_1D_2H(x)-D_1D_2H(x)=0$.
+Let $F(x)=(DH(x)_1,-DH(x)_2)$. Then $\nabla\cdot F = D_1D_2H(x)-D_2D_1H(x)=D_1D_2H(x)-D_1D_2H(x)=0$.
 	
 
 
