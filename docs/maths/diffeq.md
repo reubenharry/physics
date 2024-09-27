@@ -425,7 +425,7 @@ $$
 \det H_x(t) = \det H_x(0)e^{\int_0^ttr(DF(x(s)))ds}
 $$
 
-In other words, if the differential of $F$ is traceless, or in physics terminology, the divergence (trace of differential of $F$) is $0$, then the phase flow is incompressible. This is Liouville's theorem.
+In other words, if the differential of $F$ is traceless, or in physics terminology, the divergence (trace of differential of $F$) is $0$, then the phase flow is incompressible.
 
   
 
@@ -645,9 +645,9 @@ Any vector field $F$ which is differentiable and goes to $0$ quicker than $\frac
 
 $$ F(r ) = \frac{1}{4\pi} \left(\nabla\times\left( \int \frac{\nabla_{r'}\times F(r')}{||r-r'||} \right) - \nabla\left( \int\frac{\nabla_{r'}\cdot F(r')}{||r-r'||} \right) \right)$$
 
-## Continuity
+## Continuity equation
 
-A continuity equation states that the change in a volume is fully determined by flux across its boundary. For example in 3 dimensions:
+A continuity equation states that the change in a volume is fully determined by flux across its boundary (assuming there are no sources or sinks). For example in 3 dimensions:
 
 $$
 \frac{d}{dt}\int_V\rho  = \int_{\partial V} \dot x \rho 

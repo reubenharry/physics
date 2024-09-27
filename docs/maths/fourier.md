@@ -145,9 +145,6 @@ I now give more concrete details of the points outlined above.
 
 ## Self-adjoint operators
 
-  
-  
-  
 
 Linear operators on the function space include the operator $p=\frac{d}{dt}$ (which physically is the momentum operator in quantum mechanics). This takes a function and gives back a new function. It is linear. It is also skew-self-adjoint (using integration by parts, and noting that the first term in the integration by parts disappears assuming a boundary condition that all functions in the space vanish at $\pm\infty$):
 
@@ -173,13 +170,15 @@ Let $T(x)$ be the complex conjugate of $x$. Orthogonality is shown as follows:
 
   
 
-For $n,m \in \Z, n\neq$m:
+For $n,m \in \Z, n\neq m$:
 
-$$ \langle e^{it2\pi m},e^{ti2\pi n}\rangle = \int_0^1 e^{ti2\pi m}T(e^{ti2\pi n}) $$
+$$\langle e^{it2\pi m},e^{ti2\pi n}\rangle = \int_0^1 e^{ti2\pi m}T(e^{ti2\pi n}) 
+$$
 
 $$ = \int_0^1 e^{ti2\pi m}(e^{-ti2\pi n}) = \int_0^1 e^{ti2\pi (m-n)}$$
 
-$$ = \frac{1}{i2\pi(m-n)}e^{i2\pi (m-n)} - \frac{1}{i2\pi(m-n)}e^{0} = \frac{e^{i2\pi (m-n)}-1}{i2\pi(m-n)} = 0$$.
+$$ = \frac{1}{i2\pi(m-n)}e^{i2\pi (m-n)} - \frac{1}{i2\pi(m-n)}e^{0} = \frac{e^{i2\pi (m-n)}-1}{i2\pi(m-n)} = 0
+$$
 
   
   
@@ -282,13 +281,6 @@ $\mathcal{F}f$ is the Fourier transform of $f$, giving the representation of $f$
   
 
 $f$ is the inverse Fourier transform of $\mathcal{F}f$. The Fourier transform of $f(x)$ projects $f$ onto a basis of complex exponentials and the inverse Fourier transform of $f$ builds up $F^{-1}f$ from a basis. This duality between projection and linear combination is at first a little weird looking.
-
-### Dirac Delta
-
-  
-
-This is a continuous analog to the Kronecker delta $\delta_{ij}$, which is $0$ except when $i=j$ and is then $1$. We want the same but in a continuous space. In particular, we want that $\int_{-\infty}^{\infty}\delta(x)dx=1$ and $\langle \delta_{x_0},f\rangle = f(x_0)$. No function has these properties, and the Dirac $\delta$ is actually a functional (see below), but it's useful and elegant.
-
   
 
 ### Inverse of $\mathcal{F}^{-1}$:
@@ -325,11 +317,14 @@ Note the consequence, via the shift theorem that $\mathcal{F}\delta(t) = 1$
 
 ### Extending Fourier analysis to linear functionals
 
-  
-
 There's a story about the analysis part of Fourier analysis, namely finding classes of functions for which the Fourier transform is a well defined unitary isomorphism. One clear problem is that we want things like the $\delta$ function to be such that $\mathcal{F}\delta = 1$, but it has none of the properties of a function. Not to mention the Fourier transform of, e.g. a complex exponential.
 
-  
+!!! Delta
+
+    The Dirac delta is a continuous analog to the Kronecker delta $\delta_{ij}$, which is $0$ except when $i=j$ and is then $1$. We want the same but in a continuous space. In particular, we want that $\int_{-\infty}^{\infty}\delta(x)dx=1$ and $\langle \delta_{x_0},f\rangle = f(x_0)$. No function has these properties, and the Dirac $\delta$ is actually a functional.
+
+
+
 
 In summary, one common approach is to first take some quite restricted set of well-behaved functions (such as the Schwartz functions, which are functions which decay very rapidly) and then obtain "distributions" (not to be confused with the probabilistic sense), which are linear functionals on this restricted set.
 
@@ -470,7 +465,11 @@ Note that the tensor product, in this setting is just: $(f \otimes g)(x) = f(x)g
 
 ## Various important functions and facts
 
-  
+### Step function
+
+Define $\theta(t)$ as $0$ for $t < 0$ and $1$ otherwise.
+
+$\mathcal{F}(\theta)(s) = \frac{1}{2}(\delta(s) + \frac{1}{\pi i s})$.
 
 ### $\Pi$ and sinc
 
@@ -556,7 +555,6 @@ $$ \sum_{n=-\infty}^{\infty}f(n) = \sum_{k=-\infty}^{\infty}\mathcal{F}f(k) $$
 
 ## Linear Systems
 
-  
 
 A linear system $L$ is just a linear operator on a function space, taking $v(t)$ to $Lv(t)=w(t)$. Note that like an operator on a finite dimensional space, it can be characterized by how it acts on (the equivalent of) a basis, namely, let $h(x,y)=L\delta(x-y)$. Then:
 
@@ -570,7 +568,7 @@ Here, $h$ is known as the impulse response and $H=\mathcal{F}h$ as the transfer 
 
   
 
-### LTI systems
+### Linear time invariant systems
 
   
 
@@ -587,8 +585,68 @@ $$ \mathcal{F}^{-1}\left(\mathcal{F}(w)(k)\right) = \mathcal{F}^{-1}\left(\mathc
 $$
 = \mathcal{F}^{-1}\left(H(k)\delta(k-v)\right) = \mathcal{F}^{-1}\left(H(v)\delta(k-v)\right)= H(v)e^{2\pi ivx} $$
 
-  
-  
+### Causal systems
+
+A system is causal if for an input function $f$, the output $Lf$ at time $t$ only depends on the input $f$ at times $s\leq t$. A convenient definition is that if $\forall t\leq t_0, v_1(t)=v_2(t) \Rightarrow Lv_1(t)= Lv_2(t)$.
+
+For linear time invariant systems, we have that a system $L$ is causal iff $\forall t < 0, v(t) = 0 \Rightarrow Lv(t) = 0$. This is convenient, since we can view functions with $\forall t <0, f(t)=0$ as objects in a category with LTI causal systems as morphisms (since they preserve this property).
+
+### LTI Causal systems
+
+Systems which are both LTI and causal have frequent physical applications and useful properties.
+
+First recall that
+
+$$
+f(t) \propto \int_{-\infty}^\infty e^{-i\omega t}\mathcal{F}f(\omega) d\omega
+$$
+
+so that if we solve the integral by [countour integration](../maths/fourier.md) in the upper half plane, which is to say, let $\omega$ range over complex numbers with a positive imaginary part, we see that $e^{-i\omega t}$ decays to $0$ **when $t$ is negative**, so that the integral is the sum of the residues of $\mathcal{F}f$ at the poles in the upper half plane.
+
+But for $t<0$, $f(t)=0$. This means that there must be no poles in the upper half plane of $\mathcal{F}f$.
+
+#### Kramers-Kronig
+
+The Fourier transform of an LTI causal system has some noteworthy properties that are easy to deduce.
+
+First note that for the step function $u$, and a causal function $f$, we have:
+
+$$
+f = uf \Rightarrow \mathcal{F}f = \mathcal{F}(uf) = \mathcal{F}u * \mathcal{F}f
+$$
+
+$$
+= \frac{1}{2}(\delta + \frac{1}{\pi i s})*\mathcal{F}f = \frac{1}{2}(\mathcal{F}f + \frac{1}{\pi i s}*\mathcal{F}f) = \mathcal{F}f
+$$
+
+$$
+\Rightarrow \mathcal{F}f = \frac{1}{\pi i s}*\mathcal{F}f
+$$
+
+$$
+\Rightarrow Re(\mathcal{F}f) + iIm(\mathcal{F}f) = \frac{1}{\pi i s}*Re(\mathcal{F}f) + \frac{1}{\pi is}*iIm(\mathcal{F}f) 
+$$
+
+$$
+= -i\frac{1}{\pi s}*Re(\mathcal{F}f) + \frac{1}{\pi s}*Im(\mathcal{F}f)
+$$
+
+$$
+\Rightarrow  Re(\mathcal{F}f) = \frac{1}{\pi s}*Im(\mathcal{F}f) 
+$$
+
+and 
+
+$$
+Im(\mathcal{F}f) = -\frac{1}{\pi s}*Re(\mathcal{F}f)
+$$
+
+## Hilbert transform
+
+$\mathcal{H}(f)(x) := (-\frac{1}{\pi x} * f)(x) = \frac{1}{\pi}\int_{-\infty}^\infty dy \frac{f(y)}{y-x}$
+
+where we avoid the singularity at $y=x$ by taking an obvious limit, known as the Cauchy principal value.
+
 
 ## Sampling theory
 

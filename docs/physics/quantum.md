@@ -566,4 +566,8 @@ We can define a representation $\pi$ of $SU(2)$ given a representation of $\phi$
 Turns out that waves roughly behave in a way where if you have a plane wave hit a wall with a hole, it will *diffract*, causing the *Fourier transform of the hole* to be the resulting field on a wall further on (at least, this is how *far-field* diffraction works). Actually this is pretty intuitive. Any situation where each of a wave's frequencies respond differently is going to result in Fourier type transformation. Just think of a prism splitting light into different angles based on frequency.
 
 This generalizes a lot, and is the principle that allows you to "see" the structure of a crystal by looking at the pattern it makes (the diffraction pattern), which is the Fourier transform (and then 2D projection) of an appropriate Dirac comb representing the lattice in question (the given model of the atomic structure of the material of interest).
+<!-- 
+## Perturbation theory
 
+### Time dependent perturbation theory
+ -->

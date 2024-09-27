@@ -384,11 +384,81 @@ cf. solution of poisson equation in 2D vs 3D
 
 At low temperature, vortices are bound in pairs, while at high temperature, they are free. There's an analogy to insulating and conducting phases of a metal.
 
+## Topological quantum field theories
+
+!!! References
+
+    For categorical background: see https://arxiv.org/pdf/math/0512103
+
+[Recall](../physics/gaugetheory.md) that field theories can be defined that have no dependence on the metric of spacetime, such as the Chern-Simons Lagrangian. Then if we consider a quantum theory with this Lagrangian, defined via the standard path integral over all connections, we can view the normalization constant (a.k.a. partition function) $Z$ as a function of $M$. We then see that $Z(M)$ is a topological invariant of $M$: it cannot depend on local curvature for example, since that involves the metric.
+
+Now consider a manifold $M$ in 3 dimensions with a pair of boundaries $A$ and $B$. More formally, we provide orientation preserving diffeomorphisms $f_1 : A \to M$ and $f_2 : B \to M$, such that $im(f_1) \cup im(f_2)$ covers $\partial M$. Such an $M$ with this extra data is a *cobordism*. These form a category COB(n) with boundaries (which are (n-1) dim manifolds) as objects and cobordisms as morphisms.
+
+
+In this case, $Z(M, o)$ depends not only on $M$, but also on a choice of boundary conditions, i.e. states of the boundary, i.e. elements of the Hilbert space $A \otimes B^*$ (we consider an *oriented* manifold, hence the dual).
+
+On reflection, this data is precisely a (symmetric monoidal) functor $F : nCob \to VECT$: an object $A$ (boundary) is mapped to a Hilbert space $Z(A)$, while a morphism (cobordism $M$ with boundaries $\partial M = (A, B)$) is mapped to a linear operator $Z(M)$, or equivalently a tensor product $a \otimes b^*$, for $a\in A, b\in B$. So $Z(M) \in Hom(Z(A), Z(B)) \cong Z(A) \otimes Z(B)^* = Z(\partial M)$ (the functor preserves the monoidal product).
+
+One upshot is that a cobordism with trivial boundaries, i.e. a manifold without boundaries, is mapped to a scalar. 
+
+
+todo: particles in tqft as tubes (internal 1 holes)
+
+
+## Discretization
+
+A common approach to calculating quantities in TQFTs is to discretize the manifold to some simpicial complex, and then define a statistical theory on that complex whose relevant quantities are invariants of the original manifold.
+
+We do either discretize spacetime or space. Of the former, the Turaev-Viro model is an example, which provides weights for each label assignment to the simplicial complex.
+
+Turaev-Walker theorem:
+todo
+
 ## Lattice gauge theories
+
+$\Z_2$ lattice gauge theory
+
+dual theory
+
+Take the $\Z_2$ lattice gauge theory, and observe that basis states are a made by choosing, for each edge of the lattice, whether it is a spin up or spin down state. One can then observe that the two Hamiltonian terms, 
 
 ## String-net models
 
-Take the $\Z_2$ lattice gauge theory, and observe that basis states are a made by choosing, for each edge of the lattice, whether it is a spin up or spin down state. One can then observe that the two Hamiltonian terms, 
+This is a very instructive family of condensed matter systems, which are a natural generalization of a lattice gauge theories.
+
+Note that the $\Z_2$ lattice gauge theory gave rise to basis states consisting of loops. 
+
+A simple way to describe string net models is by the ground Hilbert basis states, which are loops with branching (aka string nets), then to define a wavefunction (i.e. assignment of amplitudes to each basis state), and then finally a Hamiltonian which gives rise to this wavefunction.
+
+The string nets (in $(1+1)d$) are lattices with 3 edges at each vertex, so envision a honeycomb lattice, warped arbitrarily in the space dimension.
+
+
+Edges are assigned a label from a set, and the branching rules are such that the product of the labels at a vertex is the identity:
+    todo refine
+
+Graphically, one of the labels corresponds to the null string, which is the edge being absent.
+
+![](../img/stringnet.png)
+
+We then calculate the amplitude of any basis state by applying the following transformations, which are parametrized by $F$ and $\gamma$, the data of a *fusion category*. These satisfy standard consistency conditions like the pentagon identity for $F$.
+
+(This image is taken from this talk: https://www.youtube.com/watch?v=WjfaMl6-Tek)
+
+After applying these transformations, we obtain the amplitude for the vacuum, which we take to have a fixed value.
+
+The Hamiltonian has two terms, much like in the lattice gauge model. Each is a sum of local terms, which are projectors onto the ground state. 
+
+The first term is a sum of operators, one for each vertex $v$, $Q_v$.
+
+The second term is a sum of operators, one for each 1-hole, i.e. plaquette $p$, $B_p$.
+
+It is possible to show that the $Q_v$ and the $B_p$ commute with each other, and that both are projectors. 
+
+From this it follows that there is a joint basis of eigenstates, with eigenvalues $\pm 1$.
+
+We also find that the ground state space depends only on the topology of the underlying manifold of the lattice, and that the degeneracy of the ground state space is a function of the cohomology groups of the manifold.
+
+
 
 turaev viro: spacetime triangulation: roughly a lagrangian approach
 
@@ -499,4 +569,34 @@ operators. Instead, they are realized as matrix product
 operators (MPOs) [24–30], a tensor network parametriza-
 tion which captures the non-trivial entanglement struc-
 ture present in these operators [31–33]
+"
+
+
+"
+Topologically ordered matter is matter that is described by a TQFT at low energy and long length scale.
+"
+
+"
+chapter 23: As mentioned in Section 19, when we use group multiplication for fusion rules, the quantum dimensions 25 of all the particles are ˜Θ all d a = 1. This means that in Eq. 23.2 both the d a factor and the factor are trivial. We are thus left with only the tetrahedron factor and the Dijkgraaf–Witten partition function looks like a simpliﬁed version of the Turaev–Viro case in Eqs. 23.1 and 23.2 given by
+"
+
+"
+23:
+Dijkgraaf–Witten theory has had extensive recent applications within quantum-condensed matter physics where it turns out that a classiﬁcation of so-called symmetry-protected topological (SPT) phases is given in terms of Dijkgraaf–Witten theories. We discuss SPT phases in Chapter 35."
+
+quantum groups:
+    tannaka duality relates a group G to the category of representations rep(G). a quantum group has a category of representations similar to rep(G)
+
+2.3.3 Theorem (Reshetikhin and Turaev [89]). Let (C, ⊗, 1, σ, θ) be a ribbon category. Then the
+evaluation of a ribbon diagram into a morphism in C is invariant under 3d isotopy1
+
+GOOD: "In a certain sense, every ribbon category is a category of
+representations - in the general case not of a group, but of a quantum group. When we do quantum field
+theory in ribbon categories, we are replacing the symmetry group by a quantum group."
+
+"
+Ordinary Lie groups are the symmetry groups of manifolds. Quantum groups are the symmetry groups
+of noncommutative spaces - deformed, noncommutative versions of the commutative algebra of functions
+on a manifold. Thus the process of passing from QF T to QF T ′ is associated with the philosophy of
+noncommutative geometry, a recent trend in physics. 
 "

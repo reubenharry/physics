@@ -27,6 +27,10 @@ Often the macrospace is much lower dimensional than the microspace (when we only
 
     It is important to note that statistical physics often involves very large systems (e.g. a system of $10^{23}$ particles), but doesn't need to. It makes total sense to consider a distribution over a single particle system. It is just that many common results do not hold in this situation, but all the ensembles are defined exactly the same.
 
+!!! Note
+
+    The language in which statistical physics is usually expressed is frequentist. That is, an ensemble is described as being "many copies of a system". The Bayesian way to think, followed here, is not to think of many systems, but just to think about uncertainty about a single system.
+
 
 ## Equilibrium statistical physics (thermodynamics)
 
@@ -35,6 +39,11 @@ From our distribution, we can obtain a marginal distribution at a given time $t$
 $$
 \frac{\partial}{\partial t}\rho(t) = 0
 $$
+
+!!! Note
+
+    Time invariance is a symmetry of the distribution here, **not** of the underlying system. As an example, if our system is a harmonic oscillator, then time evolution acts as a rotation in phase space. However, if one had a uniform distribution over a circle in the phase space, rotation would be a symmetry. Indeed, this is a stationary distribution (the microcanonical ensemble).
+
 
 The principle of maximum entropy orders that we pick the maximum-entropy distribution over states consistent with our assumptions, namely: (1) the distribution is stationary, (2) the exact energy of the system is known. Note that energy is time-conserved in a closed system.
 
@@ -69,7 +78,7 @@ The physics community uses a different terminology, reflecting the complicated h
 
 ### Classical vs quantum statistical mechanics
 
-#### Quantum
+#### Quantum setting
 
 Equilibrium statistical mechanics applies equally to classical and quantum systems.
 
@@ -91,7 +100,7 @@ Also recall that, since for an operator $O$ and an eigenvector $O_n$, $p(O_n)=\l
 
 $$p(E_n) = \langle E_n|\rho | E_n\rangle = \frac{e^{-\beta E_n}}{Z}$$
 
-#### Classical
+#### Classical setting
 
 Classical statistical mechanics can be derived from quantum statistical mechanics. Recall that:
 
@@ -113,6 +122,14 @@ $$Z = \frac{1}{h^{dN}N!}\int dp^Nq^N e^{-\beta \left( U(r^n) + \sum_i\frac{p_i^2
 
 What's happening here is that we're integrating over phase space, which at a very high resolution is really the discrete grid of position and momentum eigenvalues. 
 
+### The Poisson and Lie bracket
+
+In statistical physics, the relationship between the [Poisson bracket](../physics/classical.md) and the [Lie bracket](../physics/quantum.md) is particularly close. In particular, considering the time evolution operator $\mathcal{L}$, i.e. the operator defined so that $\pd{\rho}{t} = i\mathcal{L}\rho(t)$, then classically, $\mathcal{L}(f) = -i\{H,f\}$ and quantum mechanically, $\mathcal{L}(f) = -\frac{1}{\hbar}[H, f]$.
+
+Also note that expectations of a quantity $A$ are $Tr(\rho A)$ in either setting, where the trace classically is taken to be a phase space integral. 
+
+Moreover, we find that laws like $Tr (A[B,C]) = Tr ([A,B]C)$ hold equally well for either bracket. This is easily shown by partial integration.
+
 
 <!-- This gives us a (sub)manifold of exponential family distributions, which we can parametrize either in primal or dual coordinates, related by a Lagrange transform. These are either:
 
@@ -121,9 +138,6 @@ What's happening here is that we're integrating over phase space, which at a ver
 
 
 
-!!! Note
-
-    The language in which statistical physics is usually expressed is frequentist. That is, an ensemble is described as being "many copies of a system". The Bayesian way to think, followed here, is not to think of many systems, but just to think about uncertainty about a single system.
 
 ### Dimensions
 
@@ -294,7 +308,29 @@ One can make the same argument for pressure.
 
 <!-- This is a straightforward consequence of the principle of maximum entropy: the Gibbs entropy $\rho$ remains constant over time, by Louiville's theorem, but the equilibrium distribution is the maximum entropy distribution with the relevant constraint (expected energy), so must have greater or equal entropy to the Gibbs entropy.  -->
 
+### Equipartition
 
+For systems where $H = \frac{p^2}{2m} + V(q)$, certain important results follow.
+
+First, the expected kinetic energy $\langle \frac{p_i^2}{2m} \rangle$ is $\frac{1}{\int dp_i e^{-\beta \frac{p_i^2}{2m}}}\int dp_i e^{-\beta \frac{p_i^2}{2m}}\frac{p_i^2}{2m} = mT/2m = T/2$ (where the other $q_i$ and $p_i$ have been marginalized out, and where the final step follows since it is the variance of the Gaussian distribution), so that $\langle \frac{p^2}{2m} \rangle = \frac{3}{2}NT$.
+
+Second, at low temperatures, we may approximate $V$ by its Hessian, in which case we obtain a system of harmonic oscillators, obeying $V(\lambda \overrightarrow x) = \lambda^2 V(\overrightarrow x)$.
+
+In this regime:
+
+$$
+\langle V \rangle = \frac{3}{2}NT
+$$
+
+??? Derivation
+
+    Lemma 1: for a function $f(x_1,\ldots x_n)$ such that $f(\lambda x_1, \ldots \lambda x_n)=\lambda^a f(x_1,\ldots x_n)$, we have that $af = \pd{(\lambda^a f(x_1,\ldots x_n))}{\lambda}|_{\lambda=1} = \pd{(f(\lambda x_1,\ldots \lambda x_n))}{\lambda}|_{\lambda=1} = \sum_i \pd{f}{x_i}x_i$.
+
+    Then note that $\langle \pd{V}{q_i}q_i \rangle = \frac{1}{Z}\int dq_1\ldots dq_n e^{-\beta V(q)}\pd{V}{q_i}q_i = \frac{1}{Z}\int dq_1\ldots dq_{i-1}, dq_{i+1}\ldots dq_n (\frac{d}{dq_i}e^{-\beta V(q)})q_i(-\beta) = \frac{Z}{Z}(-\beta) = T$, so that $\sum_i \langle \pd{V}{q_i}q_i \rangle = 3NT$.
+
+Putting all the above results together, $\langle E_{kin} \rangle = \langle V \rangle$.
+
+This is known as equipartition.
 
 
 ### An effective theory: thermodynamics
@@ -311,11 +347,162 @@ $F \propto \log Z$. It satisfies $F = \langle H \rangle - TS$, so that at high t
 
 
 
+
 ## Non-equilibrium statistical physics
 
-Here, we want to consider also the evolution of the system towards equilibrium over time, so our belief distributions are over full paths of the system over time.
+In many cases, we are interested in the full distribution over paths of the system, either because the system does not equilibrate, or because we want to understand the approach to equilibrium.
+
+For instance, if we have a time dependent Hamiltonian $H(t)$, then we are likely going to need to consider the full distribution over paths.
+
+### Near-equilibrium physics (Linear Response Theory)
+
+!!! Note
+
+    Kubo's paper *The fluctuation-dissipation theorem* is excellent; this section follows it.
+
+!!! Note
+
+    See the notes on [classical mechanics](../physics/classical.md) for a discussion of small time varying terms in a Hamiltonian. This section builds on that.
+
+Suppose we have a system whose Hamiltonian is $H = H_0 + H_1$, where only $H_1$ depends on time.
+
+
+
+
+In the general case, this requires us to construct and integrate over a distribution over paths of the system, which is hard.
+
+However, the case of a small $H_1$ (only low frequencies), which justifies a first order approximation, turns out to be useful for many systems. In that case:
+
+<!-- But we know that for $K$ small (or rather for $K$ with only low frequencies), we have a relationship: -->
+
+$$
+E_{H}[B] = E_{H_0}[B] + T(H_1)
+$$
+
+where $T$ is some linear operator. (This is just the normal statement that $f(x+\Delta) = f(x) + T\Delta$ for some linear operator $T$ and $\Delta$ small, but in a Hilbert space of functions.)
+
+
+A basic fact of [Fourier analysis](../maths/fourier.md) is that all time invariant linear functions (and we want $T$ to be time invariant so that only the relative times in question matter) are of the form $x \mapsto \chi * x$ for some $\chi$ so we have:
+
+$$
+E_{H}[B] = E_{H_0}[B] + \chi * H_1
+$$
+
+When $H_1(t) = K(t)A(p,q)$ (here I assume that we are working in a classical setting), and when $K$ disappears in the infinite past, we can deduce that 
+
+$$
+\chi = -\beta E_H[\dot{A}(0)B] * K
+$$
+
+<!-- 
+At this point, we make the approximation of first order, so that 
+
+
+$$
+\rho(t) = e^{\int dt' iL(t')}\rho = e^{\int dt' iL_0(t')}e^{\int dt' iL_1(t')}\rho
+$$
+
+$$
+\approx e^{\int dt' iL_0(t')}(1 + \int dt' iL_1(t'))\rho
+$$ -->
+
+??? Derivation
+
+    To see this, we write $\rho = \rho_0 + \Delta\rho$, where we will assume $\Delta\rho$ is small, and note that the time varying distribution obeys $\pd{\rho}{t} = \{H, \rho\} = \{H_0 + H_1, \rho_0 + \Delta\rho\} = \{H_0 , \rho_0\} + \{H_1, \Delta\rho\} + \{H_0 , \Delta\rho\} + \{H_1, \rho_0\}$, where the first term drops out because $\rho_0$ is stationary with respect to $H_0$, and the second because we are working at first order, and $H_1$ and $\Delta\rho$ are both small.
+
+    Rearranging:
+
+    $$
+    \pd{\Delta \rho}{t} = \pd{\rho_0}{t} + \pd{\Delta \rho}{t} = \{H_0 , \Delta\rho\} + \{H_1, \rho_0\}
+    $$
+
+    $$ 
+    = -(iL_0\Delta\rho + iL_1\rho_0)
+    $$
+
+    which is solved by
+
+    $$
+    \Delta\rho(t) = -\int_{-\infty}^t dt' e^{-i(t-t')L_0}iL_1(t')\rho_0
+    $$
+
+
+
+
+    where $\rho_0$ is a canonical distribution.
+
+    Then observe that $(E_{H}[B] - E_{H_0}[B])(t) = E_{\Delta \rho}(B) = Tr(\Delta \rho B)$
+
+    $$
+    = \int dpdq \int_{\infty}^t dt' e^{i(t-t')L_0}iL_1(t')\rho_0 B(p,q)$$
+
+    $$ 
+    = Tr \int_{\infty}^t dt' e^{i(t-t')L_0}\{\rho_0, A\}K(t') B(p,q)
+    $$
+
+    Recalling that $Tr(A[B,C])=Tr([A,B]C)$ in either a classical or a quantum setting, and that the trace is cyclic even for operators, we obtain
+
+    $$
+    (E_{H}[B] - E_{H_0}[B])(t) = \int_{-\infty}^t dt' K(t')Tr(\rho_0 \{A, e^{-iL_0(t-t')}B\})
+    $$
+
+    where the trace $Tr$ is a phase space integral in the classical setting and the normal trace in the quantum setting.
+
+    Again recalling that $Tr(A[B,C])=Tr([A,B]C)$ we have that
+
+    $$
+    (E_{H}[B] - E_{H_0}[B])(t) = \int_{-\infty}^t dt' K(t')Tr(\{\rho_0, A\}e^{-iL_0(t-t')}B)
+    $$
+
+    By straightforward calculation, it is easy to see that for $\rho = e^{-\beta H}$, $\{\rho, A\} = -\beta \rho \{H, A\} = \beta \frac{dA}{dt}$, and since $\rho_0$ is the equilibrium distribution (because in the infinite past there is no perturbation), we obtain the desired form of $\chi$.
+
+This holds in **both the classical and quantum cases**; the proof was agnostic to the setting.
+
+Susceptibility is defined as $\chi := \pd{\langle B \rangle}{F}|_{\omega=0}$, where $B$ is understood to be in the frequency basis, so that $\chi = \lim_{\omega \to 0}\chi(\omega)$, justifying the name $\chi$.
+
+#### The Kubo formula
+
+
+We work in the interaction picture, so that $|\phi(t) \rangle_I = U(t,t_0)\phi(t_0) \rangle_I := U(t)\phi(t_0) \rangle_I$, so that $\rho(t) = U(t)\rho_0U(t)^{-1}$.
+
+We then have a Hamiltonian with a small time varying $\hat H_1(t) = \hat A(t)\phi(t)$, and calculate an expectation in the full distribution 
+
+$$\langle O \rangle_\phi = Tr(\rho(t)O) = Tr(\rho_0U(t)O(t)U(t)^{-1})$$
+
+$$ = Tr(\rho_0 + i\int_{-\infty}^tdt' [H_1(t'),O(t)] + \ldots$$
+
+$$
+\approx \langle O(t) \rangle_{\phi=0} + i\int_{-\infty}^\infty \theta(t-t')dt' \langle [A(t'),O(t)] \rangle_{\phi=0}\phi(t')
+$$
+
+where we have used the step function $\theta$ to extend the bounds of the integral. This gives $\chi(t-t') = i\theta(t-t') \langle [A(t'),O(t)] \rangle_{\phi=0}$.
+ 
+#### Fluctuation-dissipation theorem
+
+Defining $S(t)=\langle O(t)O(0)\rangle$ in a near equilibrium system, the classical statement is:
+
+$$
+\mathcal{F}(S) = -\frac{2}{\beta \omega} Im(\mathcal{F}(\chi))
+$$
+
+where the angle brackets indicate expectations in the equilibrium distribution. So this equation relates the equilibrium fluctuation of a system (left side) to the dissipation (see notes on [classical mechanics](../physics/classical.md) to understand why this is dissipation) of the system.
+
+The quantum statement is:
+
+$$
+S(\omega) = -2(1-e^{-\beta\omega})^{-1}Im(\chi)(\omega)$$
+
+$$
+= -2(n_B(\omega)+1)Im(\chi)(\omega)
+$$
+
+where $n_B(\omega) = (e^{\beta\omega}-1)^{-1}$ is the Bose-Einstein distribution. At high temperatures, $\beta \omega << 1$, so we find that $n_B(\omega) \to 1/\beta\omega$, recovering the classical result. So we only need to derive the quantum result.
+
+
 
 ### Brownian motion
+
+We now consider truly non-equilibrium physics, where our distribution of interest is over paths. A typical way to parametrize such a distribution is by a differential equation.
 
 Suppose we have an SDE:
 
@@ -805,15 +992,7 @@ For which $p(m)\propto e^{-F(m)}$ is a (infinite dimensional) Gaussian. At and a
 <!-- Note that if $F$ were interpreted as the Lagrangian of a QFT, excitations would be massless. -->
 
 
-## Linear Response Theory
 
-The following assumes the basics of statistical mechanics (see notes). Suppose we have a system whose Hamiltonian is $H$ and we perturb it to $H_T = H - K(t)A(p,q)$. We then want to calculate the resulting change in expectation $\Delta B(t) = E_{H_T}[B(t)] - E_{H}[B(t)]$.
-
-Ostensibly, this would require knowing the (time varying) distribution of the system resulting from the perturbation, but we can get what we want by exploiting the a quite general form of the fluctuation-dissipation theorem. The critical assumption is that this applies in the limit of $K$ small:
-
-$$ \Delta B(t) = \beta E_H[\dot{A}(0)B(t)] * K(t) $$
-
-The expected perturbation is the output of a linear system with input $K$ and a kernel representing the correlation of the change of input variable and the output variable, under the original system. So you can predict the response to a small perturbation of the system just by seeing the behavior of the system without the perturbation.
 
 ## Magnetic field and chemical potential
 

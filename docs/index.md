@@ -59,6 +59,7 @@ graph TB
     FA --> Q
     CT --> GT
     C --> CA
+    FA --> D
     CA --> QFT
     C --> FA
     
@@ -101,7 +102,9 @@ The level of the material should be roughly what a smart theoretical physics und
 
 Mostly, but it is opinionated. A good example are the notes on [statistical physics](physics/statisticalphysics.md), which are presented from the perspective of Bayesian probability, information theory and geometry. Here the difference to the standard language is [laid out in a table](physics/statisticalphysics.md##terminology-physics-vs-probability).
 
-When it is possible to make connections between different fields that simplify ideas or reduce the need to repeat material, I do.
+When it is possible to make connections between different fields that simplify ideas or reduce the need to repeat material, I do. For example, I present a number of related theorems (Green's, Stokes', divergence, even the fundamental theorem of calculus) as a special case of Stokes' general theorem. 
+
+Relatedly, I tried very hard to avoid ideas or equations that aren't clearly motivated. Everything mathematical derivation should be part of a story, and follow from some simple ideas. As an example, see the notes on complex analysis, where the Cauchy-Riemann equations are motivated, rather than postulated. Similarly for introducing matrix multiplication as a consequence of the composition of linear transforms.
 
 #### What order should these notes be read in?
 

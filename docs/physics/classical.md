@@ -95,8 +95,17 @@ Now consider a rotation, so $\phi(a,t) = U(a)\phi(0,t)$, where $U(r)$ is a rotat
 
 For fields, the same reasoning holds. Consider a spacetime translation $x(a) = x + a$ and any Lagrangian $\mathcal{L}$. Then $j^\mu_\nu = \pd{\mathcal{L}}{(\partial_\nu \phi)}\pd{\phi}{x_\mu} - \delta^\mu_\nu\mathcal{L}$. In this context, $T := j$ is known as the energy-momentum tensor. The corresponding conserved quantities are $E = \int d^3 x T^0_0$ and $P_i = \int d^3 x T^0_i$ .
 
+## Kinetic and potential terms
 
+In Cartesian coordinates, a typical Lagrangian is of the form $\mathcal{L}(x, \dot x) = T(\dot x) - V(x) = \frac{1}{2}m\dot x^2 - V(x)$, where $T$ is the kinetic energy and $V$ is the potential energy. 
 
+$V$ can be an arbitrary function.
+
+$T$ usually takes the form above (and there are generic arguments why it should), but *only in Cartesian coordinates*. If your coordinates were the angles of the two arms in a double pendulum, for example, it would no longer have this form. 
+
+Moreover, this separability into two terms is a feature of non-relativistic mechanics.
+
+Force is defined as the negative gradient of the potential, i.e. $F = -\nabla V$. Physically, the name is appropriate, since if you are modeling e.g. a ball falling in a gravitational field, the force $F$ in the equation $m \ddot x = F$ is how hard gravity is pushing the ball downwards.
 
 ## Hamiltonian mechanics
 
@@ -120,10 +129,29 @@ where $\{f, g\} = \pd{f}{q}\pd{g}{p} - \pd{f}{p}\pd{g}{q}$ is the Poisson bracke
 
 This is the Hamiltonian formulation of classical mechanics: it describes a differential equation $\frac{d}{dt} \begin{pmatrix} q \\ p \end{pmatrix} = \begin{pmatrix} \pd{H}{p} \\ -\pd{H}{q} \end{pmatrix}$.
 
+In this setting, $F = \frac{dp}{dt}$.
+
+### Liouville's theorem
+
+Volumes in phase space are preserved under the flow induced by the differential equation above.
+
+By dint of this incompressibility, we have a continuity equation, namely:
+
+$$
+\frac{d}{dt}\rho = -\nabla \cdot (\rho \cdot \dot x) = \sum_i \pd{}{q^i}(\rho \dot q^i) + \pd{}{p_i}(\rho \dot p_i) = 0
+$$
+
+$$
+= \sum_i \pd{\rho}{q^i}\dot q^i + \pd{\rho}{p_i}\dot p_i + \rho(\sum_i \pd{}{q^i}\pd{\mathcal{H}}{p^i} - \pd{}{p^i}\pd{\mathcal{H}}{q^i} ) = 0
+$$
+
+$$
+= \sum_i \pd{\rho}{q^i}\dot q^i + \pd{\rho}{p_i}\dot p_i = \{H, \rho\} = \dot x \cdot \nabla_x \rho := iL\rho
+$$
 
 ### Symplectic geometry
 
-This is the geometrical structure associated with classical mechanics.
+This is the geometrical structure associated with classical mechanics; using this language, one can restate the above results more abstractly.
 
 Geometrically, the configuration space, of which the Lagrangian is a function, is the tangent bundle, while phase space is the cotangent bundle. The evolution of a system can be described by a map from the cotangent bundle to itself.
 
@@ -208,3 +236,58 @@ For instance, if the transform is $\forall x, \phi(x) \mapsto \phi(x)\cdot e^{ia
 
 Then, if  -->
 
+## Work
+
+Work is the integral of force over a path in the configuration space, where in the general case, force may be position dependent (and even time dependent):
+
+$$
+W = \int F \cdot ds
+$$
+
+As this suggest, $F$ should more abstractly be viewed as a 1-form, i.e. an object which can be integrated along paths.
+
+This equals the change in kinetic energy.
+
+## Perturbations, classically
+
+!!! Note
+
+	This section relies heavily on the material on [Fourier transforms](../maths/fourier.md), in particular the sections on causality and LTI systems. 
+
+Consider a system with a Hamiltonian $H(t) = H_0 + H_1(t)$, where only the second term depends on $t$. If the second term is small, we can proceed linearly.
+
+As an (important) example, suppose our system has a small time varying force $F(t)$, so that we can write the (approximate) solution $x(t)$ as a linear function of $F$:
+
+$$
+x(t) = L(F)(t)
+$$
+
+We know that $L$ must be a causal system, and it is LTI by assumption, so it can be written as $f \mapsto \chi * f$, for a function $\chi(t)$ with $\chi(t)=0$ for $t <0$ (this requirement on $\chi$ is easy to show by writing out the definition of convolution and the property of a causal system as mapping causal functions to causal functions).
+
+As it turns out, the imaginary part of $\chi$ is related to the change in energy, and is therefore known as the dissipative part of the response function. To see this:
+
+We calculate that the change in energy is:
+
+$$
+\Delta E \approx \int F \cdot dx = \int F(t) \dot x dt
+$$
+
+$$
+= \int d\omega d\omega' dt (-i\omega)F(\omega)F(\omega') \chi(\omega)e^{i(\omega+\omega')t}
+$$
+
+which we obtained by substituting in $F(t) = \int d\omega F(\omega)e^{i\omega t}$ and $x(t) = \int d\omega \chi(\omega)e^{i\omega t}$ and similar, and where I ignored constants of proportionality.
+
+Thus by integrating over $dt$ to obtain a delta function in the typical way, we find:
+
+$$
+\Delta E \approx \int d\omega (-i\omega)\chi(\omega)F|(\omega)|^2 
+$$
+
+Now since $\Delta E$ and $F$ are both real, $\chi(\omega)$ must be real, so that 
+
+$$
+\Delta E \approx \int \omega  Im(\chi)(\omega) |F(\omega)|^2d\omega
+$$
+
+So $\Delta E$ is only **a function of the imaginary part of $\chi$**.

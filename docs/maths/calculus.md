@@ -293,10 +293,6 @@ Fixed points are a sort of *topological* feature of an ODE, in the sense that we
 
 This leads naturally to the notion of a *bifurcation*, where you have an ODE parametrized by some parameter  $p \in \mathbb{R}$ and as you vary $p$, you find that at some point the number or stability of the fixed points changes. This is a bifurcation.
 
-<!-- TODO: link to above: 1D systems can change their behavior (e.g. stability of their fixed points, number of fixed points, etc) as
-a function of some control parameter. *Bifurcations* are the values of this control parameters
-at which these changes in the system's behavior happen.
- -->
 
 
 
@@ -370,16 +366,10 @@ Points crossing the x-axes are the *fixed points* and the stability can just be 
 sign of $\dot{x}$ around that fixed point (basically checking whether x would approach or diverge from that fixed point given the
 sign of the derivative $\cdot{x}$). 
 
-<!-- TODO RCG: section 4.3: ghost, bottlenecks, and scaling laws -->
-
 ### 2D ODEs
 
 Some common kinds of fixed points include:
 
-<!-- ​ tODO : classification of fixed points Fig 5.2.8. Relate fixed points to e-values -->
-
-<!-- - TODO SR : classification of linear systems fixed points Fig 5.2.8. Relate fixed points to e-values and go through the examples - useful for when linearization around fixed points works
-  - 5.2.2 (saddle node, and prototypical trajectories along the ‘slow’ vs ‘fast‘ eigenvectors), 5.2.3 (center vs spiral depending on complex terms of the e-vectors),  5.2.5 (star node for equal eigenvectors ) ,5.2.5 (single eigenvalue and degenerate node ) -->
 
 **Limit cycles**
 
