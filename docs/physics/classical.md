@@ -77,6 +77,8 @@ $$\frac{d\mathcal{L}(\phi(a,x), \partial_\mu\phi(a,x))}{da}|_{a=0} = \partial_\m
  
 Then for $j^\mu := K^\mu - J^\mu$, we evidently have $\partial_\mu j^\mu = 0$, *as long as $x \mapsto \phi(0,x)$ follows the equations of motion*. We say that $j$ is the Noether current. Or in the language of forms, $d\star j = 0$.
 
+This is a *continuity equation*.
+
 ??? Advanced
 
 	This comment assumes familiarity with [differential forms](../maths/differential_geometry)

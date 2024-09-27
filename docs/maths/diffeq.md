@@ -334,24 +334,15 @@ $$\Rightarrow \phi(x_0,t) = e^{t\psi} (\int_{0}^te^{-s\psi}f(s)ds + x_0)$$
 Suppose that $\psi$ is skew-self-adjoint, i.e. $\psi^*=-\psi$. This might arise, for instance, if $\psi=i\tau$ and $\tau$ is self-adjoint. Then suppose $F(x)=\psi x$. Then $||\phi_F(x,t)||$ is constant in $t$. This is because $\phi_F(x,t)=e^{t\psi}x$ and $e^{t\psi}$ is unitary. It is unitary because $(e^{t\psi})^*=e^{-t\psi}$, so $e^{t\psi}e^{-t\psi}=I$.
 
   
-## Influence of initial conditions :
+## Influence of initial conditions
 
   
 Now consider:
 
-  
-
-
-
-  
 
 $$
 D_1\phi_F(x,t) = F(\phi(x,t))
 $$
-
-  
-  
-  
 
 with $D_1\phi_F(x,t) := \frac{\partial \phi_F(x,t)}{\partial x}$.  Intuitively, this is asking: how does the whole path change if I vary the initial condition by just a tiny bit. 
 
@@ -644,28 +635,4 @@ Any vector field $F$ which is differentiable and goes to $0$ quicker than $\frac
   
 
 $$ F(r ) = \frac{1}{4\pi} \left(\nabla\times\left( \int \frac{\nabla_{r'}\times F(r')}{||r-r'||} \right) - \nabla\left( \int\frac{\nabla_{r'}\cdot F(r')}{||r-r'||} \right) \right)$$
-
-## Continuity equation
-
-A continuity equation states that the change in a volume is fully determined by flux across its boundary (assuming there are no sources or sinks). For example in 3 dimensions:
-
-$$
-\frac{d}{dt}\int_V\rho  = \int_{\partial V} \dot x \rho 
-$$
-
-Observe how the dimensions work out correctly if $x : L$ and $t : T$.
-
-Stokes' theorem now tells us:
-
-$$
-\int_V\frac{d}{dt}\rho = \frac{d}{dt}\int_V\rho = \int_{\partial V} \dot x \rho =_{Stokes} \int_{V} \nabla\cdot \dot x \rho 
-$$
-
-so 
-
-$$
-\frac{d}{dt}\rho = \nabla\cdot \dot x \rho
-$$
-
-Or for a 4-vector $j = (\rho, (\frac{d}{dt}\overrightarrow x) \rho)$, $\partial_\mu j^\mu = 0$.
 
