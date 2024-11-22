@@ -79,7 +79,7 @@ A state in the transverse Ising model lives in the Hilbert space $\bigotimes_i^N
     = (\delta_{s_i, s'_i} + \delta_{s_i, -s'_i}e^{-2K})e^{\sum_i Ks_is_{i+1}}
     $$
 
-    Observe that for two rows of spins, this is precisely the classical energy, and the result extends to more rows. 
+    Observe that for $L_y=1$, $Tr[e^{-L_yH_q}]=\sum_{s,s'}\langle s' | V_1V_3 | s \rangle$, which is what we just calculated, and is evidently equal to the classical partition function $Z_{cl}$. The result extends to $L_y=n$ in an obvious way.
 
 
 
@@ -107,6 +107,10 @@ To calculate $Z_{cl}$, we then contract the MPO against itself repeatedly.
 One can then study variations to this tensor network, such as the effect of interposing a 1D tensor network in the middle of the Ising TN.
 
 For physical reasons, these are called defects, and have an algebraic structure that has come up a lot in recent theoretical quantum condensed matter physics.
+
+I believe they form a fusion category, isomorphic to the category of representations[^1] of some Lie group, maybe $SU(2) \times SU(2)$?
+
+[^1]: That is, a category where the objects are irreducible representations (i.e. functors from a given group to the category of vector spaces) and the morphisms are natural transformations between these functors, which amount to linear maps satisfying an intertwining condition. This category has a monoidal product and a direct sum, both inherited from linear algebra. Rules for e.g. addition of angular momentum, which is about the direct sum decomposition of the monoidal product of irreps are, I think, the fusion rules of the category.
 
 *Under construction...*
 
