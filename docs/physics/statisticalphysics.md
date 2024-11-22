@@ -193,8 +193,7 @@ $$
 This in fact holds for all ensembles. Further, we can calculate the exterior derivative of $S$:
 
 $$
-dS = d(\log Z) = d(\beta 
-langle E\rangle) = -\frac{1}{Z}\sum_a e^{-\beta E_a}(E_ad\beta + \beta dE_a) + \langle E\rangle d\beta + \beta d\langle E\rangle
+dS = d(\log Z) + d(\beta \langle E \rangle) = -\frac{1}{Z}\sum_a e^{-\beta E_a}(E_ad\beta + \beta dE_a) + \langle E\rangle d\beta + \beta d\langle E\rangle
 $$
 
 $$ = \beta(d\langle E\rangle - \langle dE \rangle)
@@ -202,9 +201,7 @@ $$
 
 ### Temperature
 
-
-import: explanation of temperature physically
-
+Under construction.
 
 ### Composing systems
 
@@ -385,13 +382,13 @@ where $T$ is some linear operator. (This is just the normal statement that $f(x+
 A basic fact of [Fourier analysis](../maths/fourier.md) is that all time invariant linear functions (and we want $T$ to be time invariant so that only the relative times in question matter) are of the form $x \mapsto \chi * x$ for some $\chi$ so we have:
 
 $$
-E_{H}[B] = E_{H_0}[B] + \chi * H_1
+E_{H}[B] = E_{H_0}[B] + \chi * K
 $$
 
 When $H_1(t) = K(t)A(p,q)$ (here I assume that we are working in a classical setting), and when $K$ disappears in the infinite past, we can deduce that 
 
 $$
-\chi = -\beta E_H[\dot{A}(0)B] * K
+\chi = -\beta E_H[\dot{A}(0)B]
 $$
 
 <!-- 
@@ -469,7 +466,7 @@ We then have a Hamiltonian with a small time varying $\hat H_1(t) = \hat A(t)\ph
 
 $$\langle O \rangle_\phi = Tr(\rho(t)O) = Tr(\rho_0U(t)O(t)U(t)^{-1})$$
 
-$$ = Tr(\rho_0 + i\int_{-\infty}^tdt' [H_1(t'),O(t)] + \ldots$$
+$$ = Tr(\rho_0 + i\int_{-\infty}^tdt' [H_1(t'),O(t)]) + \ldots$$
 
 $$
 \approx \langle O(t) \rangle_{\phi=0} + i\int_{-\infty}^\infty \theta(t-t')dt' \langle [A(t'),O(t)] \rangle_{\phi=0}\phi(t')

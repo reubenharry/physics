@@ -309,21 +309,54 @@ In general, you want samples from the typical set, i.e. the part of the space of
 
 #### Markov Chain Monte Carlo (MCMC)
 
-This is a particular type of Monte Carlo method. The idea is that you choose a transition kernel $T(x|x')$ in such a way that $P$ is a fixed point of $T$, that is, $P(x) = (TP)(x) = \int T(x|x')P(x')dx'$. There are different ways to do this, and one common one described below is Metropolis-Hastings. Then you invoke some theorems (largely, I think, the Perron-Frobenius theorem) which tells you that given some assumptions (your $T$ should be ergodic), $T$ has a unit eigenvector (i.e. a distribution which is the fixed point of the kernel) which is maximal and unique. That means that $\lim_{n\to\infty}T^nA$ for any initial distribution $A$ converges to this fixed point, because the largest eigenvector eventually dominates. Because it's unique, this fixed point must be $P$. Taking a Markovian walk along the kernel, starting from any $A$, amounts to sampling from the fixed point, i.e. from $P$. 
+<!-- todo: refactor in non-eq terms -->
+
+This is a particular type of Monte Carlo method. Abstractly, one wants to sample from some distribution $P : Dist(A)$, and does so by constructing a distribution $P_{ne} : Dist(T \to A)$, where $T$ is either discrete or continuous time. Then the marginal distribution of $P_{ne}$ at a given time evolves, i.e. we have a dynamics $f : T \to Dist(A)$. For time $t$ large, $f(t)$ converges to $P$.
+
+Less abstractly, let $T$ be a conditional probability distribution $T : A \to Dist(A)$, and note that one can lift this to a map $Dist(A) \to Dist(A)$, defined by: $(TP)(x) = \int T(x|x')P(x')dx'$. 
+
+The idea is that you choose a transition kernel $T(x|x')$ in such a way that $P$ is a fixed point of $T$, that is, $TP = P$. There are different ways to do this, and one common one described below is Metropolis-Hastings.
+
+One can then construct $P$ explicitly by solving the equation $P = TP$ as $P = T(T(T(T(...))))$, which one can sample from approximately by taking a random value, and applying $T$ to it repeatedly. In practice, one creates a "chain", which just means a list $[x_0, x_1 \sim T(x_0), x_2 \sim T(x_1), ...]$ and then uses the empirical distribution of this chain as an approximation of $P$. 
+
+
+<!-- todo: construction of fixpoints in the normal way: unrolling -->
+
+Here one relies on the Perron-Frobenius theorem and assumptions about ergodicity.
+<!-- 
+Then you invoke some theorems (largely, I think, the Perron-Frobenius theorem) which tells you that given some assumptions (your $T$ should be ergodic), $T$ has a unit eigenvector (i.e. a distribution which is the fixed point of the kernel) which is maximal and unique. That means that $\lim_{n\to\infty}T^nA$ for any initial distribution $A$ converges to this fixed point, because the largest eigenvector eventually dominates. Because it's unique, this fixed point must be $P$. Taking a Markovian walk along the kernel, starting from any $A$, amounts to sampling from the fixed point, i.e. from $P$.  -->
 
 ##### Metropolis Hastings (MH)
 
-  
 
-$P(x)T(x'|x) = P(x')T(x|x')$ is the condition of *detailed balance* for a pair of a distribution and a kernel. As shown below, detailed balance is sufficient (but *not necessary*) to show that $P$ is a fixed point of $T$.
 
-  
+$P(x)T(x'|x) = P(x')T(x|x')$ is the condition of *detailed balance*, also known as *reversibility* for a pair of a distribution and a kernel.
 
-$$ P(x)T(x'|x) = P(x')T(x|x') \Rightarrow \sum_xP(x)T(x'|x) = \sum_xP(x')T(x|x') = P(x')\sum_xT(x|x') = P(x') $$
+Detailed balance is sufficient (but *not necessary*) to show that $P$ is a fixed point of $T$:
+ 
 
-  
+$$ 
+P(x)T(x'|x) = P(x')T(x|x') \Rightarrow \sum_xP(x)T(x'|x) = \sum_xP(x')T(x|x') = P(x')\sum_xT(x|x') = P(x') 
+$$
 
-MH is one method to obtain a kernel which satisfies detailed balance. The idea is that you have another kernel $Q$ which you can choose pretty freely, and let $T = A(x'|x)Q(x'|x)$, where $A(x'|x)=min(1,\frac{P(x')Q(x|x')}{P(x)Q(x'|x)})$. Note that you don't have to know $P$, but rather $P$ only up to normalization, since it appears in a ratio. Clever. By design, some simple maths shows that with $T$ as defined, $(P,T)$ satisfies detailed balance, so you're in business. Caveat: you want to make sure that $T$ is ergodic.
+MH is a simple method to obtain a kernel which satisfies detailed balance. 
+
+
+The idea is that you have another kernel $Q$ which you can choose pretty freely which is in general *not* reversible, and let $T = A(x'|x)Q(x'|x)$, where $A(x'|x)=\mathrm{min}(1,\frac{P(x')Q(x|x')}{P(x)Q(x'|x)})$. Note that you don't have to know $P$, but rather $P$ only up to normalization, since it appears in a ratio. Then
+
+ 
+$$
+P(x)T(x'|x) = P(x)A(x'|x)Q(x'|x)
+$$
+
+
+$$
+= P(x)Q(x'|x)\mathrm{min}(1,\frac{P(x')Q(x|x')}{P(x)Q(x'|x)}) = 
+$$
+
+Now there are two cases. Either $A(x'|x) < 1$, in which case $A(x|x')=1$, so that $P(x)Q(x'|x)\mathrm{min}(1,\frac{P(x')Q(x|x')}{P(x)Q(x'|x)}) = P(x')Q(x|x')A(x|x') = P(x')T(x|x')$, or $A(x'|x) < 1$ and the argument goes in the other direction. 
+
+So $(P,T)$ satisfies detailed balance, and you can do MCMC, with the caveat that $T$ be ergodic. One can think of $A$ as a "correction" to $Q$ which converts it into a reversible kernel by adding a factor that corrects precisely its failure of reversibility. In that sense, one can think of $\log \frac{P(x')Q(x|x')}{P(x)Q(x'|x)}$ as a measure of reversibility, which is $0$ when the kernel $Q$ is reversible.
 
   
 
@@ -331,7 +364,7 @@ MH is one method to obtain a kernel which satisfies detailed balance. The idea i
 
   
 
-##### Hamiltonian Monte Carlo (HMC)
+##### Continuous dynamics (Hamiltonian Monte Carlo)
 
   
 The idea is that we derive a better transition kernel by moving into a phase space and exploiting the nice volume preserving nature of Hamiltonian dynamics (hence the name).
@@ -705,6 +738,7 @@ $$
 $$
 p(x) \propto e^{-x^2/2}
 $$
+
 This is the Normal distribution with variance $1$ and mean $0$.
 
 <!--
@@ -836,11 +870,7 @@ $T=id$, $b(x)=1, \eta=\sigma^{-1}(\mu)$.
 
   
 
-Crucial point: how do we convert from the mean parametrized form of the Bernoulli distribution, namely $P(x|\mu) = x^\mu\cdot x^{1-\mu}$ to the naturally parametrized form?
-
-  
-
-Easy: take the log odds: $\eta=log(\frac{\mu}{1-\mu})$. And the inverse is the sigmoid function.
+To convert from the mean parametrized form of the Bernoulli distribution, namely $P(x|\mu) = x^\mu\cdot x^{1-\mu}$, to the naturally parametrized form, take the log odds: $\eta=log(\frac{\mu}{1-\mu})$. And the inverse is the sigmoid function.
 
   
   
@@ -861,7 +891,12 @@ A physical application is to model the time varying motion of a particle with un
 
   
 
-#### Stochastic integration
+#### Stochastic calculus
+
+!!! References
+
+	https://math.nyu.edu/~goodman/teaching/StochCalc2018/notes/
+
 
   
 
@@ -876,6 +911,13 @@ $$
 
 where $t_k = k(\tau/v)$ in the **Ito formulation** of the integral, and $t_k = (k + \frac{1}{2})(\tau/v)$ in the **Stratonovich formulation**.
 
+Depending on which integral definition we choose, the rules of stochastic calculus are different. For the Ito version, and for $dX(t) = \mu(t)dt + \sigma(t)dW(t)$, the Ito lemma is:
+
+$$
+df(t, X(t)) = (\frac{\partial f}{\partial t} + \mu(t)\frac{\partial f}{\partial x} + \frac{1}{2}\sigma(t)^2\frac{\partial^2 f}{\partial x^2})dt + \sigma(t)\frac{\partial f}{\partial x}dW(t) 
+$$
+
+This tells us how $f$, a function of $X$, evolves over time. The surprising part is $\frac{1}{2}\sigma(t)^2\frac{\partial^2 f}{\partial x^2}$.
   
 
 #### Wiener process
@@ -883,7 +925,7 @@ where $t_k = k(\tau/v)$ in the **Ito formulation** of the integral, and $t_k = (
   
 
 $$
-W(t) = lim_{dt \to 0}\sqrt{dt}\sum_{k=0}^{t/dt}J_k
+W(t) = \lim_{dt \to 0}\sqrt{dt}\sum_{k=0}^{t/dt}J_k
 $$
   
 
@@ -927,11 +969,7 @@ $$ -->
 
 #### Processes via Stochastic Differential Equations (SDEs)
 
-  
-
-It is typical to use the Wiener process to create more complex processes, e.g. $dX = a(X(t),t)dt + b(X(t),t)dW$
-
-  
+It is typical to use the Wiener process to create more complex processes, e.g. $dX = a(X(t),t)dt + b(X(t),t)dW$.
 
 #### Generators
 
@@ -939,7 +977,33 @@ It is typical to use the Wiener process to create more complex processes, e.g. $
 
 For a given process $dX$, it has an associated generator $\mathcal{L} = a\frac{d}{dx} + \frac{1}{2}b^2\frac{d^2}{dx^2}$.
 
-  
+
+#### Geometric SDE
+
+An important SDE is 
+
+$$
+dS(t) = \mu S(t)dt + \sigma S(t)dW(t)
+$$
+
+This can be solved with a change of variables to $\log(S)$, using Ito's lemma (see above):
+
+$$
+d(\log S)(t) = (\mu S(t)\frac{\partial \log(S)}{\partial S} + \frac{1}{2}\sigma S(t)^2\frac{\partial^2 \log(S)}{\partial S})dt + \sigma S(t)\frac{\partial \log (S)}{\partial S}dW(t) 
+$$
+
+$$
+= (\mu - \frac{1}{2}\sigma^2)dt + \sigma dW(t)
+$$
+
+which can be Ito integrated to obtain:
+
+$$
+X_T = X_0 + (\mu - \frac{1}{2}\sigma^2)T + \sigma W(T)
+$$
+
+and used to find $S(T) = e^{X_T}$.
+
   
 
 #### Ornstein-Uhlenbeck SDE

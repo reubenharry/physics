@@ -111,7 +111,7 @@ Force is defined as the negative gradient of the potential, i.e. $F = -\nabla V$
 
 ## Hamiltonian mechanics
 
-The Lagrangian is a function of the tangent bundle. A Legendre transform gives us a function of the cotangent bundle, namely:
+The Lagrangian is a function of the tangent bundle. A [Legendre transform](/maths/differential_geometry) gives us a function of the cotangent bundle, namely:
 
 $$
 H(\pd{\mathcal{L}}{\dot q}, q, t) = \dot q \pd{\mathcal{L}}{\dot q} - \mathcal{L}
@@ -157,26 +157,27 @@ This is the geometrical structure associated with classical mechanics; using thi
 
 Geometrically, the configuration space, of which the Lagrangian is a function, is the tangent bundle, while phase space is the cotangent bundle. The evolution of a system can be described by a map from the cotangent bundle to itself.
 
-Let $\mathcal{M}$ be the $n$ dimensional manifold on which states of your physical system live. Then $TM$, the tangent bundle, is the configuration space, and $T^*M$, the cotangent bundle, is the phase space. More concretely, points in $T^*M$ are pairs $(p,q)$, for $p : \mathcal{M}$ and $q : T^*_pM$. 
+Let $\mathcal{M}$ be the $n$ dimensional manifold on which states of your physical system live. Then $TM$, the tangent bundle, is the configuration space, and $T^*M$, the cotangent bundle, is the phase space. More concretely, points in $T^*M$ are pairs $(q,p)$, for $p : \mathcal{M}$ and $q : T^*_pM$. 
 
 Recall that $T^*M$ is itself a ($2n$ dimensional) manifold, on which we may define differential forms.
 
-In fact, there is a natural form $\theta$:
+In fact, there is a map $\theta$:
 
 $$
-\theta_{(p,q)} : T_xT^*M \to \R
+\theta_{(q,p) : T^*M} : T_zT^*M \to \R
 $$
 
 $$
-\theta_{(p,q)} = p \circ d\pi_1
+\theta_{(q,p) : T^*M} = p \circ d\pi_1
 $$
 
-where $\pi_1(q,p)=q$. Examination shows that this is well-typed.
+To understand this, recall that $p$ is a linear map from $T_pM$ to $\R$, and $d\pi_1 : TT^*Q \to TQ$ is the differential of the projection map $\pi_1(q,p) = q$. So we have a $\theta : M \to T^*M$, which is a differential 1-form.
 
-In coordinates, we find:
+
+In canonical coordinates, we find:
 
 $$
-\theta := -p_idq^i
+\theta(p,q) := -p_idq^i
 $$
 
 **Under construction**: derivation
@@ -243,12 +244,20 @@ Then, if  -->
 Work is the integral of force over a path in the configuration space, where in the general case, force may be position dependent (and even time dependent):
 
 $$
-W = \int F \cdot ds
+W = \int (F(x(t)) \cdot v(t))dt \int F \cdot ds
 $$
 
-As this suggest, $F$ should more abstractly be viewed as a 1-form, i.e. an object which can be integrated along paths.
+for a displacement $s$. As this suggest, $F$ should more abstractly be viewed as a 1-form, i.e. an object which can be integrated along paths.
 
-This equals the change in kinetic energy.
+This equals the change in kinetic energy:
+
+$$
+\int (F(x(t)) \cdot v(t))dt = \int m\int \ddot x \cdot \dot x dt
+$$ 
+
+$$
+= \int m\int \frac{d}{dt}(\frac{1}{2}\dot x^2)dt = \frac{1}{2}m\dot x^2|_{t_1}^{t_2} = K(t_1) - K(t_2) 
+$$
 
 ## Perturbations, classically
 

@@ -75,6 +75,19 @@ $$
 
     Note that the type of a vector field is a [dependent](https://en.wikipedia.org/wiki/Dependent_type) product type. This means that the **type** of the output of the function, namely $T_p\mathcal{M}$ depends on the **value** of the input $p$. The type of a tangent bundle is a dependent sum type.
 
+## Legendre transform
+
+A Legendre transform maps a function $f : TM \to \R$ to a function $g : T^*M \to \R$. It is defined by:
+
+$$
+\mathcal{L}(q,\dot q) = \dot q \cdot \pd{\mathcal{L}}{ \dot q} - H(\pd{\mathcal{L}}{ \dot q}, q)
+$$
+
+$$
+H(p,q) = p \cdot \pd{H}{p} - \mathcal{L}( q, \dot q)
+$$
+
+where $p_i = \pd{\mathcal{L}}{\dot q_i}$ and $\dot q_i = \pd{H}{p_i}$. 
 
 ## Differential Geometry on Fiber Bundles
 

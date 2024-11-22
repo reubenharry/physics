@@ -139,9 +139,10 @@ nav:
         - Quantum Physics: physics/quantum.md
         - Symmetry: physics/symmetry.md
         - Statistical Physics: physics/statisticalphysics.md
+        - Tensor Networks: physics/tensornetworks.md
         - Gauge Theory: physics/gaugetheory.md
         - Quantum Field Theory: physics/qft.md
-        - Condensed Matter: physics/condensedmatter.md
+
     - Computer Science:
         - Computer Science: cs/cs.md
         - Notation: cs/notation.md

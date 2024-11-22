@@ -16,4 +16,15 @@ Measure theory lives in the category `Meas`. The objects are measurable spaces $
 
 A probability measure on $X$ is a function $\mu : \Sigma_X \to [0,1]$ such that $\mu(X)=1$ and $\mu(\bigcup(S_i)) = \sum \mu(S_i)$, where $\bigcup$ means disjoint countable union. Probability measures can be pushed forward through a measurable function in the obvious way.
 
-It is straightforward to define an integral - see the above paper. Measures (with some restrictions) are one-to-one with integrators, so we will abuse notation and write $\mu(f)$ to be the integral of $f$ with measure $\mu$. 
+It is straightforward to define a Lebesgue integral - see the above paper, and this coincides with the Riemann integral wherever they are both defined. The Lebesgue integral is more general.
+
+Measures (with some restrictions) are one-to-one with integrators, so we will abuse notation and write $\mu(f)$ to be the integral of $f$ with measure $\mu$. 
+
+### Radon-Nikodym derivative
+
+If $\mu$ and $\nu$ are measures on a measurable space $(X, \Sigma_X)$, and $\nu$ is absolutely continuous with respect to $\mu$, then there exists a measurable function $f : X \to \R$ such that $\nu(S) = \int_S f d\mu$ (i.e. $\mu(f)|_S$) for all $S \in \Sigma_X$. The converse also holds.
+
+One conventionally defines the Radon-Nikodym $\frac{d\nu}{d\mu} := f$.
+
+The main relevance of this is that a probability density function is such a Radon-Nikodym derivative.
+
