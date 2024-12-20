@@ -1,3 +1,9 @@
+#
+
+from Shankar:
+
+The correlation function of the Ising model in the thermodynamic limit is the ground state expectation value of the green's function (time ordered product) of the operator whose eigenvalue space is the support of the classical variable in question.
+
 # Condensed Matter Physics
 
 This is the application of quantum statistical physics to matter. A typical example would be to study a metal, and understand its different phases, equilibrium properties, symmetries and so on, with the goal of predicting/engineering measurable properties like conductivity.
@@ -600,3 +606,13 @@ of noncommutative spaces - deformed, noncommutative versions of the commutative 
 on a manifold. Thus the process of passing from QF T to QF T ′ is associated with the philosophy of
 noncommutative geometry, a recent trend in physics. 
 "
+
+## 6j symbol
+
+this is related to the associator in the category of representations of a group, i.e the morphism responsible for associativity:
+
+$$
+a_{ijk} = (i \otimes j) \otimes k \to i \otimes (j \otimes k)
+$$
+
+See Baez's categorical prehistory paper for details, also https://ncatlab.org/nlab/show/6j+symbol
