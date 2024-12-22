@@ -129,7 +129,7 @@ For example, stepping into Washington square park, you will see various building
 
 How would this idea play out in light of points (1)-(5)?
 
-Re. (1) and (3), the belief state of a complicated agent (like a person) need be neither a low dimensional manifold as in statistical mechanics nor remotely calculable analytically. So it's not immediately impossible that all the very rich structure of the world as we encounter it could be in the macrospace.
+Re. (1) and (3), the belief state of a complicated agent (like a person) need be neither a low dimensional manifold as in statistical mechanics nor remotely calculable analytically. So you could imagine that the macrospace here has very complex structure, enough to correspond to the rich ontology of the world.
 
 Re. (4), the point of note is that the objects in a scene graph describing the macrostate are not themselves necessarily descriptions of parts of the microstate. So it isn't as if an object in the scene graph like the jazz band in the park corresponds to a spatially (and temporally) local collection of atoms in the microstate. The Ship of Theseus thought experiment could be understood broadly as about this point: you shouldn't consider a concept in the world like a ship too literally as a bunch of atoms.
    
