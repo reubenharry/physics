@@ -4,6 +4,10 @@ from Shankar:
 
 The correlation function of the Ising model in the thermodynamic limit is the ground state expectation value of the green's function (time ordered product) of the operator whose eigenvalue space is the support of the classical variable in question.
 
+correlation length is inverse mass, usually
+
+Transfer matrix is the propagator
+
 # Condensed Matter Physics
 
 This is the application of quantum statistical physics to matter. A typical example would be to study a metal, and understand its different phases, equilibrium properties, symmetries and so on, with the goal of predicting/engineering measurable properties like conductivity.

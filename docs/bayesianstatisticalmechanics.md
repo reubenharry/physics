@@ -120,14 +120,14 @@ By the way, statistical mechanics is really a special case of the above picture,
 
 In the case of statistical physics, intuitive physical variables like temperature (which is $1/\beta$), entropy change, energy, heat capacity and so on turn out to be properties of the macrostate, not the microstate.
 
-What you might then wonder is whether the rich ontology that makes up the world as we encounter it (e.g. physical objects like tables, trees, animals, concepts like particular historical events, fashion styles, etc etc) should actually be understood as "living" in the macrospace, i.e. the space of belief distributions that we obtain from our incomplete knowledge of the microstate of the world, rather than in the microspace per se.
+What you might then wonder is whether the rich ontology that makes up the world as we encounter it (e.g. physical objects like tables, trees, animals, concepts like particular historical events, languages, the topic of every wikipedia article, etc) should actually be understood as "living" in the macrospace, i.e. the space of belief distributions that we obtain from our incomplete knowledge of the microstate of the world, rather than in the microspace per se.
 
-For example, stepping into Washington square park, you will see various buildings, a waterfall, will hear jazz, see stands selling art, etc. In short, there is a "scene graph" containing a range of concrete and abstract objects, with various properties, related to each other in various ways. The idea is that all of these things jointly describe my macrostate, rather than the world's microstate. I'll use "scene graph" to describe this kind of structured description of an entire macrostate, for lack of a better term.
+For example, stepping into Washington square park, you will see various buildings, a waterfall, will hear jazz, see stands selling art, etc. In short, there is a "scene graph" containing a range of concrete and abstract objects, with various properties, related to each other in various ways. The idea is that all of these things jointly (together with everything else I know about) describe my macrostate, rather than the world's microstate. I'll use "scene graph" to describe this kind of structured description of an entire macrostate, for lack of a better term.
 
 
 ### Points (1)-(5)
 
-If this view of the world is right, what would points (1)-(5) imply?
+How would this idea play out in light of points (1)-(5)?
 
 Re. (1) and (3), the belief state of a complicated agent (like a person) need be neither a low dimensional manifold as in statistical mechanics nor remotely calculable analytically. So it's not immediately impossible that all the very rich structure of the world as we encounter it could be in the macrospace.
 
