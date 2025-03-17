@@ -129,7 +129,7 @@ nav:
         - Cohomology: maths/cohomology.md
         - Manifolds: maths/differential_geometry.md
         - Probability: maths/probability.md
-        - Conformal transforms: maths/conformal.md
+        # - Conformal transforms: maths/conformal.md
     - Statistics:
       - Statistics: physics/statistics.md
     - Physics:
@@ -141,7 +141,7 @@ nav:
         - Statistical Physics: physics/statisticalphysics.md
         - Tensor Networks: physics/tensornetworks.md
         - Gauge Theory: physics/gaugetheory.md
-        - Quantum Field Theory: physics/qft.md
+        - Statistical Field Theory: physics/qft.md
 
     - Computer Science:
         - Computer Science: cs/cs.md

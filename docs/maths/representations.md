@@ -119,99 +119,99 @@ This is the group of linear transforms that preserve the Minkowski metric, i.e. 
 ??? Derivation
 
 
-  The defining property is $\Lambda^T\eta\Lambda = \eta$. We first observe that $-1 = \det(\Lambda) = \det(\Lambda^T\eta\Lambda) = \det(\Lambda)^2\det(\eta) = -\det(\Lambda)^2$, so that $\det(\Lambda) = \pm 1$.
+    The defining property is $\Lambda^T\eta\Lambda = \eta$. We first observe that $-1 = \det(\Lambda) = \det(\Lambda^T\eta\Lambda) = \det(\Lambda)^2\det(\eta) = -\det(\Lambda)^2$, so that $\det(\Lambda) = \pm 1$.
 
-  Further, $-1 = \eta_{00} = (\Lambda^T\eta\Lambda)_{00} = \eta_{\mu\nu}\Lambda^\mu_0\Lambda^\nu_0 = -\Lambda^0_0\Lambda^0_0 + \Lambda^i_0\Lambda^i_0$, so that $\Lambda^0_0 = \Lambda^0_0 = \pm \sqrt{1 + \Lambda^i_0\Lambda^i_0}$.
+    Further, $-1 = \eta_{00} = (\Lambda^T\eta\Lambda)_{00} = \eta_{\mu\nu}\Lambda^\mu_0\Lambda^\nu_0 = -\Lambda^0_0\Lambda^0_0 + \Lambda^i_0\Lambda^i_0$, so that $\Lambda^0_0 = \Lambda^0_0 = \pm \sqrt{1 + \Lambda^i_0\Lambda^i_0}$.
 
-  This splits the manifold of Lorentz transformations into 4 parts, based on whether $\det{\Lambda}$ is positive and whether $\Lambda_0^0$ is positive. The sector containing the identity is the one where $\det{\Lambda} = 1$ and $\Lambda_0^0 > 0$.
+    This splits the manifold of Lorentz transformations into 4 parts, based on whether $\det{\Lambda}$ is positive and whether $\Lambda_0^0$ is positive. The sector containing the identity is the one where $\det{\Lambda} = 1$ and $\Lambda_0^0 > 0$.
 
-  We now construct the Lie algebra of this sector.
-  
-  To first order $\Lambda^\mu_\rho = \delta^\mu_\rho + \epsilon K ^\mu_\rho$, so again to first order, $(\delta^\mu_\rho + \epsilon K ^\mu_\rho)\eta_{\mu\nu}(\delta^\nu_\sigma + \epsilon K^\nu_\sigma)  =  \eta_{\mu\nu} + \epsilon K^\rho_\mu\eta_{\rho\nu} + \epsilon \eta_{\mu\rho}K^\rho_\nu = \eta_{\mu\nu}$. This gives us the condition $K^T\eta + \eta K = 0$, or $\{K, \eta\}=0$. Considing a (1,1) subspace, this reduces to solving:
+    We now construct the Lie algebra of this sector.
 
-  $$
-  \begin{bmatrix}
-  0 && -1
-  \\
-  -1 && 0
-  \end{bmatrix}
-  \begin{bmatrix}
-  a && b
-  \\
-  c && d
-  \end{bmatrix}
-  +
-  \begin{bmatrix}
-  a && b
-  \\
-  c && d
-  \end{bmatrix}
-  \begin{bmatrix}
-  0 && -1
-  \\
-  -1 && 0
-  \end{bmatrix}
-  = 0
-  $$
+    To first order $\Lambda^\mu_\rho = \delta^\mu_\rho + \epsilon K ^\mu_\rho$, so again to first order, $(\delta^\mu_\rho + \epsilon K ^\mu_\rho)\eta_{\mu\nu}(\delta^\nu_\sigma + \epsilon K^\nu_\sigma)  =  \eta_{\mu\nu} + \epsilon K^\rho_\mu\eta_{\rho\nu} + \epsilon \eta_{\mu\rho}K^\rho_\nu = \eta_{\mu\nu}$. This gives us the condition $K^T\eta + \eta K = 0$, or $\{K, \eta\}=0$. Considing a (1,1) subspace, this reduces to solving:
 
-  which is solved by $K = \begin{bmatrix} 0 && i \\ i && 0 \end{bmatrix}$, or in the full space, by 
+    $$
+    \begin{bmatrix}
+    0 && -1
+    \\
+    -1 && 0
+    \end{bmatrix}
+    \begin{bmatrix}
+    a && b
+    \\
+    c && d
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+    a && b
+    \\
+    c && d
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 && -1
+    \\
+    -1 && 0
+    \end{bmatrix}
+    = 0
+    $$
 
-  $$
-  \begin{bmatrix}
-  0 && i && 0 && 0
-  \\
-  i && 0 && 0 && 0
-  \\
-  0 && 0 && 0 && 0
-  \\
-  0 && 0 && 0 && 0
-  \end{bmatrix}
-  $$
+    which is solved by $K = \begin{bmatrix} 0 && i \\ i && 0 \end{bmatrix}$, or in the full space, by 
 
-  We then exponentiate to obtain 
+    $$
+    \begin{bmatrix}
+    0 && i && 0 && 0
+    \\
+    i && 0 && 0 && 0
+    \\
+    0 && 0 && 0 && 0
+    \\
+    0 && 0 && 0 && 0
+    \end{bmatrix}
+    $$
 
-  $$
-  \Lambda_1(\phi) = e^{i\phi K_1} = \sum_{n=0}^\infty \frac{i^n\phi^nk^n_1}{n!} = \cosh(\phi)I + i\sinh(\phi)k_1
-  $$
-  
-  $$ = \begin{bmatrix}
-  \cosh(\phi) && -\sinh(\phi)
-  \\
-  -\sinh(\phi) && \cosh(\phi)
-  \end{bmatrix}
-  $$
+    We then exponentiate to obtain 
 
-  In 4d spacetime, we have three of these, namely
+    $$
+    \Lambda_1(\phi) = e^{i\phi K_1} = \sum_{n=0}^\infty \frac{i^n\phi^nk^n_1}{n!} = \cosh(\phi)I + i\sinh(\phi)k_1
+    $$
 
-  $$
-  \begin{bmatrix}
-  \cosh(\phi) && -\sinh(\phi) && 0 && 0
-  \\
-  -\sinh(\phi) && \cosh(\phi) && 0 && 0
-  \\
-  0 && 0 && 1 && 0
-  \\
-  0 && 0 && 0 && 1
-  \end{bmatrix}
-  $$
+    $$ = \begin{bmatrix}
+    \cosh(\phi) && -\sinh(\phi)
+    \\
+    -\sinh(\phi) && \cosh(\phi)
+    \end{bmatrix}
+    $$
 
-  and
+    In 4d spacetime, we have three of these, namely
 
-  $$
-  \begin{bmatrix}
-  \cosh(\phi) && 0 && -\sinh(\phi) && 0
-  \\
-  0 && 1 && 0 && 0
-  \\
-  -\sinh(\phi) && 0 && \cosh(\phi) && 0
-  \\
-  0 && 0 && 0 && 1
-  \end{bmatrix}
-  $$
+    $$
+    \begin{bmatrix}
+    \cosh(\phi) && -\sinh(\phi) && 0 && 0
+    \\
+    -\sinh(\phi) && \cosh(\phi) && 0 && 0
+    \\
+    0 && 0 && 1 && 0
+    \\
+    0 && 0 && 0 && 1
+    \end{bmatrix}
+    $$
 
-  and the obvious third one.
+    and
 
-  The other 3 generators are the $SO(3)$ rotations.
+    $$
+    \begin{bmatrix}
+    \cosh(\phi) && 0 && -\sinh(\phi) && 0
+    \\
+    0 && 1 && 0 && 0
+    \\
+    -\sinh(\phi) && 0 && \cosh(\phi) && 0
+    \\
+    0 && 0 && 0 && 1
+    \end{bmatrix}
+    $$
+
+    and the obvious third one.
+
+    The other 3 generators are the $SO(3)$ rotations.
 
 It turns out we have, for $N^\pm = \frac{1}{2}(J_i \pm iK_i)$, that $[N^+, N^-] = 0$ and $[N^\pm, N^pm] = i\epsilon_{ijk}N^\pm_k$, so that the Lie algebra $so(1,3) \cong so(3) \oplus so(3) \cong su(2) \oplus su(2)$.
 
@@ -302,3 +302,22 @@ $$
 
  -->
 
+## Particles, categorically
+
+<!-- Recall that a representation is a functor from a group (viewed as a one object category whose morphisms are the group elements) to a category of Hilbert spaces $\mathit{HILB}$. -->
+
+TODO: give context
+
+Given a representation $F_1 : G \to \mathit{HILB}$, states of a physical system are rays in $H := F_1(G)$.
+
+The irreps of $F_1$ are interpreted physically as particles, whose states therefore live in subspaces of $H$, so that the whole system is determined by the state of all the particles.
+
+The dynamics of the physical system is captured by a natural transformation $F_1 \mapsto F_2$. Spelled out, this is precisely an intertwining map between representations, i.e. a function $S$ such that $S \circ F_1(g) = F_2(g) \circ S$. In other words, the dynamics are symmetry preserving: you can change viewpoint before or after the dynamics, and you get the same result.
+
+We now invoke Schur's lemma to great effect, in two ways.
+
+First by a corollary of Schur's lemma, which tells us that if $U$ is a natural transformation $F_1 \to F_1$, then the irreps are exactly the eigenspaces of $U$. Since energy $H$ generates $U$, we can label particles by their energy.
+
+Second, Schur's lemma tells us that the only natural transformations between irreps are $1$ (i.e. the identity) or $0$. This means that particles cannot simply change into other particles (without some other interaction).
+
+This only applies to irreps, so there are certainly non-trivial natural transformations between tensor products of irreps, e.g. $H_1 \otimes H_2 \to H_3$. Feynman diagrams denote precisely these natural transformations.
