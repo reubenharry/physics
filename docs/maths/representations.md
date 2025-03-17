@@ -219,7 +219,7 @@ If we understand these Lie algebra's irreducible representations, then we unders
 
 #### Irreps of SO(1,3)
 
-Since $so(1,3) \iso su(2) \oplus su(2)$, we can consider the irreps of $su(2)$, which are labelled by a single half-integer. The lowest weight irrep is therefore $(0,0)$, which means that $N^+$ and $N^-$ must be real numbers (1x1 matrices). To satisfy any non-trivial commutation relation, we must therefore have $N^\pm = 0$, so $e^{iN}=1$. So Lorentz transforms all map to the identity here.
+Since $so(1,3) \cong su(2) \oplus su(2)$, we can consider the irreps of $su(2)$, which are labelled by a single half-integer. The lowest weight irrep is therefore $(0,0)$, which means that $N^+$ and $N^-$ must be real numbers (1x1 matrices). To satisfy any non-trivial commutation relation, we must therefore have $N^\pm = 0$, so $e^{iN}=1$. So Lorentz transforms all map to the identity here.
 
 ## Adjoint representations
 
